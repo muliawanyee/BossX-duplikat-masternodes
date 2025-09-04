@@ -1,1 +1,1 @@
-# BossX-duplikat-masternodes
+# BossX-Duplikat-Masternodes
