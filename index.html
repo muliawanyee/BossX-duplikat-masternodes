@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BossX - Program Masternode</title>
+    <title>BossX - Xnode Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -26,7 +26,6 @@
         @keyframes borderRight{0%{transform:scaleY(0);opacity:0}10%{opacity:1}30%{transform:scaleY(1);opacity:1}35%{opacity:0}100%{opacity:0}}
         @keyframes borderBottom{0%{transform:scaleX(0);opacity:0}10%{opacity:1}30%{transform:scaleX(1);opacity:1}35%{opacity:0}100%{opacity:0}}
         @keyframes borderLeft{0%{transform:scaleY(0);opacity:0}10%{opacity:1}30%{transform:scaleY(1);opacity:1}35%{opacity:0}100%{opacity:0}}
-        .badge{position:absolute;top:1rem;right:1rem;padding:.5rem 1rem;border-radius:9999px;font-weight:bold;font-size:.875rem}
         .profile-picture{width:2.5rem;height:2.5rem;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid rgba(245,158,11,0.5)}
         .profile-picture img{width:100%;height:100%;object-fit:cover}
         #running-text{animation:scroll-left 60s linear infinite}
@@ -122,7 +121,7 @@
                     </div>
                 </div>
 
-                <!-- 8 Card Xnode - Semua gambar dari link yang kamu berikan (bergantian untuk variasi neon) -->
+                <!-- 8 Card Xnode - Tanpa badge -->
                 <h2 class="text-4xl font-bold text-amber-400 text-center mb-12">Pilih Varian Xnode</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                     <!-- 1. Xnode Classic -->
@@ -133,10 +132,10 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Classic" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-amber-500 to-orange-600 text-black">Classic</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-amber-400 mb-4">Xnode Classic</h3>
-                        <p class="text-xl text-gray-300 mb-6">Neon Glow Edition • Entry Level</p>
+                        <p class="text-xl text-gray-300 mb-6">Neon Glow • Futuristic Design • Entry Level</p>
                         <div class="text-5xl font-bold text-amber-400 mb-8">100 USDT</div>
                         <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700" onclick="buyMarketplaceItem('Xnode Classic', 100)">
                             Beli Sekarang
@@ -151,10 +150,10 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-blue-500 to-cyan-600 text-black">Pro</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-blue-400 mb-4">Xnode Pro</h3>
-                        <p class="text-xl text-gray-300 mb-6">Neon Pink Glow • Professional Performance</p>
+                        <p class="text-xl text-gray-300 mb-6">Neon Pink Glow • High Performance • Pro Edition</p>
                         <div class="text-5xl font-bold text-blue-400 mb-8">450 USDT</div>
                         <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700" onclick="buyMarketplaceItem('Xnode Pro', 450)">
                             Beli Sekarang
@@ -169,7 +168,7 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Advanced" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-red-500 to-pink-600 text-black">Advanced</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Xnode Advanced</h3>
                         <p class="text-xl text-gray-300 mb-6">High Hashrate • Industrial Grade</p>
@@ -187,7 +186,7 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Mini" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-green-500 to-emerald-600 text-black">Mini</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-green-400 mb-4">Xnode Mini</h3>
                         <p class="text-xl text-gray-300 mb-6">Portable • Low Power • Neon Edition</p>
@@ -205,7 +204,7 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Silent Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-purple-500 to-indigo-600 text-black">Silent Pro</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-purple-400 mb-4">Xnode Silent Pro</h3>
                         <p class="text-xl text-gray-300 mb-6">Super Silent • Home Friendly</p>
@@ -223,7 +222,7 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Touch Display" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-cyan-500 to-teal-600 text-black">Touch Display</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-cyan-400 mb-4">Xnode Touch Display</h3>
                         <p class="text-xl text-gray-300 mb-6">Built-in Screen • Real-time Monitoring</p>
@@ -241,7 +240,7 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode BMM Series" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-yellow-500 to-amber-600 text-black">BMM Series</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-yellow-400 mb-4">Xnode BMM Series</h3>
                         <p class="text-xl text-gray-300 mb-6">Balanced Performance • Premium Build</p>
@@ -259,10 +258,10 @@
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
                             <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Cyberpunk Neon" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <div class="badge bg-gradient-to-r from-pink-500 to-purple-600 text-black">Cyberpunk Neon</div>
+                            <!-- Badge dihapus -->
                         </div>
                         <h3 class="text-3xl font-bold text-pink-400 mb-4">Xnode Cyberpunk Neon</h3>
-                        <p class="text-xl text-gray-300 mb-6">Limited Edition • Ultimate Glow</p>
+                        <p class="text-xl text-gray-300 mb-6">Limited Edition • Ultimate Neon Glow</p>
                         <div class="text-5xl font-bold text-pink-400 mb-8">550 USDT</div>
                         <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700" onclick="buyMarketplaceItem('Xnode Cyberpunk Neon', 550)">
                             Beli Sekarang
