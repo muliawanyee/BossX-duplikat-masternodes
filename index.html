@@ -125,7 +125,7 @@
                 <!-- 8 Card Xnode Lengkap -->
                 <h2 class="text-4xl font-bold text-amber-400 text-center mb-12">Pilih Varian Xnode</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <!-- 1. Xnode Classic (gambar dari linkmu + harga 100 USDT) -->
+                    <!-- 1. Xnode Classic -->
                     <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
@@ -150,11 +150,11 @@
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
                         <div class="relative mb-6">
-                            <img src="https://ezblockchain.net/wp-content/uploads/2025/10/cover-8.png" alt="Xnode Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
+                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
                             <div class="badge bg-gradient-to-r from-blue-500 to-cyan-600 text-black">Pro</div>
                         </div>
                         <h3 class="text-3xl font-bold text-blue-400 mb-4">Xnode Pro</h3>
-                        <p class="text-xl text-gray-300 mb-6">15-20 TH/s • Advanced Cooling • Professional</p>
+                        <p class="text-xl text-gray-300 mb-6">Neon Pink Glow • High Performance • Pro Edition</p>
                         <div class="text-5xl font-bold text-blue-400 mb-8">450 USDT</div>
                         <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700" onclick="buyMarketplaceItem('Xnode Pro', 450)">
                             Beli Sekarang
@@ -172,7 +172,7 @@
                             <div class="badge bg-gradient-to-r from-red-500 to-pink-600 text-black">Advanced</div>
                         </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Xnode Advanced</h3>
-                        <p class="text-xl text-gray-300 mb-6">20-30 TH/s • High Performance • Industrial</p>
+                        <p class="text-xl text-gray-300 mb-6">20-30 TH/s • High Performance • Industrial Grade</p>
                         <div class="text-5xl font-bold text-red-400 mb-8">600 USDT</div>
                         <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700" onclick="buyMarketplaceItem('Xnode Advanced', 600)">
                             Beli Sekarang
@@ -275,7 +275,7 @@
     </div>
 
     <script>
-        // Jam online
+        // Jam online aktif
         function updateClock() {
             const now = new Date();
             document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
@@ -284,7 +284,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Toggle sidebar & navigation
+        // Toggle sidebar
         document.getElementById('toggle-sidebar').addEventListener('click', () => {
             const sidebar = document.getElementById('sidebar');
             const logoText = document.getElementById('logo-text');
@@ -292,6 +292,18 @@
             sidebar.classList.toggle('collapsed');
             logoText.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'block';
             menuTexts.forEach(t => t.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'inline');
+        });
+
+        // Navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = item.dataset.page;
+                document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+                document.getElementById(page + '-page')?.classList.add('active');
+                document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+                item.classList.add('active');
+            });
         });
 
         // Marketplace buy function
@@ -307,11 +319,12 @@
                 usdtBalance -= price;
                 myXnodes.push(item);
                 updateInventory();
-                alert(`Selamat! ${item} berhasil dibeli!`);
+                alert(`Selamat! ${item} berhasil dibeli!\nSisa saldo: ${usdtBalance.toFixed(2)} USDT`);
                 confetti({
                     particleCount: 200,
                     spread: 100,
-                    origin: { y: 0.6 }
+                    origin: { y: 0.6 },
+                    colors: ['#f59e0b', '#d97706', '#ff1493', '#8a2be2']
                 });
             }
         }
