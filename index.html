@@ -6,294 +6,278 @@
     <title>BossX - Xnode Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif}
-        body{background:#000;color:#fff;overflow-x:hidden}
-        .gradient-bg{background:linear-gradient(to bottom,#1a1a1a,#000)}
-        .gradient-border{border:1px solid rgba(245,158,11,0.2)}
-        .hover-scale{transition:transform .3s ease-in-out}
-        .hover-scale:hover{transform:scale(1.05)}
-        .exchange-card{background:linear-gradient(145deg,rgba(31,41,55,0.9),rgba(17,24,39,0.9));border:1px solid rgba(245,158,11,0.3);border-radius:1.5rem;box-shadow:0 15px 35px rgba(0,0,0,0.6),0 0 30px rgba(245,158,11,0.2);transition:all .4s ease;position:relative;overflow:hidden}
-        .exchange-card:hover{box-shadow:0 20px 50px rgba(0,0,0,0.7),0 0 40px rgba(245,158,11,0.4);transform:translateY(-10px)}
-        .border-line-gold{position:absolute;background:linear-gradient(90deg,transparent,#f59e0b,#d97706,#f59e0b,transparent);opacity:0;transition:opacity .4s;pointer-events:none}
-        .exchange-card:hover .border-line-gold{opacity:1}
-        .border-top-gold{top:0;left:0;width:100%;height:3px;animation:borderTop 4s linear infinite}
-        .border-right-gold{top:0;right:0;width:3px;height:100%;animation:borderRight 4s linear infinite .8s}
-        .border-bottom-gold{bottom:0;right:0;width:100%;height:3px;animation:borderBottom 4s linear infinite 1.6s}
-        .border-left-gold{bottom:0;left:0;width:3px;height:100%;animation:borderLeft 4s linear infinite 2.4s}
-        @keyframes borderTop{0%{transform:scaleX(0);opacity:0}10%{opacity:1}30%{transform:scaleX(1);opacity:1}35%{opacity:0}100%{opacity:0}}
-        @keyframes borderRight{0%{transform:scaleY(0);opacity:0}10%{opacity:1}30%{transform:scaleY(1);opacity:1}35%{opacity:0}100%{opacity:0}}
-        @keyframes borderBottom{0%{transform:scaleX(0);opacity:0}10%{opacity:1}30%{transform:scaleX(1);opacity:1}35%{opacity:0}100%{opacity:0}}
-        @keyframes borderLeft{0%{transform:scaleY(0);opacity:0}10%{opacity:1}30%{transform:scaleY(1);opacity:1}35%{opacity:0}100%{opacity:0}}
-        .badge{position:absolute;top:1rem;right:1rem;padding:.5rem 1rem;border-radius:9999px;font-weight:bold;font-size:.875rem}
-        .profile-picture{width:2.5rem;height:2.5rem;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid rgba(245,158,11,0.5)}
-        .profile-picture img{width:100%;height:100%;object-fit:cover}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .gradient-bg {
+            background: linear-gradient(to bottom, #1a1a1a, #000000);
+        }
+        .gradient-border {
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        .hover-scale {
+            transition: transform 0.2s ease-in-out;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        .sidebar {
+            transition: width 0.3s ease-in-out;
+            width: 14rem;
+            min-width: 14rem;
+        }
+        .sidebar.collapsed {
+            width: 4rem;
+            min-width: 4rem;
+        }
+        .menu-item {
+            transition: all 0.2s ease-in-out;
+        }
+        .menu-item:hover {
+            background-color: rgba(31, 41, 55, 0.5);
+            transform: translateX(4px);
+        }
+        .menu-item.active {
+            background: linear-gradient(to right, rgba(245, 158, 11, 0.2), rgba(234, 179, 8, 0.2));
+            color: #f59e0b;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .crypto-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #000;
+            overflow: hidden;
+        }
+        .crypto-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.75rem;
+        }
+        .crypto-icon-large {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.1));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .profile-picture {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .exchange-card {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.9));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+        .exchange-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.3);
+            transform: translateY(-5px);
+        }
+        .border-line-gold {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #f59e0b, #d97706, #f59e0b, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .exchange-card:hover .border-line-gold {
+            opacity: 1;
+        }
+        .border-top-gold { top: 0; left: 0; width: 100%; height: 2px; animation: borderTop 3s linear infinite; }
+        .border-right-gold { top: 0; right: 0; width: 2px; height: 100%; animation: borderRight 3s linear infinite 0.7s; }
+        .border-bottom-gold { bottom: 0; right: 0; width: 100%; height: 2px; animation: borderBottom 3s linear infinite 1.4s; }
+        .border-left-gold { bottom: 0; left: 0; width: 2px; height: 100%; animation: borderLeft 3s linear infinite 2.1s; }
+        @keyframes borderTop { 0% { transform: scaleX(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleX(1); opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+        @keyframes borderRight { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+        @keyframes borderBottom { 0% { transform: scaleX(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleX(1); opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+        @keyframes borderLeft { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            display: none;
+        }
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        #running-text {
+            animation: scroll-left 60s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-black text-white flex">
-    <!-- Sidebar dengan Logo BossX & Profil -->
-    <div class="w-80 gradient-bg gradient-border flex flex-col shadow-2xl">
-        <div class="p-8 border-b border-amber-500/20 text-center">
-            <div class="crypto-icon-large mx-auto mb-6">
-                <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" class="w-full h-full object-contain rounded-xl"/>
-            </div>
-            <h1 class="text-4xl font-bold text-amber-400 mb-2">BossX</h1>
-            <p class="text-lg text-gray-300">Xnode Marketplace</p>
-        </div>
-
-        <!-- Profil User -->
-        <div class="p-6 border-b border-amber-500/20 text-center">
-            <div class="flex items-center justify-center space-x-4">
-                <div class="profile-picture">
-                    <img src="https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg" alt="Fery Muliawan"/>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar h-screen gradient-bg gradient-border">
+        <div class="p-3 border-b border-amber-500/20">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="crypto-icon">
+                        <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" />
+                    </div>
+                    <div id="logo-text">
+                        <h1 class="text-lg font-bold text-amber-400">BossX</h1>
+                        <p class="text-xs text-gray-400">Crypto Exchange</p>
+                    </div>
                 </div>
-                <div class="text-left">
-                    <p class="text-xl font-bold text-white">Fery Muliawan</p>
-                    <p class="text-amber-400 text-sm">Founder & CEO</p>
-                </div>
+                <button id="toggle-sidebar" class="text-gray-400 hover:text-amber-400 p-1 rounded">
+                    <i data-lucide="chevron-left"></i>
+                </button>
             </div>
         </div>
-
-        <div class="flex-1 flex items-center justify-center">
-            <div class="text-center">
-                <i data-lucide="shopping-bag" class="w-20 h-20 text-amber-400 mx-auto mb-6"></i>
-                <p class="text-3xl font-bold text-amber-400">Marketplace</p>
-                <p class="text-gray-400 mt-4 text-lg">Pilih varian Xnode terbaikmu</p>
-            </div>
-        </div>
-
-        <div class="p-6 border-t border-amber-500/20 text-center text-sm text-gray-500">
-            © 2025 BossX Technology • Worldwide Shipping
-        </div>
+        <nav class="mt-4 px-2">
+            <!-- Hanya menu Marketplace yang disisakan -->
+            <a href="#" class="menu-item active flex items-center px-2 py-2 mb-2 rounded-xl" data-page="marketplace">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span class="ml-2 font-medium menu-text text-sm">Marketplace</span>
+            </a>
+        </nav>
     </div>
 
-    <!-- Main Content - Hanya Marketplace -->
-    <div class="flex-1 overflow-auto">
-        <div class="max-w-7xl mx-auto p-8">
-            <!-- Header Utama -->
-            <div class="text-center mb-16 mt-12">
-                <i data-lucide="zap" class="w-32 h-32 text-amber-400 mx-auto mb-8"></i>
-                <h1 class="text-6xl font-bold text-amber-400 mb-6">Xnode Marketplace</h1>
-                <p class="text-3xl text-gray-300 mb-4">Alat Mining Resmi BossX</p>
-                <p class="text-2xl text-gray-400 max-w-4xl mx-auto">Plug & Play • Hemat Listrik • Hashrate Tinggi • Sync Otomatis ke Validator BossX</p>
-            </div>
-
-            <!-- My Inventory -->
-            <div class="bg-gray-900/50 border border-amber-500/30 rounded-3xl p-10 mb-16 text-center">
-                <h2 class="text-4xl font-bold text-amber-400 mb-8 flex items-center justify-center">
-                    <i data-lucide="package" class="w-12 h-12 mr-4"></i> My Xnode Collection
-                </h2>
-                <div id="my-inventory" class="grid grid-cols-2 md:grid-cols-4 gap-8 min-h-48">
-                    <p class="col-span-full text-2xl text-gray-500">Belum ada Xnode yang dibeli. Pilih varian favoritmu di bawah!</p>
-                </div>
-            </div>
-
-            <!-- 8 Varian Xnode -->
-            <h2 class="text-4xl font-bold text-amber-400 text-center mb-12">Pilih Varian Xnode</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                <!-- 1. Xnode Classic -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://mineshop.eu/storage/tinymce/XuV7x8eyQkZHCN5s0zR1Sa1iOQvdUJ1EbHPgDbDd.webp" alt="Xnode Classic" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-amber-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-amber-500 to-orange-600 text-black">Classic</div>
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+        <header class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border-b border-amber-500/20 px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div id="time" class="text-amber-400 text-lg font-bold">00:00:00</div>
+                <div class="flex-1 max-w-sm mx-4">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+                        <input type="text" placeholder="Cari..." class="w-full pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
                     </div>
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4">Xnode Classic</h3>
-                    <p class="text-gray-300 mb-8 text-lg">5-10 TH/s • 150W • Ideal untuk pemula</p>
-                    <div class="text-5xl font-bold text-amber-400 mb-10">150 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 transition-all" onclick="buyMarketplaceItem('Xnode Classic', 150)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
                 </div>
-
-                <!-- 2. Xnode Pro -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://p.turbosquid.com/ts-thumb/K3/GDAJ0m/Ly/di8sunwvlqqc6ixb_bitcoin_mining_asic_002/jpg/1685527487/1920x1080/fit_q87/9e1f6b5d636fa49f05936c47512c28e2eba99d8c/di8sunwvlqqc6ixb_bitcoin_mining_asic_002.jpg" alt="Xnode Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-blue-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-blue-500 to-cyan-600 text-black">Pro</div>
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="profile-picture">
+                            <img src="https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg" alt="User" />
+                        </div>
+                        <div class="text-sm">
+                            <p class="font-medium">Fery Muliawan</p>
+                            <p class="text-amber-400 text-xs">Validator: 8055x</p>
+                        </div>
                     </div>
-                    <h3 class="text-3xl font-bold text-blue-400 mb-4">Xnode Pro</h3>
-                    <p class="text-gray-300 mb-8 text-lg">15 TH/s • 400W • Cooling Premium</p>
-                    <div class="text-5xl font-bold text-blue-400 mb-10">450 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 transition-all" onclick="buyMarketplaceItem('Xnode Pro', 450)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 3. Xnode Advanced -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://cdn.mos.cms.futurecdn.net/VYGvzvoy87pLw4a2UfCZTD.jpg" alt="Xnode Advanced" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-amber-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-amber-500 to-red-600 text-black">Advanced</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4">Xnode Advanced</h3>
-                    <p class="text-gray-300 mb-8 text-lg">20 TH/s • 500W • High Performance</p>
-                    <div class="text-5xl font-bold text-amber-400 mb-10">600 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700 transition-all" onclick="buyMarketplaceItem('Xnode Advanced', 600)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 4. Xnode WiFi Edition -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://m.media-amazon.com/images/I/61J1asdQMzL._AC_UF350,350_QL80_.jpg" alt="Xnode WiFi" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-purple-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-purple-500 to-pink-600 text-black">WiFi Edition</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-purple-400 mb-4">Xnode WiFi Edition</h3>
-                    <p class="text-gray-300 mb-8 text-lg">1-4 TH/s • Super Silent • Wireless</p>
-                    <div class="text-5xl font-bold text-purple-400 mb-10">250 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 transition-all" onclick="buyMarketplaceItem('Xnode WiFi Edition', 250)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 5. Xnode BMM Series -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://cdn.prod.website-files.com/5e5ee6f9b325a6509259421f/670630b81c7f246622975cd0_miner.png" alt="Xnode BMM" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-amber-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-amber-500 to-yellow-600 text-black">BMM Series</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4">Xnode BMM Series</h3>
-                    <p class="text-gray-300 mb-8 text-lg">10-15 TH/s • Premium Build</p>
-                    <div class="text-5xl font-bold text-amber-400 mb-10">400 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 transition-all" onclick="buyMarketplaceItem('Xnode BMM Series', 400)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 6. Xnode Touch Display -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://www.solosatoshi.com/wp-content/uploads/2025/03/Bitaxe-Touch-Miner-Displaying-Bitcoin-Price-on-Desk.png" alt="Xnode Touch" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-cyan-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-cyan-500 to-blue-600 text-black">Touch Display</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-cyan-400 mb-4">Xnode Touch Display</h3>
-                    <p class="text-gray-300 mb-8 text-lg">8 TH/s • Layar Real-time</p>
-                    <div class="text-5xl font-bold text-cyan-400 mb-10">350 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all" onclick="buyMarketplaceItem('Xnode Touch Display', 350)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 7. Xnode Cyberpunk Neon -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://www.solosatoshi.com/wp-content/uploads/2025/03/bitaxe-touch-bitcoin-solo-miner-1-e1752951205491.webp" alt="Xnode Cyberpunk" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-purple-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-purple-500 to-pink-600 text-black">Cyberpunk Neon</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-purple-400 mb-4">Xnode Cyberpunk Neon</h3>
-                    <p class="text-gray-300 mb-8 text-lg">12 TH/s • Neon Glow Edition</p>
-                    <div class="text-5xl font-bold text-purple-400 mb-10">550 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 transition-all" onclick="buyMarketplaceItem('Xnode Cyberpunk Neon', 550)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                </div>
-
-                <!-- 8. Xnode Silent Pro -->
-                <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
-                    <div class="border-line-gold border-top-gold"></div>
-                    <div class="border-line-gold border-right-gold"></div>
-                    <div class="border-line-gold border-bottom-gold"></div>
-                    <div class="border-line-gold border-left-gold"></div>
-                    <div class="relative mb-8">
-                        <img src="https://m.media-amazon.com/images/I/612IUqqvPiL._AC_UF894,1000_QL80_.jpg" alt="Xnode Silent Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl border-4 border-green-500/50 bg-black"/>
-                        <div class="badge bg-gradient-to-r from-green-500 to-emerald-600 text-black">Silent Pro</div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-green-400 mb-4">Xnode Silent Pro</h3>
-                    <p class="text-gray-300 mb-8 text-lg">18 TH/s • Super Silent • 450W</p>
-                    <div class="text-5xl font-bold text-green-400 mb-10">800 USDT</div>
-                    <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transition-all" onclick="buyMarketplaceItem('Xnode Silent Pro', 800)">
-                        <i data-lucide="shopping-cart" class="inline mr-3"></i> Beli Sekarang
-                    </button>
-                    <p class="mt-4 text-red-400 font-bold text-xl">Limited Stock!</p>
                 </div>
             </div>
+        </header>
 
-            <!-- Footer Info -->
-            <div class="mt-24 text-center pb-12">
-                <i data-lucide="truck" class="w-20 h-20 text-green-400 mx-auto mb-6"></i>
-                <p class="text-3xl text-green-400 font-bold mb-4">Pengiriman Cepat & Aman Worldwide</p>
-                <p class="text-2xl text-gray-400">Garansi Resmi 1-2 Tahun • Support 24/7 • Sync Otomatis ke BossX</p>
-                <p class="text-lg text-gray-600 mt-8">Pembelian menggunakan USDT • Hubungi admin untuk bulk order</p>
+        <main class="flex-1 overflow-auto p-4">
+            <div id="content">
+                <!-- Running Text Ticker -->
+                <div class="bg-gray-900 border border-amber-500/20 rounded-xl p-3 overflow-hidden mb-4">
+                    <div class="relative">
+                        <div id="running-text" class="whitespace-nowrap text-amber-400 font-medium text-sm">
+                            🔥 BTC +5.2% $35,000 • ETH +3.8% $1,875 • BNB -1.2% $206 • BossX Validator Masternode System Active • Xnode Mining Devices Available!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hanya Marketplace Page -->
+                <div id="marketplace-page" class="page-content active">
+                    <div class="p-6">
+                        <div class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-amber-500/30 rounded-xl p-8 mb-8 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent"></div>
+                            <div class="relative z-10 text-center">
+                                <h1 class="text-5xl font-bold text-amber-400 mb-4 flex items-center justify-center">
+                                    <i data-lucide="shopping-bag" class="w-16 h-16 mr-4"></i>
+                                    Xnode Marketplace
+                                </h1>
+                                <p class="text-2xl text-gray-300">Beli alat mining resmi BossX dengan USDT</p>
+                            </div>
+                        </div>
+
+                        <!-- Grid Produk Xnode (contoh 8 item, kamu bisa isi gambar dan harga sesuai keinginan) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <!-- Item 1 -->
+                            <div class="exchange-card p-6 relative overflow-hidden hover-scale card-hover">
+                                <div class="border-line-gold border-top-gold"></div>
+                                <div class="border-line-gold border-right-gold"></div>
+                                <div class="border-line-gold border-bottom-gold"></div>
+                                <div class="border-line-gold border-left-gold"></div>
+                                <img src="https://via.placeholder.com/400x300?text=Xnode+Classic" alt="Xnode Classic" class="w-full h-64 object-cover rounded-xl mb-4" />
+                                <h3 class="text-2xl font-bold text-amber-400 mb-2 text-center">Xnode Classic</h3>
+                                <p class="text-gray-300 text-center mb-4">Hashrate: 10 TH/s • 150W</p>
+                                <div class="text-3xl font-bold text-amber-400 text-center mb-4">150 USDT</div>
+                                <button class="node-button w-full py-3 font-bold">Beli Sekarang</button>
+                            </div>
+
+                            <!-- Item 2 sampai 8 (contoh sama, ganti gambar/harga/nama sesuai kebutuhan) -->
+                            <!-- Ulangi struktur card di atas 7 kali lagi dengan variasi -->
+                            <div class="exchange-card p-6 relative overflow-hidden hover-scale card-hover">
+                                <div class="border-line-gold border-top-gold"></div>
+                                <div class="border-line-gold border-right-gold"></div>
+                                <div class="border-line-gold border-bottom-gold"></div>
+                                <div class="border-line-gold border-left-gold"></div>
+                                <img src="https://via.placeholder.com/400x300?text=Xnode+Pro" alt="Xnode Pro" class="w-full h-64 object-cover rounded-xl mb-4" />
+                                <h3 class="text-2xl font-bold text-blue-400 mb-2 text-center">Xnode Pro</h3>
+                                <p class="text-gray-300 text-center mb-4">Hashrate: 20 TH/s • 400W</p>
+                                <div class="text-3xl font-bold text-blue-400 text-center mb-4">450 USDT</div>
+                                <button class="node-button w-full py-3 font-bold">Beli Sekarang</button>
+                            </div>
+
+                            <!-- Tambahkan 6 card lagi sesuai kebutuhan -->
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        let usdtBalance = 1000;
-        let myXnodes = [];
-
-        function buyMarketplaceItem(item, price) {
-            if (usdtBalance < price) {
-                alert('Saldo USDT tidak mencukupi! Dibutuhkan ' + price + ' USDT');
-                return;
-            }
-            if (confirm('Konfirmasi pembelian:\n\n' + item + '\nHarga: ' + price + ' USDT\n\nLanjutkan?')) {
-                usdtBalance -= price;
-                myXnodes.push(item);
-                updateInventory();
-                alert('Selamat! ' + item + ' berhasil dibeli!\nSisa saldo: ' + usdtBalance.toFixed(2) + ' USDT\nXnode akan segera dikirim.');
-
-                confetti({
-                    particleCount: 200,
-                    spread: 100,
-                    origin: { y: 0.6 },
-                    colors: ['#f59e0b', '#d97706', '#3b82f6', '#10b981', '#8b5cf6']
-                });
-            }
-        }
-
-        function updateInventory() {
-            const inv = document.getElementById('my-inventory');
-            if (myXnodes.length === 0) {
-                inv.innerHTML = '<p class="col-span-full text-2xl text-gray-500">Belum ada Xnode yang dibeli. Pilih varian favoritmu di bawah!</p>';
-            } else {
-                inv.innerHTML = '';
-                myXnodes.forEach(x => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-gradient-to-br from-amber-600/30 to-orange-600/30 border-2 border-amber-500/70 rounded-3xl p-8 text-center shadow-2xl';
-                    card.innerHTML = `
-                        <i data-lucide="cpu" class="w-16 h-16 text-amber-400 mx-auto mb-4"></i>
-                        <p class="text-3xl font-bold text-amber-400">${x}</p>
-                        <p class="text-xl text-green-400 mt-4">✓ Owned</p>
-                    `;
-                    inv.appendChild(card);
-                });
-                lucide.createIcons();
-            }
-        }
+        // Hanya script minimal untuk toggle sidebar dan icon
+        document.getElementById('toggle-sidebar').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            const logoText = document.getElementById('logo-text');
+            const menuTexts = document.querySelectorAll('.menu-text');
+            sidebar.classList.toggle('collapsed');
+            logoText.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'block';
+            menuTexts.forEach(text => text.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'inline');
+        });
 
         lucide.createIcons();
-        updateInventory();
+
+        // Update jam real-time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html>
