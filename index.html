@@ -116,157 +116,149 @@
                 <!-- My Collection -->
                 <div class="bg-gray-900/50 border border-amber-500/30 rounded-3xl p-10 mb-12 text-center">
                     <h2 class="text-4xl font-bold text-amber-400 mb-8">My Xnode Collection</h2>
-                    <div id="my-inventory" class="grid grid-cols-2 md:grid-cols-4 gap-8 min-h-48">
+                    <div id="my-inventory" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 min-h-48">
                         <p class="col-span-full text-2xl text-gray-500">Belum ada Xnode yang dibeli</p>
                     </div>
                 </div>
 
-                <!-- 8 Card Xnode - Tanpa badge -->
+                <!-- 8 Card Xnode - Card lebih lebar (max 3 kolom di desktop, gambar lebih besar) -->
                 <h2 class="text-4xl font-bold text-amber-400 text-center mb-12">Pilih Varian Xnode</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"> <!-- Diubah jadi max 3 kolom agar lebih lebar -->
                     <!-- 1. Xnode Classic -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center"> <!-- Padding lebih besar -->
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Classic" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Classic" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/> <!-- Tinggi gambar lebih besar -->
                         </div>
-                        <h3 class="text-3xl font-bold text-amber-400 mb-4">Xnode Classic</h3>
-                        <p class="text-xl text-gray-300 mb-6">Neon Glow • Futuristic Design • Entry Level</p>
-                        <div class="text-5xl font-bold text-amber-400 mb-8">100 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700" onclick="buyMarketplaceItem('Xnode Classic', 100)">
+                        <h3 class="text-4xl font-bold text-amber-400 mb-6">Xnode Classic</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Neon Glow • Futuristic Design • Entry Level</p>
+                        <div class="text-6xl font-bold text-amber-400 mb-10">100 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700" onclick="buyMarketplaceItem('Xnode Classic', 100)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 2. Xnode Pro -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Pro" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-blue-400 mb-4">Xnode Pro</h3>
-                        <p class="text-xl text-gray-300 mb-6">Neon Pink Glow • High Performance • Pro Edition</p>
-                        <div class="text-5xl font-bold text-blue-400 mb-8">450 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700" onclick="buyMarketplaceItem('Xnode Pro', 450)">
+                        <h3 class="text-4xl font-bold text-blue-400 mb-6">Xnode Pro</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Neon Pink Glow • High Performance • Pro Edition</p>
+                        <div class="text-6xl font-bold text-blue-400 mb-10">450 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700" onclick="buyMarketplaceItem('Xnode Pro', 450)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 3. Xnode Advanced -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Advanced" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Advanced" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-red-400 mb-4">Xnode Advanced</h3>
-                        <p class="text-xl text-gray-300 mb-6">High Hashrate • Industrial Grade</p>
-                        <div class="text-5xl font-bold text-red-400 mb-8">600 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700" onclick="buyMarketplaceItem('Xnode Advanced', 600)">
+                        <h3 class="text-4xl font-bold text-red-400 mb-6">Xnode Advanced</h3>
+                        <p class="text-2xl text-gray-300 mb-8">High Hashrate • Industrial Grade</p>
+                        <div class="text-6xl font-bold text-red-400 mb-10">600 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700" onclick="buyMarketplaceItem('Xnode Advanced', 600)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 4. Xnode Mini -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Mini" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Mini" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-green-400 mb-4">Xnode Mini</h3>
-                        <p class="text-xl text-gray-300 mb-6">Portable • Low Power • Neon Edition</p>
-                        <div class="text-5xl font-bold text-green-400 mb-8">99 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700" onclick="buyMarketplaceItem('Xnode Mini', 99)">
+                        <h3 class="text-4xl font-bold text-green-400 mb-6">Xnode Mini</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Portable • Low Power • Neon Edition</p>
+                        <div class="text-6xl font-bold text-green-400 mb-10">99 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700" onclick="buyMarketplaceItem('Xnode Mini', 99)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 5. Xnode Silent Pro -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Silent Pro" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode Silent Pro" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-purple-400 mb-4">Xnode Silent Pro</h3>
-                        <p class="text-xl text-gray-300 mb-6">Super Silent • Home Friendly</p>
-                        <div class="text-5xl font-bold text-purple-400 mb-8">700 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700" onclick="buyMarketplaceItem('Xnode Silent Pro', 700)">
+                        <h3 class="text-4xl font-bold text-purple-400 mb-6">Xnode Silent Pro</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Super Silent • Home Friendly</p>
+                        <div class="text-6xl font-bold text-purple-400 mb-10">700 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700" onclick="buyMarketplaceItem('Xnode Silent Pro', 700)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 6. Xnode Touch Display -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Touch Display" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Touch Display" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-cyan-400 mb-4">Xnode Touch Display</h3>
-                        <p class="text-xl text-gray-300 mb-6">Built-in Screen • Real-time Monitoring</p>
-                        <div class="text-5xl font-bold text-cyan-400 mb-8">350 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700" onclick="buyMarketplaceItem('Xnode Touch Display', 350)">
+                        <h3 class="text-4xl font-bold text-cyan-400 mb-6">Xnode Touch Display</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Built-in Screen • Real-time Monitoring</p>
+                        <div class="text-6xl font-bold text-cyan-400 mb-10">350 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700" onclick="buyMarketplaceItem('Xnode Touch Display', 350)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 7. Xnode BMM Series -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode BMM Series" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/RGfYyPSq/2025-12-19-174746.png" alt="Xnode BMM Series" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Xnode BMM Series</h3>
-                        <p class="text-xl text-gray-300 mb-6">Balanced Performance • Premium Build</p>
-                        <div class="text-5xl font-bold text-yellow-400 mb-8">400 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700" onclick="buyMarketplaceItem('Xnode BMM Series', 400)">
+                        <h3 class="text-4xl font-bold text-yellow-400 mb-6">Xnode BMM Series</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Balanced Performance • Premium Build</p>
+                        <div class="text-6xl font-bold text-yellow-400 mb-10">400 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700" onclick="buyMarketplaceItem('Xnode BMM Series', 400)">
                             Beli Sekarang
                         </button>
                     </div>
 
                     <!-- 8. Xnode Cyberpunk Neon -->
-                    <div class="exchange-card p-8 relative overflow-hidden hover-scale card-hover text-center">
+                    <div class="exchange-card p-10 relative overflow-hidden hover-scale card-hover text-center">
                         <div class="border-line-gold border-top-gold"></div>
                         <div class="border-line-gold border-right-gold"></div>
                         <div class="border-line-gold border-bottom-gold"></div>
                         <div class="border-line-gold border-left-gold"></div>
-                        <div class="relative mb-6">
-                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Cyberpunk Neon" class="w-full h-80 object-contain rounded-2xl shadow-2xl bg-black"/>
-                            <!-- Badge dihapus -->
+                        <div class="relative mb-8">
+                            <img src="https://i.ibb.co.com/mFb3W98h/image.png" alt="Xnode Cyberpunk Neon" class="w-full h-96 object-contain rounded-3xl shadow-2xl bg-black"/>
                         </div>
-                        <h3 class="text-3xl font-bold text-pink-400 mb-4">Xnode Cyberpunk Neon</h3>
-                        <p class="text-xl text-gray-300 mb-6">Limited Edition • Ultimate Neon Glow</p>
-                        <div class="text-5xl font-bold text-pink-400 mb-8">550 USDT</div>
-                        <button class="w-full py-5 text-2xl font-bold rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700" onclick="buyMarketplaceItem('Xnode Cyberpunk Neon', 550)">
+                        <h3 class="text-4xl font-bold text-pink-400 mb-6">Xnode Cyberpunk Neon</h3>
+                        <p class="text-2xl text-gray-300 mb-8">Limited Edition • Ultimate Neon Glow</p>
+                        <div class="text-6xl font-bold text-pink-400 mb-10">550 USDT</div>
+                        <button class="w-full py-6 text-3xl font-bold rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700" onclick="buyMarketplaceItem('Xnode Cyberpunk Neon', 550)">
                             Beli Sekarang
                         </button>
-                        <p class="mt-4 text-red-400 font-bold text-xl">Limited Stock!</p>
+                        <p class="mt-6 text-red-400 font-bold text-2xl">Limited Stock!</p>
                     </div>
                 </div>
             </div>
