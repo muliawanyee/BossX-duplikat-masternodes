@@ -186,11 +186,11 @@
       
       <div class="hero-stats">
         <div class="stat-box">
-          <div class="stat-value" id="live-counter">0.000000 BX</div>
+          <div class="stat-value" id="live-counter">0.000000 BossX</div>
           <div class="stat-label">Reward Terkumpul (Live)</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value">0.00123 BX/s</div>
+          <div class="stat-value">0.00123 BossX/s</div>
           <div class="stat-label">Rate per Detik</div>
         </div>
         <div class="stat-box">
@@ -280,7 +280,7 @@
           <div class="step-content">
             <h3>🎫 Terima Kode Key</h3>
             <ul>
-              <li>Sistem generate kode unik (contoh: BX-7G9K-M2P4)</li>
+              <li>Sistem generate kode unik (contoh: BossX-7G9K-M2P4)</li>
               <li>Kode dikirim ke dashboard, email, & Telegram</li>
               <li><strong>Penting:</strong> Simpan baik-baik, hanya 1x pakai</li>
             </ul>
@@ -302,7 +302,7 @@
           <div class="step-content">
             <h3>🌙 Node Aktif Sampai 06.00 Pagi</h3>
             <ul>
-              <li>Reward mengalir per detik secara otomatis</li>
+              <li>Reward BossX mengalir per detik secara otomatis</li>
               <li>Node ON non-stop hingga jam <strong>06:00 WIB</strong></li>
               <li>Jam 06.00: Cycle selesai → klaim, tarik, atau stake ulang</li>
               <li>Beli KeyNode baru untuk cycle berikutnya</li>
@@ -384,7 +384,7 @@
     const ratePerSecond = 0.00123; // Ganti sesuai tokenomics asli
     setInterval(() => {
       reward += ratePerSecond;
-      document.getElementById('live-counter').textContent = reward.toFixed(6) + ' BX';
+      document.getElementById('live-counter').textContent = reward.toFixed(6) + ' BossX';
     }, 1000);
 
     // 2. Countdown to 06:00 AM
