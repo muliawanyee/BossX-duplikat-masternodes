@@ -84,27 +84,58 @@
     .pulse { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 var(--success); } 50% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 6px transparent; } }
 
-    /* Navbar & Logo */
+    /* Navbar & Logo - UPDATED */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(3, 3, 8, 0.7); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-glass); padding: 12px 0;
+      background: rgba(3, 3, 8, 0.85); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-glass); padding: 14px 0;
     }
     .nav-inner { display: flex; justify-content: space-between; align-items: center; }
     
-    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-img {
-      width: 44px; height: 44px; object-fit: contain; border-radius: 50%;
-      mix-blend-mode: screen; filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4)); transition: var(--transition);
+    .logo-container { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      text-decoration: none;
+      padding: 4px 0;
     }
-    .logo-container:hover .logo-img { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7)); }
-    .logo-text { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: -0.02em; }
-    .logo-text span { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
+    .logo-img {
+      width: 38px; height: 38px; 
+      object-fit: contain;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+      transition: var(--transition);
+      /* Jika logo berlatar hitam, mix-blend-mode akan membuatnya menyatu */
+      mix-blend-mode: screen;
+    }
+    .logo-container:hover .logo-img {
+      transform: scale(1.1) rotate(3deg);
+      filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.8));
+    }
+    .logo-text { 
+      font-family: 'Outfit', sans-serif; 
+      font-weight: 800; 
+      font-size: 1.5rem; 
+      color: #fff; 
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .logo-text span { 
+      color: var(--primary); 
+      text-shadow: 0 0 10px var(--primary-glow); 
+    }
 
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.01em; transition: var(--transition); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { 
+      font-size: 0.875rem; 
+      font-weight: 500; 
+      color: var(--text-muted); 
+      letter-spacing: 0.01em; 
+      transition: var(--transition);
+      white-space: nowrap;
+    }
     .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
-    @media (max-width: 768px) { .nav-links { display: none; } }
+    @media (max-width: 968px) { .nav-links { display: none; } }
 
     /* Hero */
     #hero { text-align: center; padding-top: 160px; padding-bottom: 120px; position: relative; overflow: hidden; }
@@ -289,7 +320,8 @@
       .roadmap-timeline { padding-left: 32px; }
       .roadmap-marker { left: -36px; width: 26px; height: 26px; font-size: 0.7rem; }
       .tech-grid { grid-template-columns: 1fr; }
-      .logo-img { width: 36px; height: 36px; }
+      .logo-img { width: 32px; height: 32px; }
+      .logo-text { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -299,6 +331,7 @@
   <nav>
     <div class="container nav-inner">
       <a href="#" class="logo-container">
+        <!-- Logo BossX yang sudah dirapikan -->
         <img src="bossx-logo.png" alt="BossX Logo" class="logo-img">
         <span class="logo-text">Boss<span>X</span></span>
       </a>
@@ -309,7 +342,6 @@
         <a href="#roadmap">Roadmap</a>
         <a href="#steps">Cara Mulai</a>
         <a href="#faq">FAQ</a>
-        <!-- REVISI: Connect Masternode -->
         <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Connect Masternode</a>
       </div>
     </div>
@@ -340,7 +372,6 @@
       </div>
 
       <div class="hero-cta">
-        <!-- REVISI: Connect Masternode -->
         <a href="#" class="btn">🔗 Connect Masternode & Start</a>
         <a href="#steps" class="btn btn-outline">📖 Lihat Panduan</a>
       </div>
@@ -704,7 +735,6 @@
     <div class="container">
       <h2>Setiap Detik Berharga — Jangan Lewatkan Reward Anda!</h2>
       <p style="max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem;">Saat ini, ratusan node aktif sedang menghasilkan BossX setiap detik. Semakin cepat Anda bergabung, semakin awal reward Anda mulai mengalir.</p>
-      <!-- REVISI: Connect Masternode -->
       <a href="#" class="btn" style="padding: 16px 40px; font-size: 1rem;">🔗 Connect Masternode & Activate Node</a>
       <p style="margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">Butuh bantuan? <a href="#">Chat Telegram Support</a> • <a href="#">Baca Whitepaper</a></p>
     </div>
