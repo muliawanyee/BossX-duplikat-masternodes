@@ -174,6 +174,135 @@
       margin-top: 36px;
     }
 
+    /* Technology Section - NEW */
+    #technology { 
+      background: linear-gradient(135deg, #0a0b10 0%, #12141c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #technology::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    #technology::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .tech-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .tech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .tech-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .tech-card:nth-child(1) { transition-delay: 0.1s; }
+    .tech-card:nth-child(2) { transition-delay: 0.2s; }
+    .tech-card:nth-child(3) { transition-delay: 0.3s; }
+    .tech-card:nth-child(4) { transition-delay: 0.4s; }
+    .tech-card:nth-child(5) { transition-delay: 0.5s; }
+    
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .tech-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 212, 255, 0.15);
+    }
+    .tech-card:hover::before {
+      transform: scaleX(1);
+    }
+    .tech-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(245,158,11,0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border: 2px solid var(--border);
+      transition: var(--transition);
+    }
+    .tech-card:hover .tech-icon {
+      border-color: var(--primary);
+      transform: scale(1.1) rotate(5deg);
+    }
+    .tech-card h3 {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tech-card h3::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      margin-left: 8px;
+    }
+    .tech-card p {
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      margin: 0;
+      color: var(--text-muted);
+    }
+    .tech-highlight {
+      display: inline-block;
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-top: 12px;
+    }
+
     /* Features */
     #features { background: var(--bg-card); }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
@@ -195,7 +324,7 @@
       margin: 0;
     }
 
-    /* Roadmap Section - INTERACTIVE */
+    /* Roadmap Section */
     #roadmap { 
       background: linear-gradient(135deg, #0a0b10 0%, #12141c 100%);
       position: relative;
@@ -459,6 +588,7 @@
       .step-num { left: 0; }
       .roadmap-timeline { padding-left: 32px; }
       .roadmap-marker { left: -38px; width: 24px; height: 24px; font-size: 0.6875rem; }
+      .tech-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -470,6 +600,7 @@
       <div class="logo">Boss<span>X</span></div>
       <div class="nav-links">
         <a href="#introduction">Tentang</a>
+        <a href="#technology">Teknologi</a>
         <a href="#features">Fitur</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#steps">Cara Mulai</a>
@@ -533,6 +664,68 @@
     </div>
   </section>
 
+  <!-- Technology Section - NEW -->
+  <section id="technology">
+    <div class="container tech-container">
+      <h2>BossX Technology</h2>
+      <p style="text-align: center; max-width: 600px; margin: 0 auto 16px; font-size: 1.0625rem;">
+        Teknologi blockchain canggih yang menjadi fondasi ekosistem BossX
+      </p>
+      
+      <div class="tech-grid">
+        <!-- Desentralisasi -->
+        <div class="tech-card">
+          <div class="tech-icon">🌐</div>
+          <h3>Desentralisasi</h3>
+          <p>
+            Tidak ada satu entitas tunggal yang mengendalikan blockchain. Ini berarti bahwa data lebih tahan terhadap sensor dan manipulasi.
+          </p>
+          <span class="tech-highlight">No Single Point of Control</span>
+        </div>
+
+        <!-- Transparansi -->
+        <div class="tech-card">
+          <div class="tech-icon">👁️</div>
+          <h3>Transparansi</h3>
+          <p>
+            Semua transaksi yang terjadi di BossX dapat dilihat oleh semua orang dalam jaringan. Terbuka dan dapat diverifikasi oleh siapa saja.
+          </p>
+          <span class="tech-highlight">100% Transparent</span>
+        </div>
+
+        <!-- Keamanan -->
+        <div class="tech-card">
+          <div class="tech-icon">🔐</div>
+          <h3>Keamanan</h3>
+          <p>
+            Kriptografi yang canggih digunakan untuk mengamankan data dan transaksi di blockchain. Ini yang membuat BossX sulit untuk dirubah atau dipalsukan.
+          </p>
+          <span class="tech-highlight">Military-Grade Security</span>
+        </div>
+
+        <!-- Kekebalan Sensor -->
+        <div class="tech-card">
+          <div class="tech-icon">🛡️</div>
+          <h3>Kekebalan terhadap Sensor</h3>
+          <p>
+            Karena tidak ada satu entitas tunggal yang mengendalikan blockchain, data lebih tahan sensor dan manipulasi dari pihak manapun.
+          </p>
+          <span class="tech-highlight">Censorship Resistant</span>
+        </div>
+
+        <!-- Efisiensi -->
+        <div class="tech-card">
+          <div class="tech-icon">⚡</div>
+          <h3>Efisiensi</h3>
+          <p>
+            Blockchain dapat membantu mempercepat proses dan mengurangi biaya transaksi. Transaksi cepat dengan biaya minimal di jaringan TRC20.
+          </p>
+          <span class="tech-highlight">Fast & Low Cost</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section id="features">
     <div class="container">
@@ -562,7 +755,7 @@
     </div>
   </section>
 
-  <!-- Roadmap Section - NEW & INTERACTIVE -->
+  <!-- Roadmap Section -->
   <section id="roadmap">
     <div class="container">
       <h2>Roadmap BossX Token</h2>
@@ -968,13 +1161,26 @@
       });
     });
 
-    // 6. Scroll Animation Observer
+    // 6. Scroll Animation Observer for Tech Cards
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.tech-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // 7. Scroll Animation for Other Elements
+    const observer2 = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
@@ -987,7 +1193,7 @@
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
+      observer2.observe(el);
     });
   </script>
 </body>
