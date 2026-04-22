@@ -195,7 +195,206 @@
       margin: 0;
     }
 
+    /* Roadmap Section - INTERACTIVE */
+    #roadmap { 
+      background: linear-gradient(135deg, #0a0b10 0%, #12141c 100%);
+      position: relative;
+    }
+    .roadmap-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .roadmap-timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    .roadmap-timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+    }
+    .roadmap-quarter {
+      position: relative;
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideIn 0.6s ease forwards;
+    }
+    .roadmap-quarter:nth-child(1) { animation-delay: 0.1s; }
+    .roadmap-quarter:nth-child(2) { animation-delay: 0.2s; }
+    .roadmap-quarter:nth-child(3) { animation-delay: 0.3s; }
+    .roadmap-quarter:nth-child(4) { animation-delay: 0.4s; }
+    .roadmap-quarter:nth-child(5) { animation-delay: 0.5s; }
+    .roadmap-quarter:nth-child(6) { animation-delay: 0.6s; }
+    .roadmap-quarter:nth-child(7) { animation-delay: 0.7s; }
+    .roadmap-quarter:nth-child(8) { animation-delay: 0.8s; }
+    
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .roadmap-marker {
+      position: absolute;
+      left: -34px;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--bg-card);
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--primary);
+      z-index: 2;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .roadmap-quarter:hover .roadmap-marker {
+      background: var(--primary);
+      color: #000;
+      transform: scale(1.2);
+      box-shadow: var(--glow);
+    }
+    .roadmap-quarter.completed .roadmap-marker {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+    .roadmap-quarter.active .roadmap-marker {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      animation: pulse 2s infinite;
+    }
+    
+    .roadmap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-left: 16px;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .roadmap-card:hover {
+      border-color: var(--primary);
+      transform: translateX(8px);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+    }
+    .roadmap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .roadmap-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .roadmap-year {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .roadmap-status {
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-completed {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .status-active {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .status-upcoming {
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    
+    .roadmap-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .roadmap-list li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+    .roadmap-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .roadmap-list li:hover {
+      color: var(--text);
+      padding-left: 28px;
+    }
+    .roadmap-card.collapsed .roadmap-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .roadmap-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .roadmap-toggle:hover {
+      color: var(--accent);
+    }
+    .roadmap-toggle-icon {
+      transition: transform 0.3s ease;
+    }
+    .roadmap-card.collapsed .roadmap-toggle-icon {
+      transform: rotate(-90deg);
+    }
+
     /* Steps */
+    #steps { background: var(--bg-card); }
     .timeline { position: relative; margin-top: 48px; }
     .timeline::before {
       content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: var(--border);
@@ -258,6 +457,8 @@
       .timeline::before { display: none; }
       .step { flex-direction: column; width: 100%; margin-top: 0 !important; }
       .step-num { left: 0; }
+      .roadmap-timeline { padding-left: 32px; }
+      .roadmap-marker { left: -38px; width: 24px; height: 24px; font-size: 0.6875rem; }
     }
   </style>
 </head>
@@ -270,6 +471,7 @@
       <div class="nav-links">
         <a href="#introduction">Tentang</a>
         <a href="#features">Fitur</a>
+        <a href="#roadmap">Roadmap</a>
         <a href="#steps">Cara Mulai</a>
         <a href="#faq">FAQ</a>
         <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Connect Wallet</a>
@@ -355,6 +557,211 @@
           <div class="icon">🔓</div>
           <h3>Liquid & Fleksibel</h3>
           <p>Tarik reward kapan saja tanpa minimum atau penalti. Stake ulang untuk compound.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Section - NEW & INTERACTIVE -->
+  <section id="roadmap">
+    <div class="container">
+      <h2>Roadmap BossX Token</h2>
+      <p style="text-align: center; max-width: 600px; margin: 0 auto 48px; font-size: 1.0625rem;">
+        Perjalanan pengembangan BossX dari konsep hingga ekspansi global
+      </p>
+      
+      <div class="roadmap-container">
+        <div class="roadmap-timeline">
+          
+          <!-- Quarter 1 -->
+          <div class="roadmap-quarter completed">
+            <div class="roadmap-marker">1</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 1
+                  <span class="roadmap-year">2026</span>
+                </div>
+                <span class="roadmap-status status-completed">Completed</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Konsep Project</li>
+                <li>Penelitian Ide</li>
+                <li>Whitepaper Publish Versi 1.0</li>
+                <li>Launch Beta Airdrop BossX Point</li>
+                <li>Publish Sosial Media Channel (Github, Youtube, Twitter, Telegram, Discord)</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 2 -->
+          <div class="roadmap-quarter completed">
+            <div class="roadmap-marker">2</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 2
+                  <span class="roadmap-year">2026</span>
+                </div>
+                <span class="roadmap-status status-completed">Completed</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Pembuatan Cryptocurrency (BossX)</li>
+                <li>Publish Website www.BossX.io</li>
+                <li>List BossX Decentralized Exchanges in Sunswap Versi 1.0, 1.5, 2.0, 3.0</li>
+                <li>Publish App Tap to Earn (Masternodes)</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 3 -->
+          <div class="roadmap-quarter completed">
+            <div class="roadmap-marker">3</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 3
+                  <span class="roadmap-year">2026</span>
+                </div>
+                <span class="roadmap-status status-completed">Completed</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Launch Beta Version BossX App on Google Play</li>
+                <li>Launch Beta Internal Market</li>
+                <li>Explorer Cold Wallet BossX</li>
+                <li>Web Education and Training 4.0</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 4 -->
+          <div class="roadmap-quarter active">
+            <div class="roadmap-marker">4</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 4
+                  <span class="roadmap-year">2026</span>
+                </div>
+                <span class="roadmap-status status-active">In Progress</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Program Share To Earn (Affiliate)</li>
+                <li>Program Play To Earn (Game, Artificial Intelligence / AI)</li>
+                <li>Audit Certik</li>
+                <li>Listing Coin Market Cap (CMC, Coingecko, Coinranking)</li>
+                <li>List Centralized Exchange (Binance, Bybit, Okx, Indodax, Crypto.com)</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 5 -->
+          <div class="roadmap-quarter">
+            <div class="roadmap-marker">5</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 1
+                  <span class="roadmap-year">2027</span>
+                </div>
+                <span class="roadmap-status status-upcoming">Upcoming</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Launch Multi-Chain Blockchain</li>
+                <li>Whitepaper Rilis Versi 2.0</li>
+                <li>Initiate Staking and Farming</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 6 -->
+          <div class="roadmap-quarter">
+            <div class="roadmap-marker">6</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 2
+                  <span class="roadmap-year">2027</span>
+                </div>
+                <span class="roadmap-status status-upcoming">Upcoming</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Contract Audit</li>
+                <li>Whitepaper Versi 2.0</li>
+                <li>List BossX on Tier 1/Tier 2 Centralize Exchange (CEX)</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 7 -->
+          <div class="roadmap-quarter">
+            <div class="roadmap-marker">7</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 3
+                  <span class="roadmap-year">2027</span>
+                </div>
+                <span class="roadmap-status status-upcoming">Upcoming</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Launch Beta Play To Earn (Metaverse)</li>
+                <li>Upgrade Cold Wallet BossX Fungsional</li>
+                <li>Improve DAPPs Performance</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quarter 8 -->
+          <div class="roadmap-quarter">
+            <div class="roadmap-marker">8</div>
+            <div class="roadmap-card collapsed" onclick="toggleRoadmap(this)">
+              <div class="roadmap-header">
+                <div class="roadmap-title">
+                  QUARTAL 4
+                  <span class="roadmap-year">2027</span>
+                </div>
+                <span class="roadmap-status status-upcoming">Upcoming</span>
+              </div>
+              <ul class="roadmap-list">
+                <li>Expansion to New Market</li>
+                <li>Expo World</li>
+              </ul>
+              <div class="roadmap-toggle">
+                <span>Lihat Detail</span>
+                <span class="roadmap-toggle-icon">▼</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -532,7 +939,8 @@
 
     // 3. FAQ Toggle
     document.querySelectorAll('.faq-q').forEach(q => {
-      q.addEventListener('click', () => {
+      q.addEventListener('click', (e) => {
+        e.stopPropagation();
         const item = q.parentElement;
         const isActive = item.classList.contains('active');
         document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
@@ -540,13 +948,46 @@
       });
     });
 
-    // 4. Smooth Scroll
+    // 4. Roadmap Toggle
+    function toggleRoadmap(card) {
+      card.classList.toggle('collapsed');
+      const toggleText = card.querySelector('.roadmap-toggle span:first-child');
+      if (card.classList.contains('collapsed')) {
+        toggleText.textContent = 'Lihat Detail';
+      } else {
+        toggleText.textContent = 'Sembunyikan';
+      }
+    }
+
+    // 5. Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    });
+
+    // 6. Scroll Animation Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.roadmap-quarter, .card, .step').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
     });
   </script>
 </body>
