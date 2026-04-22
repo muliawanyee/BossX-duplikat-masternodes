@@ -56,7 +56,6 @@
     a { color: var(--primary); text-decoration: none; transition: var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* Glassmorphism Base */
     .glass { background: var(--bg-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-glass); border-radius: var(--radius); }
 
     .btn {
@@ -84,7 +83,7 @@
     .pulse { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 var(--success); } 50% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 6px transparent; } }
 
-    /* Navbar & Logo - UPDATED */
+    /* Navbar & Logo */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(3, 3, 8, 0.85); backdrop-filter: blur(24px);
@@ -100,13 +99,11 @@
       padding: 4px 0;
     }
     .logo-img {
-      width: 38px; height: 38px; 
+      width: 40px; height: 40px; 
       object-fit: contain;
       border-radius: 8px;
       filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
       transition: var(--transition);
-      /* Jika logo berlatar hitam, mix-blend-mode akan membuatnya menyatu */
-      mix-blend-mode: screen;
     }
     .logo-container:hover .logo-img {
       transform: scale(1.1) rotate(3deg);
@@ -320,7 +317,7 @@
       .roadmap-timeline { padding-left: 32px; }
       .roadmap-marker { left: -36px; width: 26px; height: 26px; font-size: 0.7rem; }
       .tech-grid { grid-template-columns: 1fr; }
-      .logo-img { width: 32px; height: 32px; }
+      .logo-img { width: 34px; height: 34px; }
       .logo-text { font-size: 1.3rem; }
     }
   </style>
@@ -331,8 +328,8 @@
   <nav>
     <div class="container nav-inner">
       <a href="#" class="logo-container">
-        <!-- Logo BossX yang sudah dirapikan -->
-        <img src="bossx-logo.png" alt="BossX Logo" class="logo-img">
+        <!-- Logo BossX dengan URL langsung dari imgbb -->
+        <img src="https://i.ibb.co.com/XxTxk79s/Whats-App-Image-2026-01-20-at-17-43-40-removebg-preview.png" alt="BossX Logo" class="logo-img">
         <span class="logo-text">Boss<span>X</span></span>
       </a>
       <div class="nav-links">
@@ -744,7 +741,7 @@
   <footer>
     <div class="container">
       <a href="#" class="logo-container" style="justify-content: center; margin-bottom: 20px;">
-        <img src="bossx-logo.png" alt="BossX Logo" class="logo-img">
+        <img src="https://i.ibb.co.com/XxTxk79s/Whats-App-Image-2026-01-20-at-17-43-40-removebg-preview.png" alt="BossX Logo" class="logo-img">
         <span class="logo-text">Boss<span>X</span></span>
       </a>
       <div class="footer-links">
