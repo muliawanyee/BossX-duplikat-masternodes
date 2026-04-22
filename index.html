@@ -189,6 +189,93 @@
       .result-value { font-size: 1.6rem; }
     }
 
+    /* Programs Section - NEW */
+    #programs { background: linear-gradient(180deg, transparent 0%, rgba(112, 0, 255, 0.05) 100%); }
+    .programs-header { text-align: center; margin-bottom: 60px; }
+    .programs-header h2 { margin-bottom: 16px; }
+    .programs-header p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+    
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    
+    .program-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius);
+      padding: 32px;
+      position: relative;
+      transition: var(--transition);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      transition: width 0.4s ease;
+    }
+    .program-card:hover::before { width: 100%; opacity: 0.05; }
+    .program-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15);
+    }
+    .program-number {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--border-glass);
+      font-family: 'Outfit', sans-serif;
+      line-height: 1;
+      transition: var(--transition);
+    }
+    .program-card:hover .program-number {
+      color: var(--primary);
+      opacity: 0.1;
+      transform: scale(1.1);
+    }
+    .program-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(112, 0, 255, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-glass);
+    }
+    .program-card h3 {
+      color: #fff;
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .program-card .subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .program-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0;
+      color: var(--text);
+    }
+
     /* Introduction */
     #introduction { background: linear-gradient(180deg, transparent 0%, rgba(112, 0, 255, 0.05) 100%); }
     .intro-container { max-width: 800px; margin: 0 auto; text-align: center; }
@@ -347,6 +434,7 @@
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
       .hero-stats { flex-direction: column; align-items: center; }
+      .programs-grid { grid-template-columns: 1fr; }
       .timeline::before { display: none; }
       .step { flex-direction: column; width: 100%; margin-top: 0 !important; }
       .step-num { left: 0; }
@@ -370,6 +458,7 @@
       </a>
       <div class="nav-links">
         <a href="#estimator">Estimasi</a>
+        <a href="#programs">Program</a>
         <a href="#introduction">Tentang</a>
         <a href="#technology">Teknologi</a>
         <a href="#roadmap">Roadmap</a>
@@ -447,6 +536,81 @@
           *Asumsi: 1 BossX = 1 USDT. Rate dasar: 0.00123 BossX/detik per 1 USDT deposit.<br>
           Angka bersifat estimasi & dapat berubah sesuai kondisi jaringan & jumlah node aktif.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section id="programs">
+    <div class="container">
+      <div class="programs-header">
+        <h2>7 Program Terbaik Kami</h2>
+        <p>Ekosistem lengkap BossX untuk memaksimalkan pendapatan dan pengalaman crypto Anda</p>
+      </div>
+      
+      <div class="programs-grid">
+        <!-- Program 1 -->
+        <div class="program-card">
+          <div class="program-number">01</div>
+          <div class="program-icon">🎯</div>
+          <h3>Program TAB TO EARN</h3>
+          <div class="subtitle">MASTERNODES, STAKING, FARMING & COPY TRADE</div>
+          <p>Dalam Program TAB TO EARN, Validator dapat menghasilkan pendapatan melalui masternodes, staking, farming dan copytrade.</p>
+        </div>
+
+        <!-- Program 2 -->
+        <div class="program-card">
+          <div class="program-number">02</div>
+          <div class="program-icon">📢</div>
+          <h3>Program SHARE TO EARN</h3>
+          <div class="subtitle">AFFILIATE</div>
+          <p>Program SHARE TO EARN menjadikan Afiliasi sebagai cara untuk menghasilkan Penghasilan tambahan.</p>
+        </div>
+
+        <!-- Program 3 -->
+        <div class="program-card">
+          <div class="program-number">03</div>
+          <div class="program-icon">🎮</div>
+          <h3>Program PLAY TO EARN</h3>
+          <div class="subtitle">GAME, NFT, METAVERSE</div>
+          <p>Program PLAY TO EARN memungkinkan pengguna untuk mendapatkan pendapatan melalui bermain game, NFT dan Metaverse.</p>
+        </div>
+
+        <!-- Program 4 -->
+        <div class="program-card">
+          <div class="program-number">04</div>
+          <div class="program-icon">🏪</div>
+          <h3>Program INTERNAL MARKET</h3>
+          <div class="subtitle">TEMPAT TRANSAKSI JUAL DAN BELI BOSSX TOKEN & P2P</div>
+          <p>Program INTERNAL MARKET merupakan tempat dimana pengguna dapat melakukan transaksi jual dan beli token bossx.</p>
+        </div>
+
+        <!-- Program 5 -->
+        <div class="program-card">
+          <div class="program-number">05</div>
+          <div class="program-icon">💰</div>
+          <h3>CRYPTOCURRENCY</h3>
+          <div class="subtitle">BOSSX TOKEN, BOSSX POINT</div>
+          <p>Cryptocurrency adalah program khusus yang berkaitan dengan penggunaan dan adopsi bossx token dalam ekosistem.</p>
+        </div>
+
+        <!-- Program 6 -->
+        <div class="program-card">
+          <div class="program-number">06</div>
+          <div class="program-icon">🤖</div>
+          <h3>AI ARTIFICIAL INTELLIGENCE</h3>
+          <div class="subtitle">KECERDASAN BUATAN</div>
+          <p>Integrasi teknologi AI untuk meningkatkan efisiensi dan pengalaman pengguna dalam ekosistem BossX.</p>
+        </div>
+
+        <!-- Program 7 -->
+        <div class="program-card" style="grid-column: 1 / -1; max-width: 750px; margin: 0 auto;">
+          <div class="program-number">07</div>
+          <div class="program-icon">🔐</div>
+          <h3>BOSSX COLD WALLET</h3>
+          <div class="subtitle">DOMPET YANG BERSIFAT INTERNAL DAN EXTERNAL</div>
+          <p>Dompet dingin BossX yang aman untuk menyimpan aset crypto Anda dengan fitur internal dan external wallet.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -866,20 +1030,20 @@
     const usdtInput = document.getElementById('usdt-input');
     const estPerSecond = document.getElementById('est-per-second');
     const estPerDay = document.getElementById('est-per-day');
-    const RATE_PER_USDT = 0.00123; // ⚙️ GANTI ANGKA INI SESUAI TOKENOMICS ASLI
+    const RATE_PER_USDT = 0.00123;
 
     function calculateReward() {
       const amount = parseFloat(usdtInput.value) || 0;
       const perSecond = amount * RATE_PER_USDT;
-      const perDay = perSecond * 86400; // 86400 detik per hari
+      const perDay = perSecond * 86400;
       
       estPerSecond.textContent = `${perSecond.toFixed(6)} BossX`;
       estPerDay.textContent = `${perDay.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} BossX`;
     }
     
     usdtInput.addEventListener('input', calculateReward);
-    usdtInput.value = 100; // Default value
-    calculateReward(); // Initial calculation
+    usdtInput.value = 100;
+    calculateReward();
 
     // 4. FAQ Toggle
     document.querySelectorAll('.faq-q').forEach(q => {
@@ -913,7 +1077,7 @@
     const observer2 = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
     }, observerOptions);
-    document.querySelectorAll('.roadmap-quarter, .card, .step').forEach(el => {
+    document.querySelectorAll('.roadmap-quarter, .card, .step, .program-card').forEach(el => {
       el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer2.observe(el);
     });
   </script>
