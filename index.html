@@ -92,24 +92,13 @@
     }
     .nav-inner { display: flex; justify-content: space-between; align-items: center; }
     
-    .logo-container {
-      display: flex; align-items: center; gap: 12px; text-decoration: none;
-    }
+    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-img {
-      width: 44px; height: 44px; object-fit: contain;
-      border-radius: 50%;
-      /* Fallback jika logo masih berlatar hitam: akan menyatu dengan background gelap */
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
-      transition: var(--transition);
+      width: 44px; height: 44px; object-fit: contain; border-radius: 50%;
+      mix-blend-mode: screen; filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4)); transition: var(--transition);
     }
-    .logo-container:hover .logo-img {
-      transform: scale(1.08) rotate(5deg);
-      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7));
-    }
-    .logo-text {
-      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: -0.02em;
-    }
+    .logo-container:hover .logo-img { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7)); }
+    .logo-text { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: -0.02em; }
     .logo-text span { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
 
     .nav-links { display: flex; gap: 32px; align-items: center; }
@@ -310,7 +299,6 @@
   <nav>
     <div class="container nav-inner">
       <a href="#" class="logo-container">
-        <!-- Ganti 'bossx-logo.png' dengan nama file logo Anda -->
         <img src="bossx-logo.png" alt="BossX Logo" class="logo-img">
         <span class="logo-text">Boss<span>X</span></span>
       </a>
@@ -321,7 +309,8 @@
         <a href="#roadmap">Roadmap</a>
         <a href="#steps">Cara Mulai</a>
         <a href="#faq">FAQ</a>
-        <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Connect Wallet</a>
+        <!-- REVISI: Connect Masternode -->
+        <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Connect Masternode</a>
       </div>
     </div>
   </nav>
@@ -351,7 +340,8 @@
       </div>
 
       <div class="hero-cta">
-        <a href="#" class="btn">🔗 Connect Wallet & Start</a>
+        <!-- REVISI: Connect Masternode -->
+        <a href="#" class="btn">🔗 Connect Masternode & Start</a>
         <a href="#steps" class="btn btn-outline">📖 Lihat Panduan</a>
       </div>
     </div>
@@ -714,7 +704,8 @@
     <div class="container">
       <h2>Setiap Detik Berharga — Jangan Lewatkan Reward Anda!</h2>
       <p style="max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem;">Saat ini, ratusan node aktif sedang menghasilkan BossX setiap detik. Semakin cepat Anda bergabung, semakin awal reward Anda mulai mengalir.</p>
-      <a href="#" class="btn" style="padding: 16px 40px; font-size: 1rem;">🔗 Connect Wallet & Activate Node</a>
+      <!-- REVISI: Connect Masternode -->
+      <a href="#" class="btn" style="padding: 16px 40px; font-size: 1rem;">🔗 Connect Masternode & Activate Node</a>
       <p style="margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">Butuh bantuan? <a href="#">Chat Telegram Support</a> • <a href="#">Baca Whitepaper</a></p>
     </div>
   </section>
