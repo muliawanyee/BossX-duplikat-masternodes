@@ -143,11 +143,11 @@
     .cycle-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 2px; transition: width 1s linear; box-shadow: 0 0 10px var(--primary-glow); }
     .hero-cta { margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-    /* Estimator Section */
+    /* Estimator Section - UPDATED LOGIC */
     #estimator { background: linear-gradient(180deg, rgba(0, 242, 255, 0.05) 0%, transparent 100%); padding: 80px 0; }
     .estimator-card {
       background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius);
-      padding: 40px; max-width: 750px; margin: 40px auto 0; backdrop-filter: blur(16px);
+      padding: 40px; max-width: 800px; margin: 40px auto 0; backdrop-filter: blur(16px);
       text-align: center; position: relative; overflow: hidden;
     }
     .estimator-card::before {
@@ -173,14 +173,16 @@
       color: var(--accent); font-weight: 800; font-size: 1.3rem; pointer-events: none;
       font-family: 'Outfit', sans-serif;
     }
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
     .result-box {
       background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass);
       border-radius: var(--radius-sm); padding: 24px 16px; transition: var(--transition);
     }
     .result-box:hover { border-color: var(--primary); background: rgba(0, 242, 255, 0.04); transform: translateY(-3px); }
+    .result-box.highlight { border-color: var(--accent); background: rgba(255, 215, 0, 0.05); }
     .result-label { display: block; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
-    .result-value { display: block; font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Outfit', sans-serif; transition: var(--transition); }
+    .result-value { display: block; font-size: 1.8rem; font-weight: 800; color: var(--primary); font-family: 'Outfit', sans-serif; transition: var(--transition); }
+    .result-box.highlight .result-value { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
     .disclaimer { margin-top: 28px; font-size: 0.85rem; color: var(--text-muted); opacity: 0.7; line-height: 1.5; }
     
     @media (max-width: 600px) { 
@@ -189,92 +191,25 @@
       .result-value { font-size: 1.6rem; }
     }
 
-    /* Programs Section - NEW */
+    /* Programs Section */
     #programs { background: linear-gradient(180deg, transparent 0%, rgba(112, 0, 255, 0.05) 100%); }
     .programs-header { text-align: center; margin-bottom: 60px; }
     .programs-header h2 { margin-bottom: 16px; }
     .programs-header p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
-    
-    .programs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
-    }
-    
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; margin-bottom: 60px; }
     .program-card {
-      background: var(--bg-glass);
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius);
-      padding: 32px;
-      position: relative;
-      transition: var(--transition);
-      backdrop-filter: blur(8px);
-      overflow: hidden;
+      background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius);
+      padding: 32px; position: relative; transition: var(--transition); backdrop-filter: blur(8px); overflow: hidden;
     }
-    .program-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--primary), var(--secondary));
-      transition: width 0.4s ease;
-    }
+    .program-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--primary), var(--secondary)); transition: width 0.4s ease; }
     .program-card:hover::before { width: 100%; opacity: 0.05; }
-    .program-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-6px);
-      box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15);
-    }
-    .program-number {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      font-size: 4rem;
-      font-weight: 800;
-      color: var(--border-glass);
-      font-family: 'Outfit', sans-serif;
-      line-height: 1;
-      transition: var(--transition);
-    }
-    .program-card:hover .program-number {
-      color: var(--primary);
-      opacity: 0.1;
-      transform: scale(1.1);
-    }
-    .program-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(112, 0, 255, 0.1));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      margin-bottom: 20px;
-      border: 1px solid var(--border-glass);
-    }
-    .program-card h3 {
-      color: #fff;
-      font-size: 1.35rem;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-    .program-card .subtitle {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-    }
-    .program-card p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin: 0;
-      color: var(--text);
-    }
+    .program-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15); }
+    .program-number { position: absolute; top: 20px; right: 24px; font-size: 4rem; font-weight: 800; color: var(--border-glass); font-family: 'Outfit', sans-serif; line-height: 1; transition: var(--transition); }
+    .program-card:hover .program-number { color: var(--primary); opacity: 0.1; transform: scale(1.1); }
+    .program-icon { width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(112, 0, 255, 0.1)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 20px; border: 1px solid var(--border-glass); }
+    .program-card h3 { color: #fff; font-size: 1.35rem; margin-bottom: 12px; font-weight: 700; }
+    .program-card .subtitle { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .program-card p { font-size: 0.95rem; line-height: 1.7; margin: 0; color: var(--text); }
 
     /* Introduction */
     #introduction { background: linear-gradient(180deg, transparent 0%, rgba(112, 0, 255, 0.05) 100%); }
@@ -504,12 +439,12 @@
     </div>
   </section>
 
-  <!-- Estimator Section -->
+  <!-- Estimator Section - UPDATED LOGIC -->
   <section id="estimator">
     <div class="container">
       <h2>Kalkulator Estimasi Reward</h2>
       <p style="text-align: center; max-width: 600px; margin: 0 auto 16px; font-size: 1.1rem;">
-        Masukkan jumlah deposit (USDT) untuk melihat estimasi reward BossX per detik & per hari
+        Masukkan jumlah deposit (USDT) untuk melihat estimasi reward BossX yang cair per detik
       </p>
       
       <div class="estimator-card">
@@ -524,17 +459,21 @@
         <div class="results-grid">
           <div class="result-box">
             <span class="result-label">⚡ Estimasi per Detik</span>
-            <span class="result-value" id="est-per-second">0.123000 BossX</span>
+            <span class="result-value" id="est-per-second">0.00000386 BossX</span>
           </div>
           <div class="result-box">
-            <span class="result-label">📅 Estimasi per Hari (24j)</span>
-            <span class="result-value" id="est-per-day">10,627.20 BossX</span>
+            <span class="result-label">📅 Estimasi per Hari</span>
+            <span class="result-value" id="est-per-day">0.33 BossX</span>
+          </div>
+          <div class="result-box highlight">
+            <span class="result-label">📆 Estimasi per Bulan (10%)</span>
+            <span class="result-value" id="est-per-month">10.00 BossX</span>
           </div>
         </div>
         
         <p class="disclaimer">
-          *Asumsi: 1 BossX = 1 USDT. Rate dasar: 0.00123 BossX/detik per 1 USDT deposit.<br>
-          Angka bersifat estimasi & dapat berubah sesuai kondisi jaringan & jumlah node aktif.
+          *Asumsi: 1 BossX = 1 USDT. Yield tetap <strong>10% per bulan</strong> dari total deposit, dihitung & cair secara real-time per detik.<br>
+          Contoh: Deposit 100 USDT → 10 BossX/bulan → ~0.33 BossX/hari → ~0.00000386 BossX/detik.
         </p>
       </div>
     </div>
@@ -549,7 +488,6 @@
       </div>
       
       <div class="programs-grid">
-        <!-- Program 1 -->
         <div class="program-card">
           <div class="program-number">01</div>
           <div class="program-icon">🎯</div>
@@ -557,8 +495,6 @@
           <div class="subtitle">MASTERNODES, STAKING, FARMING & COPY TRADE</div>
           <p>Dalam Program TAB TO EARN, Validator dapat menghasilkan pendapatan melalui masternodes, staking, farming dan copytrade.</p>
         </div>
-
-        <!-- Program 2 -->
         <div class="program-card">
           <div class="program-number">02</div>
           <div class="program-icon">📢</div>
@@ -566,8 +502,6 @@
           <div class="subtitle">AFFILIATE</div>
           <p>Program SHARE TO EARN menjadikan Afiliasi sebagai cara untuk menghasilkan Penghasilan tambahan.</p>
         </div>
-
-        <!-- Program 3 -->
         <div class="program-card">
           <div class="program-number">03</div>
           <div class="program-icon">🎮</div>
@@ -575,8 +509,6 @@
           <div class="subtitle">GAME, NFT, METAVERSE</div>
           <p>Program PLAY TO EARN memungkinkan pengguna untuk mendapatkan pendapatan melalui bermain game, NFT dan Metaverse.</p>
         </div>
-
-        <!-- Program 4 -->
         <div class="program-card">
           <div class="program-number">04</div>
           <div class="program-icon">🏪</div>
@@ -584,8 +516,6 @@
           <div class="subtitle">TEMPAT TRANSAKSI JUAL DAN BELI BOSSX TOKEN & P2P</div>
           <p>Program INTERNAL MARKET merupakan tempat dimana pengguna dapat melakukan transaksi jual dan beli token bossx.</p>
         </div>
-
-        <!-- Program 5 -->
         <div class="program-card">
           <div class="program-number">05</div>
           <div class="program-icon">💰</div>
@@ -593,8 +523,6 @@
           <div class="subtitle">BOSSX TOKEN, BOSSX POINT</div>
           <p>Cryptocurrency adalah program khusus yang berkaitan dengan penggunaan dan adopsi bossx token dalam ekosistem.</p>
         </div>
-
-        <!-- Program 6 -->
         <div class="program-card">
           <div class="program-number">06</div>
           <div class="program-icon">🤖</div>
@@ -602,8 +530,6 @@
           <div class="subtitle">KECERDASAN BUATAN</div>
           <p>Integrasi teknologi AI untuk meningkatkan efisiensi dan pengalaman pengguna dalam ekosistem BossX.</p>
         </div>
-
-        <!-- Program 7 -->
         <div class="program-card" style="grid-column: 1 / -1; max-width: 750px; margin: 0 auto;">
           <div class="program-number">07</div>
           <div class="program-icon">🔐</div>
@@ -1026,24 +952,32 @@
     }
     setInterval(updateCountdown, 1000); updateCountdown();
 
-    // 3. Estimator Logic
+    // 3. Estimator Logic - UPDATED TO 10% MONTHLY
     const usdtInput = document.getElementById('usdt-input');
     const estPerSecond = document.getElementById('est-per-second');
     const estPerDay = document.getElementById('est-per-day');
-    const RATE_PER_USDT = 0.00123;
+    const estPerMonth = document.getElementById('est-per-month');
+    
+    const MONTHLY_YIELD = 0.10; // 10% per bulan
+    const SECONDS_PER_MONTH = 30 * 24 * 60 * 60; // 2.592.000 detik
 
     function calculateReward() {
-      const amount = parseFloat(usdtInput.value) || 0;
-      const perSecond = amount * RATE_PER_USDT;
-      const perDay = perSecond * 86400;
+      const deposit = parseFloat(usdtInput.value) || 0;
       
-      estPerSecond.textContent = `${perSecond.toFixed(6)} BossX`;
-      estPerDay.textContent = `${perDay.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} BossX`;
+      // Hitungan inti: 10% per bulan, dibagi rata per detik
+      const monthlyReward = deposit * MONTHLY_YIELD;
+      const perSecond = monthlyReward / SECONDS_PER_MONTH;
+      const perDay = monthlyReward / 30;
+
+      // Update tampilan
+      estPerSecond.textContent = `${perSecond.toFixed(8)} BossX`;
+      estPerDay.textContent = `${perDay.toFixed(2)} BossX`;
+      estPerMonth.textContent = `${monthlyReward.toFixed(2)} BossX`;
     }
     
     usdtInput.addEventListener('input', calculateReward);
-    usdtInput.value = 100;
-    calculateReward();
+    usdtInput.value = 100; // Default value
+    calculateReward(); // Initial calculation
 
     // 4. FAQ Toggle
     document.querySelectorAll('.faq-q').forEach(q => {
