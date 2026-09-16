@@ -184,36 +184,11 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
 @media (max-width: 768px) { .order-book-section { max-height: 200px; } .pair-button { padding: 0.5rem 1rem; } .market-data { grid-template-columns: repeat(2, 1fr); text-align: center; } }
 
 /* ========== PRIVATE KEY STYLES ========== */
-.pk-code-display {
-    font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    background: linear-gradient(145deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
-    border: 2px dashed #a855f7;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    color: #a855f7;
-    font-weight: bold;
-    word-break: break-all;
-    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-}
-.pk-key-row-available {
-    background: rgba(34, 197, 94, 0.05);
-    border-left: 3px solid #22c55e;
-}
-.pk-key-row-redeemed {
-    background: rgba(59, 130, 246, 0.05);
-    border-left: 3px solid #3b82f6;
-    opacity: 0.7;
-}
-.pk-highlight-new {
-    animation: pkHighlight 3s ease-out;
-}
-@keyframes pkHighlight {
-    0% { background: rgba(245, 158, 11, 0.3); transform: scale(1.02); }
-    100% { background: transparent; transform: scale(1); }
-}
+.pk-code-display { font-family: 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 2px; background: linear-gradient(145deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); border: 2px dashed #a855f7; padding: 1rem; border-radius: 0.5rem; text-align: center; color: #a855f7; font-weight: bold; word-break: break-all; text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+.pk-key-row-available { background: rgba(34, 197, 94, 0.05); border-left: 3px solid #22c55e; }
+.pk-key-row-redeemed { background: rgba(59, 130, 246, 0.05); border-left: 3px solid #3b82f6; opacity: 0.7; }
+.pk-highlight-new { animation: pkHighlight 3s ease-out; }
+@keyframes pkHighlight { 0% { background: rgba(245, 158, 11, 0.3); transform: scale(1.02); } 100% { background: transparent; transform: scale(1); } }
 </style>
 </head>
 <body>
@@ -230,7 +205,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
             <h1 class="login-title">BossX Exchange</h1>
             <p class="login-subtitle">Masuk ke akun Validator Masterxcloud Anda</p>
             <div id="login-error" class="login-error">Username atau password salah!</div>
-            <form id="login-form" onsubmit="handleLogin(event)">
+            <form id="login-form" onsubmit="return handleLogin(event)">
                 <input type="text" id="login-username" class="login-input" placeholder="Username" required autocomplete="username" />
                 <input type="password" id="login-password" class="login-input" placeholder="Password" required autocomplete="current-password" />
                 <button type="submit" id="login-button" class="login-button">Masuk</button>
@@ -251,7 +226,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
 <!-- MAIN APP -->
 <!-- ============================================ -->
 <div id="main-app" class="min-h-screen bg-black text-white flex main-container" style="display: none;">
-    <!-- Sidebar -->
     <div id="sidebar" class="sidebar h-screen gradient-bg gradient-border">
         <div class="p-3 border-b border-amber-500/20">
             <div class="flex items-center justify-between">
@@ -274,7 +248,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                 <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                 <span class="ml-2 font-medium menu-text text-sm">Dashboard</span>
             </a>
-            <!-- ✅ MENU PRIVATE KEY (POSISI 2 - SETELAH DASHBOARD) -->
             <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-gray-400" data-page="private-key">
                 <i data-lucide="key-round" class="w-4 h-4"></i>
                 <span class="ml-2 font-medium menu-text text-sm">Private Key</span>
@@ -311,14 +284,13 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                 <i data-lucide="settings" class="w-4 h-4"></i>
                 <span class="ml-2 font-medium menu-text text-sm">Setting</span>
             </a>
-            <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-gray-400" data-page="logout" onclick="handleLogout(event)">
+            <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-gray-400" data-page="logout" onclick="handleLogout(event); return false;">
                 <i data-lucide="log-out" class="w-4 h-4"></i>
                 <span class="ml-2 font-medium menu-text text-sm">Logout</span>
             </a>
         </nav>
     </div>
 
-    <!-- Main Content -->
     <div class="flex-1 flex flex-col min-w-0">
         <header class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border-b border-amber-500/20 px-4 py-3">
             <div class="flex items-center justify-between">
@@ -333,7 +305,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <a href="#" class="flex items-center space-x-2 px-2 py-1 bg-green-500/10 rounded-lg border border-green-500/20 hover:bg-green-500/20 transition-colors" onclick="showPage('exchange'); event.preventDefault();">
+                    <a href="#" class="flex items-center space-x-2 px-2 py-1 bg-green-500/10 rounded-lg border border-green-500/20 hover:bg-green-500/20 transition-colors" onclick="showPage('exchange'); return false;">
                         <i data-lucide="globe" class="w-4 h-4 text-green-400"></i>
                         <span class="text-green-400 text-sm font-medium">Market Open</span>
                     </a>
@@ -357,9 +329,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
         <main class="flex-1 overflow-auto">
             <div id="content" class="content-container space-y-4">
                 
-                <!-- ============================================ -->
                 <!-- DASHBOARD PAGE -->
-                <!-- ============================================ -->
                 <div id="dashboard-page" class="page-content active">
                     <div class="bg-gray-900 border border-amber-500/20 rounded-xl p-3 overflow-hidden">
                         <div class="relative">
@@ -369,8 +339,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                         </div>
                     </div>
                     <div class="stats-grid">
-                        
-                        <!-- ✅ CARD 1: REDEEM PRIVATE KEY (MENGGANTI AKTIVASI NODE) -->
                         <div class="stat-card hover-scale">
                             <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                             <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -382,25 +350,15 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                                 <span id="bossx-balance">1000.000000000 BossX</span>
                             </div>
                             <div class="space-y-3">
-                                <input
-                                    id="redeem-input"
-                                    type="text"
-                                    placeholder="Paste Private Key (25 karakter)"
-                                    class="node-input"
-                                    maxlength="25"
-                                    style="text-transform: uppercase; font-family: 'Courier New', monospace; letter-spacing: 1px;"
-                                />
+                                <input id="redeem-input" type="text" placeholder="Paste Private Key (25 karakter)" class="node-input" maxlength="25" style="text-transform: uppercase; font-family: 'Courier New', monospace; letter-spacing: 1px;" />
                                 <button id="redeem-button" class="node-button" onclick="redeemPrivateKey()" style="background: linear-gradient(145deg, #a855f7, #7c3aed);">
-                                    <i data-lucide="unlock" class="w-4 h-4 inline mr-1"></i>
-                                    Redeem Now
+                                    <i data-lucide="unlock" class="w-4 h-4 inline mr-1"></i>Redeem Now
                                 </button>
                                 <p class="text-xs text-gray-500 text-center">
                                     Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-pointer" onclick="showPage('private-key')">"Private Key"</span>
                                 </p>
                             </div>
                         </div>
-
-                        <!-- Card 2: Validasi Running -->
                         <div class="stat-card hover-scale">
                             <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                             <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -422,8 +380,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                                 <p id="power-status" class="text-xs text-gray-500" style="display: none;">Masternode sedang running - Auto stop jam 06:00</p>
                             </div>
                         </div>
-
-                        <!-- Card 3: Reward Validasi -->
                         <div class="stat-card hover-scale">
                             <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                             <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -439,8 +395,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                                 <button class="node-button convert-button" onclick="convertToUSDT()">Convert To USDT</button>
                             </div>
                         </div>
-
-                        <!-- Card 4: Balance USDT -->
                         <div class="stat-card hover-scale">
                             <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                             <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -454,8 +408,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                             <p class="text-xs text-green-400 mt-1">Available balance</p>
                         </div>
                     </div>
-
-                    <!-- Log Engine -->
                     <div id="log-engine" class="bg-gray-900 border border-amber-500/20 rounded-xl p-4 mt-6 relative overflow-hidden log-engine">
                         <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
                         <div class="flex justify-between items-center mb-3">
@@ -464,8 +416,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                         </div>
                         <div id="log-output" class="bg-black p-4 rounded-lg overflow-y-auto h-64 text-sm font-mono whitespace-pre-wrap space-y-1"></div>
                     </div>
-
-                    <!-- Info System -->
                     <div class="bg-gray-900 border border-blue-500/20 rounded-xl p-4 mt-6 relative overflow-hidden info-system">
                         <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
                         <div class="flex items-center mb-3">
@@ -489,16 +439,13 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- ============================================ -->
-                <!-- ✅ PRIVATE KEY PAGE (FITUR BARU) -->
-                <!-- ============================================ -->
+                <!-- PRIVATE KEY PAGE -->
                 <div id="private-key-page" class="page-content">
                     <div class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-purple-500/20 rounded-xl p-6 mb-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h1 class="text-3xl font-bold text-purple-400 mb-2 flex items-center">
-                                    <i data-lucide="key-round" class="w-8 h-8 mr-2"></i>
-                                    Private Key
+                                    <i data-lucide="key-round" class="w-8 h-8 mr-2"></i>Private Key
                                 </h1>
                                 <p class="text-gray-400">Generate dan kelola Private Key untuk aktivasi node validator</p>
                             </div>
@@ -507,55 +454,34 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                             </div>
                         </div>
                     </div>
-
-                    <!-- Tab Switcher -->
                     <div class="bg-gray-900 border border-purple-500/20 rounded-xl p-6 mb-6">
                         <div class="flex space-x-4 mb-6">
                             <button id="generate-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                                <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>
-                                Generate
+                                <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate
                             </button>
                             <button id="mykeys-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white">
-                                <i data-lucide="list" class="w-4 h-4 inline mr-2"></i>
-                                My Keys
+                                <i data-lucide="list" class="w-4 h-4 inline mr-2"></i>My Keys
                                 <span id="keys-count-badge" class="ml-2 bg-purple-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                             </button>
                         </div>
-
-                        <!-- TAB: GENERATE -->
                         <div id="generate-content">
                             <div class="stat-card p-6">
                                 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                                 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-                                
                                 <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-                                    <i data-lucide="wand-2" class="mr-2 text-purple-400 w-6 h-6"></i>
-                                    Generate Private Key
+                                    <i data-lucide="wand-2" class="mr-2 text-purple-400 w-6 h-6"></i>Generate Private Key
                                 </h3>
-                                
                                 <div class="space-y-4">
                                     <div class="space-y-2">
                                         <label class="text-sm text-gray-400">Jumlah BossX untuk Stake:</label>
                                         <div class="relative">
-                                            <input
-                                                id="pk-stake-amount"
-                                                type="number"
-                                                placeholder="Minimal 10 BossX"
-                                                class="node-input pr-16"
-                                                min="10"
-                                                step="0.000000001"
-                                            />
-                                            <button id="pk-max-stake" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-purple-500 text-white text-xs rounded font-semibold hover:bg-purple-600 transition-colors">
-                                                MAX
-                                            </button>
+                                            <input id="pk-stake-amount" type="number" placeholder="Minimal 10 BossX" class="node-input pr-16" min="10" step="0.000000001" />
+                                            <button id="pk-max-stake" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-purple-500 text-white text-xs rounded font-semibold hover:bg-purple-600 transition-colors">MAX</button>
                                         </div>
                                     </div>
-
-                                    <!-- Info Box -->
                                     <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
                                         <h4 class="text-blue-400 font-semibold mb-2 flex items-center">
-                                            <i data-lucide="info" class="mr-2 w-4 h-4"></i>
-                                            Informasi
+                                            <i data-lucide="info" class="mr-2 w-4 h-4"></i>Informasi
                                         </h4>
                                         <ul class="text-sm text-gray-300 space-y-1">
                                             <li>• <strong>Minimal stake:</strong> 10 BossX</li>
@@ -565,8 +491,6 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                                             <li>• <strong>Cara pakai:</strong> Copy kode → paste di Dashboard → Redeem</li>
                                         </ul>
                                     </div>
-
-                                    <!-- Summary -->
                                     <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-4">
                                         <div class="flex justify-between items-center mb-2">
                                             <span class="text-gray-400">Jumlah Stake:</span>
@@ -586,66 +510,45 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                                             <span id="pk-summary-balance" class="text-green-400 font-mono text-sm">1000.00 BossX</span>
                                         </div>
                                     </div>
-
                                     <button id="generate-pk-button" class="node-button" onclick="generatePrivateKey()" style="background: linear-gradient(145deg, #a855f7, #7c3aed);">
-                                        <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>
-                                        Generate Private Key
+                                        <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate Private Key
                                     </button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- TAB: MY KEYS -->
                         <div id="mykeys-content" style="display: none;">
                             <div class="stat-card p-6">
                                 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                                 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-                                
                                 <div class="flex justify-between items-center mb-6">
                                     <h3 class="text-xl font-bold text-white flex items-center">
-                                        <i data-lucide="list" class="mr-2 text-purple-400 w-6 h-6"></i>
-                                        History Private Key
+                                        <i data-lucide="list" class="mr-2 text-purple-400 w-6 h-6"></i>History Private Key
                                     </h3>
-                                    <button onclick="loadPrivateKeys(); updatePrivateKeysList(); updatePKStatistics();" class="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors">
-                                        <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>
-                                        Refresh
+                                    <button onclick="updatePrivateKeysList(); updatePKStatistics();" class="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors">
+                                        <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>Refresh
                                     </button>
                                 </div>
-                                
-                                <div id="private-keys-list">
-                                    <!-- List akan di-insert oleh JavaScript -->
-                                </div>
+                                <div id="private-keys-list"></div>
                             </div>
-
-                            <!-- Statistics -->
                             <div class="grid md:grid-cols-3 gap-6 mt-6">
                                 <div class="stat-card p-6">
                                     <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                                     <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-gray-400">Total Keys</h4>
-                                        <i data-lucide="key" class="text-purple-400 w-5 h-5"></i>
-                                    </div>
+                                    <div class="flex items-center justify-between mb-4"><h4 class="text-gray-400">Total Keys</h4><i data-lucide="key" class="text-purple-400 w-5 h-5"></i></div>
                                     <div id="pk-total-keys" class="text-2xl font-bold text-white">0</div>
                                     <p class="text-sm text-purple-400 mt-1">Private Key dibuat</p>
                                 </div>
                                 <div class="stat-card p-6">
                                     <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                                     <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-gray-400">Available</h4>
-                                        <i data-lucide="check-circle" class="text-green-400 w-5 h-5"></i>
-                                    </div>
+                                    <div class="flex items-center justify-between mb-4"><h4 class="text-gray-400">Available</h4><i data-lucide="check-circle" class="text-green-400 w-5 h-5"></i></div>
                                     <div id="pk-available-keys" class="text-2xl font-bold text-white">0</div>
                                     <p class="text-sm text-green-400 mt-1">Belum diredeem</p>
                                 </div>
                                 <div class="stat-card p-6">
                                     <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
                                     <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-gray-400">Redeemed</h4>
-                                        <i data-lucide="check-check" class="text-blue-400 w-5 h-5"></i>
-                                    </div>
+                                    <div class="flex items-center justify-between mb-4"><h4 class="text-gray-400">Redeemed</h4><i data-lucide="check-check" class="text-blue-400 w-5 h-5"></i></div>
                                     <div id="pk-redeemed-keys" class="text-2xl font-bold text-white">0</div>
                                     <p class="text-sm text-blue-400 mt-1">Sudah digunakan</p>
                                 </div>
@@ -654,15 +557,13 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- ============================================ -->
                 <!-- DEPOSIT PAGE -->
-                <!-- ============================================ -->
                 <div id="deposit-page" class="page-content">
                     <div class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-amber-500/20 rounded-xl p-6 mb-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h1 class="text-3xl font-bold text-amber-400 mb-2">Deposit Crypto</h1>
-                                <p class="text-gray-400">Deposit USDT dan BOSSX ke wallet Anda dengan mudah dan aman</p>
+                                <p class="text-gray-400">Deposit USDT dan BOSSX ke wallet Anda</p>
                             </div>
                             <div class="crypto-icon-large"><i data-lucide="wallet" class="text-amber-400 w-8 h-8"></i></div>
                         </div>
@@ -761,13 +662,13 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- Withdrawal Page -->
+                <!-- WITHDRAWAL PAGE -->
                 <div id="withdrawal-page" class="page-content">
                     <div class="bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-red-500/20 rounded-xl p-6 mb-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h1 class="text-3xl font-bold text-red-400 mb-2">Withdrawal Crypto</h1>
-                                <p class="text-gray-400">Tarik USDT dan BOSSX dari wallet Anda dengan aman dan cepat</p>
+                                <p class="text-gray-400">Tarik USDT dan BOSSX dari wallet Anda</p>
                             </div>
                             <div class="crypto-icon-large"><i data-lucide="arrow-up" class="text-red-400 w-8 h-8"></i></div>
                         </div>
@@ -889,12 +790,12 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- Chat Room Page -->
+                <!-- CHAT ROOM PAGE -->
                 <div id="chat-room-page" class="page-content">
                     <div id="chat-room-container" class="w-full h-full"></div>
                 </div>
 
-                <!-- Referral Page -->
+                <!-- REFERRAL PAGE -->
                 <div id="referral-page" class="page-content">
                     <div class="p-6">
                         <h1 class="text-2xl font-bold text-amber-400 mb-4">Referral</h1>
@@ -919,7 +820,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- Team Developer Page -->
+                <!-- TEAM DEVELOPER PAGE -->
                 <div id="team-developer-page" class="page-content">
                     <div class="p-6">
                         <h1 class="text-3xl font-bold text-amber-400 mb-6">Team Developer</h1>
@@ -974,7 +875,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- P2P Page -->
+                <!-- P2P PAGE -->
                 <div id="p2p-page" class="page-content exchange-bg">
                     <div class="exchange-card p-6 mb-6">
                         <h1 class="text-3xl font-bold text-amber-400 mb-4 flex items-center">
@@ -1028,7 +929,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- FAQ & Settings -->
+                <!-- FAQ & SETTINGS -->
                 <div id="faq-page" class="page-content">
                     <div class="p-6">
                         <h1 class="text-2xl font-bold text-amber-400 mb-4">FAQ</h1>
@@ -1042,7 +943,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
                     </div>
                 </div>
 
-                <!-- Internal Market Page (Exchange) -->
+                <!-- EXCHANGE PAGE -->
                 <div id="exchange-page" class="page-content exchange-bg">
                     <div class="exchange-card p-4 mb-4">
                         <h1 class="text-3xl font-bold text-amber-400 mb-2 flex items-center">
@@ -1192,28 +1093,35 @@ function showMainApp() {
 
 function handleLogin(event) {
     event.preventDefault();
+    console.log('🔐 handleLogin dipanggil');
     const username = document.getElementById('login-username').value.trim();
     const password = document.getElementById('login-password').value;
     const errorDiv = document.getElementById('login-error');
     const loginButton = document.getElementById('login-button');
+
+    console.log('Username:', username, 'Password:', password);
 
     loginButton.disabled = true;
     loginButton.textContent = 'Memverifikasi...';
 
     setTimeout(() => {
         if (username === DEMO_CREDENTIALS.username && password === DEMO_CREDENTIALS.password) {
+            console.log('✅ Login berhasil');
             localStorage.setItem('bossx_logged_in', 'true');
             localStorage.setItem('bossx_username', username);
             errorDiv.classList.remove('show');
             showSuccessMessage('Login berhasil! Selamat datang di BossX.');
             setTimeout(() => showMainApp(), 500);
         } else {
+            console.log('❌ Login gagal');
             errorDiv.textContent = 'Username atau password salah!';
             errorDiv.classList.add('show');
             loginButton.disabled = false;
             loginButton.textContent = 'Masuk';
         }
     }, 800);
+    
+    return false;
 }
 
 function handleLogout(event) {
@@ -1230,10 +1138,12 @@ function handleLogout(event) {
             document.getElementById('login-button').textContent = 'Masuk';
         }, 500);
     }
+    return false;
 }
 
 function showRegisterInfo() {
     alert('Fitur registrasi akan segera hadir!\n\nUntuk demo, gunakan:\nUsername: admin\nPassword: admin123');
+    return false;
 }
 
 // ============================================
@@ -1284,14 +1194,21 @@ const withdrawalHistory = { USDT: [], BOSSX: [] };
 const p2pHistory = [];
 
 function initializeMainApp() {
-    updateClock();
-    updateBalanceDisplays();
-    updateDepositContent();
-    updateWithdrawalContent();
-    updateP2PContent();
-    lucide.createIcons();
-    startMasaCountdown();
-    setTimeout(() => showSuccessMessage('Selamat datang di BossX Crypto Exchange Platform!'), 500);
+    console.log('🚀 initializeMainApp dipanggil');
+    try {
+        updateClock();
+        updateBalanceDisplays();
+        updateDepositContent();
+        updateWithdrawalContent();
+        updateP2PContent();
+        lucide.createIcons();
+        startMasaCountdown();
+        setupEventListeners();
+        setTimeout(() => showSuccessMessage('Selamat datang di BossX Crypto Exchange Platform!'), 500);
+        console.log('✅ initializeMainApp selesai');
+    } catch (err) {
+        console.error('❌ Error di initializeMainApp:', err);
+    }
 }
 
 // ============================================
@@ -1301,8 +1218,10 @@ function updateClock() {
     const now = new Date();
     const timeOptions = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', timeOptions);
-    document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
+    const timeEl = document.getElementById('time');
+    const dateEl = document.getElementById('date');
+    if (timeEl) timeEl.textContent = now.toLocaleTimeString('id-ID', timeOptions);
+    if (dateEl) dateEl.textContent = now.toLocaleDateString('id-ID', dateOptions);
 }
 
 function getTimestamp() {
@@ -1350,8 +1269,8 @@ function showPage(pageId) {
     }
 
     if (pageId !== 'exchange') {
-        if (typeof wsDepth !== 'undefined' && wsDepth) wsDepth.close();
-        if (typeof wsTrades !== 'undefined' && wsTrades) wsTrades.close();
+        if (typeof wsDepth !== 'undefined' && wsDepth) { wsDepth.close(); wsDepth = null; }
+        if (typeof wsTrades !== 'undefined' && wsTrades) { wsTrades.close(); wsTrades = null; }
     }
 }
 
@@ -1396,14 +1315,13 @@ function appendLog(message, logType = 'normal') {
     logOutput.scrollTop = logOutput.scrollHeight;
 }
 
-let masaBerlaku = 40000000;
-let masaInterval;
-
 function updateMasaBerlaku() {
-    document.getElementById('masa-berlaku').textContent = masaBerlaku.toLocaleString('id-ID') + ' detik';
+    const el = document.getElementById('masa-berlaku');
+    if (!el) return;
+    el.textContent = masaBerlaku.toLocaleString('id-ID') + ' detik';
     if (masaBerlaku <= 0) {
         clearInterval(masaInterval);
-        document.getElementById('masa-berlaku').textContent = '0 detik (Kontrak Berakhir)';
+        el.textContent = '0 detik (Kontrak Berakhir)';
         forceStopValidation();
         appendLog('[STATUS] Masa berlaku validasi berakhir (0 detik)');
         showErrorMessage('Kontrak validasi berakhir! Aktivasi ulang diperlukan.');
@@ -1478,10 +1396,14 @@ function convertToUSDT() {
 }
 
 function updateBalanceDisplays() {
-    document.getElementById('bossx-balance').textContent = bossxBalance.toFixed(9) + ' BossX';
-    document.getElementById('validation-balance').textContent = currentValidationReward.toFixed(9) + ' BossX';
-    document.getElementById('reward-balance').textContent = totalRewardBalance.toFixed(9) + ' BossX';
-    document.getElementById('usdt-balance').textContent = usdtBalance.toFixed(2) + ' USDT';
+    const el1 = document.getElementById('bossx-balance');
+    const el2 = document.getElementById('validation-balance');
+    const el3 = document.getElementById('reward-balance');
+    const el4 = document.getElementById('usdt-balance');
+    if (el1) el1.textContent = bossxBalance.toFixed(9) + ' BossX';
+    if (el2) el2.textContent = currentValidationReward.toFixed(9) + ' BossX';
+    if (el3) el3.textContent = totalRewardBalance.toFixed(9) + ' BossX';
+    if (el4) el4.textContent = usdtBalance.toFixed(2) + ' USDT';
     if (currentPage === 'exchange') updateAvbl();
     if (currentPage === 'private-key') updatePKSummary();
 }
@@ -1564,7 +1486,7 @@ function checkSixAMStop() {
 }
 
 // ============================================
-// ✅ PRIVATE KEY SYSTEM (FITUR BARU)
+// PRIVATE KEY SYSTEM
 // ============================================
 const PK_STORAGE_KEY = 'bossx_private_keys';
 const PK_FEE = 1;
@@ -1936,6 +1858,7 @@ function updateDepositContent() {
 function updateDepositHistory() {
     const history = depositHistory[activeTab] || [];
     const historyContent = document.getElementById('history-content');
+    if (!historyContent) return;
     if (history.length === 0) {
         historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-gray-400 w-6 h-6"></i></div><h4 class="text-gray-400 text-lg font-semibold mb-2">Belum ada history deposit</h4><p class="text-gray-500">History deposit ${activeTab} Anda akan muncul di sini</p></div>`;
     } else {
@@ -2092,6 +2015,7 @@ function generateFakeTxHash() {
 function updateWithdrawalHistory() {
     const history = withdrawalHistory[activeWithdrawalTab] || [];
     const historyContent = document.getElementById('withdrawal-history-content');
+    if (!historyContent) return;
     if (history.length === 0) {
         historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-gray-400 w-6 h-6"></i></div><h4 class="text-gray-400 text-lg font-semibold mb-2">Belum ada history withdrawal</h4><p class="text-gray-500">History withdrawal ${activeWithdrawalTab} Anda akan muncul di sini</p></div>`;
     } else {
@@ -2172,6 +2096,7 @@ function setMaxP2P() {
 
 function updateP2PHistory() {
     const historyContent = document.getElementById('p2p-history-content');
+    if (!historyContent) return;
     if (p2pHistory.length === 0) {
         historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-gray-400 w-6 h-6"></i></div><h4 class="text-gray-400 text-lg font-semibold mb-2">Belum ada history transfer</h4><p class="text-gray-500">History transfer P2P Anda akan muncul di sini</p></div>`;
     } else {
@@ -2451,74 +2376,109 @@ function updateAvbl() {
 }
 
 // ============================================
-// EVENT LISTENERS
+// EVENT LISTENERS (DIBUNGKUS DALAM FUNGSI)
 // ============================================
-document.getElementById('toggle-sidebar').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    const logoText = document.getElementById('logo-text');
-    const menuTexts = document.querySelectorAll('.menu-text');
-    const toggleIcon = this.querySelector('[data-lucide]');
-    if (sidebar.classList.contains('collapsed')) {
-        sidebar.classList.remove('collapsed');
-        logoText.style.display = 'block';
-        menuTexts.forEach(text => text.style.display = 'inline');
-        toggleIcon.setAttribute('data-lucide', 'chevron-left');
-    } else {
-        sidebar.classList.add('collapsed');
-        logoText.style.display = 'none';
-        menuTexts.forEach(text => text.style.display = 'none');
-        toggleIcon.setAttribute('data-lucide', 'chevron-right');
+function setupEventListeners() {
+    console.log('🔧 setupEventListeners dipanggil');
+    
+    // Sidebar toggle
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const logoText = document.getElementById('logo-text');
+            const menuTexts = document.querySelectorAll('.menu-text');
+            const toggleIcon = this.querySelector('[data-lucide]');
+            if (sidebar.classList.contains('collapsed')) {
+                sidebar.classList.remove('collapsed');
+                logoText.style.display = 'block';
+                menuTexts.forEach(text => text.style.display = 'inline');
+                toggleIcon.setAttribute('data-lucide', 'chevron-left');
+            } else {
+                sidebar.classList.add('collapsed');
+                logoText.style.display = 'none';
+                menuTexts.forEach(text => text.style.display = 'none');
+                toggleIcon.setAttribute('data-lucide', 'chevron-right');
+            }
+            lucide.createIcons();
+        });
     }
-    lucide.createIcons();
-});
 
-document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-        const page = this.getAttribute('data-page');
-        if (page && page !== 'logout') {
-            e.preventDefault();
-            showPage(page);
+    // Menu navigation
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            const page = this.getAttribute('data-page');
+            if (page && page !== 'logout') {
+                e.preventDefault();
+                showPage(page);
+            }
+        });
+    });
+
+    // Deposit tabs
+    const usdtTab = document.getElementById('usdt-tab');
+    const bossxTab = document.getElementById('bossx-tab');
+    if (usdtTab) usdtTab.addEventListener('click', function() { activeTab = 'USDT'; updateDepositContent(); });
+    if (bossxTab) bossxTab.addEventListener('click', function() { activeTab = 'BOSSX'; updateDepositContent(); });
+
+    // Withdrawal tabs
+    const wUsdtTab = document.getElementById('withdrawal-usdt-tab');
+    const wBossxTab = document.getElementById('withdrawal-bossx-tab');
+    if (wUsdtTab) wUsdtTab.addEventListener('click', function() { activeWithdrawalTab = 'USDT'; updateWithdrawalContent(); });
+    if (wBossxTab) wBossxTab.addEventListener('click', function() { activeWithdrawalTab = 'BOSSX'; updateWithdrawalContent(); });
+
+    // Deposit functionality
+    const copyAddrBtn = document.getElementById('copy-address');
+    const downloadQrBtn = document.getElementById('download-qr');
+    const refreshHistBtn = document.getElementById('refresh-history');
+    if (copyAddrBtn) copyAddrBtn.addEventListener('click', function() { copyToClipboard(walletAddresses[activeTab].address); });
+    if (downloadQrBtn) downloadQrBtn.addEventListener('click', function() { downloadQRCode(); });
+    if (refreshHistBtn) refreshHistBtn.addEventListener('click', function() { showSuccessMessage('History deposit berhasil diperbarui!'); updateDepositHistory(); });
+
+    // Clear log
+    const clearLogBtn = document.getElementById('clear-log');
+    if (clearLogBtn) clearLogBtn.addEventListener('click', function() { document.getElementById('log-output').innerHTML = ''; showSuccessMessage('Log berhasil di-clear!'); });
+
+    // Private Key tabs
+    const genTab = document.getElementById('generate-tab');
+    const myTab = document.getElementById('mykeys-tab');
+    if (genTab) genTab.addEventListener('click', function() { switchPKTab('generate'); });
+    if (myTab) myTab.addEventListener('click', function() { switchPKTab('mykeys'); });
+
+    // Private Key stake input
+    const pkStakeInput = document.getElementById('pk-stake-amount');
+    if (pkStakeInput) pkStakeInput.addEventListener('input', function() { updatePKSummary(); });
+
+    // Private Key max button
+    const pkMaxBtn = document.getElementById('pk-max-stake');
+    if (pkMaxBtn) pkMaxBtn.addEventListener('click', function() { setMaxPKStake(); });
+
+    // Global click delegation
+    document.addEventListener('click', function(e) {
+        if (!e.target) return;
+        if (e.target.id === 'max-withdrawal') setMaxWithdrawal();
+        if (e.target.id === 'refresh-withdrawal-history') { showSuccessMessage('History withdrawal berhasil diperbarui!'); updateWithdrawalHistory(); }
+        if (e.target.id === 'p2p-max') setMaxP2P();
+    });
+
+    document.addEventListener('input', function(e) {
+        if (!e.target) return;
+        if (e.target.id === 'withdrawal-amount') updateWithdrawalSummary();
+    });
+
+    document.addEventListener('change', function(e) {
+        if (e.target.id === 'buy-order-type') {
+            const priceInput = document.getElementById('buy-price');
+            if (priceInput) priceInput.style.display = e.target.value === 'market' ? 'none' : 'block';
+        }
+        if (e.target.id === 'sell-order-type') {
+            const priceInput = document.getElementById('sell-price');
+            if (priceInput) priceInput.style.display = e.target.value === 'market' ? 'none' : 'block';
         }
     });
-});
 
-document.getElementById('usdt-tab').addEventListener('click', function() { activeTab = 'USDT'; updateDepositContent(); });
-document.getElementById('bossx-tab').addEventListener('click', function() { activeTab = 'BOSSX'; updateDepositContent(); });
-document.getElementById('withdrawal-usdt-tab').addEventListener('click', function() { activeWithdrawalTab = 'USDT'; updateWithdrawalContent(); });
-document.getElementById('withdrawal-bossx-tab').addEventListener('click', function() { activeWithdrawalTab = 'BOSSX'; updateWithdrawalContent(); });
-document.getElementById('copy-address').addEventListener('click', function() { copyToClipboard(walletAddresses[activeTab].address); });
-document.getElementById('download-qr').addEventListener('click', function() { downloadQRCode(); });
-document.getElementById('refresh-history').addEventListener('click', function() { showSuccessMessage('History deposit berhasil diperbarui!'); updateDepositHistory(); });
-document.getElementById('clear-log').addEventListener('click', function() { document.getElementById('log-output').innerHTML = ''; showSuccessMessage('Log berhasil di-clear!'); });
-
-// Private Key event listeners
-document.getElementById('generate-tab').addEventListener('click', function() { switchPKTab('generate'); });
-document.getElementById('mykeys-tab').addEventListener('click', function() { switchPKTab('mykeys'); });
-document.getElementById('pk-stake-amount').addEventListener('input', function() { updatePKSummary(); });
-document.getElementById('pk-max-stake').addEventListener('click', function() { setMaxPKStake(); });
-
-document.addEventListener('click', function(e) {
-    if (!e.target) return;
-    if (e.target.id === 'max-withdrawal') setMaxWithdrawal();
-    if (e.target.id === 'refresh-withdrawal-history') { showSuccessMessage('History withdrawal berhasil diperbarui!'); updateWithdrawalHistory(); }
-    if (e.target.id === 'p2p-max') setMaxP2P();
-});
-
-document.addEventListener('input', function(e) {
-    if (!e.target) return;
-    if (e.target.id === 'withdrawal-amount') updateWithdrawalSummary();
-});
-
-document.addEventListener('change', function(e) {
-    if (e.target.id === 'buy-order-type') {
-        const priceInput = document.getElementById('buy-price');
-        priceInput.style.display = e.target.value === 'market' ? 'none' : 'block';
-    }
-    if (e.target.id === 'sell-order-type') {
-        const priceInput = document.getElementById('sell-price');
-        priceInput.style.display = e.target.value === 'market' ? 'none' : 'block';
-    }
-});
+    console.log('✅ setupEventListeners selesai');
+}
 
 // ============================================
 // CLOCK & INITIALIZATION
@@ -2622,6 +2582,7 @@ function initializeChatRoom() {
 // ============================================
 // INITIAL CHECK
 // ============================================
+console.log('🚀 Script dimulai');
 checkAuth();
 lucide.createIcons();
 </script>
