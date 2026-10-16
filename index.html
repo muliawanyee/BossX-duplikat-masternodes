@@ -225,7 +225,7 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
 </a>
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-gray-400" data-page="private-key">
 <i data-lucide="key-round" class="w-4 h-4"></i>
-<span class="ml-2 font-medium menu-text text-sm">Private Key</span>
+<span class="ml-2 font-medium menu-text text-sm">Access Key</span>
 </a>
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-gray-400" data-page="deposit">
 <i data-lucide="arrow-down-circle" class="w-4 h-4"></i>
@@ -314,16 +314,16 @@ body { background: #000000; color: #ffffff; overflow-x: hidden; }
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-3">
-<p class="text-sm text-gray-400">Redeem Private Key</p>
+<p class="text-sm text-gray-400">Redeem Access Key</p>
 <i data-lucide="key-round" class="w-4 h-4 text-purple-400"></i>
 </div>
 <div class="space-y-3" style="margin-top: auto;">
-<input id="redeem-input" type="text" placeholder="Paste Private Key (25 karakter)" class="node-input" maxlength="25" style="text-transform: uppercase; font-family: 'Courier New', monospace; letter-spacing: 1px;" />
+<input id="redeem-input" type="text" placeholder="Redeem Key" class="node-input" maxlength="25" style="text-transform: uppercase; font-family: 'Courier New', monospace; letter-spacing: 1px;" />
 <button id="redeem-button" class="node-button" onclick="redeemPrivateKey()" style="background: linear-gradient(145deg, #a855f7, #7c3aed);">
 <i data-lucide="unlock" class="w-4 h-4 inline mr-1"></i>Redeem Now
 </button>
 <p class="text-xs text-gray-500 text-center">
-Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-pointer" onclick="showPage('private-key')">"Private Key"</span>
+Beli Access Key di menu <span class="text-purple-400 font-semibold cursor-pointer" onclick="showPage('private-key')">"Access Key"</span>
 </p>
 </div>
 </div>
@@ -426,10 +426,10 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 <p><strong>• Masa Berlaku Validasi:</strong> <span id="masa-berlaku" style="color: #ef4444; font-weight: 600;">40.000.000 detik</span></p>
 </div>
 <div>
-<p><strong>• Minimal Stake:</strong> 10 BossX (via Private Key)</p>
+<p><strong>• Minimal Stake:</strong> 10 BossX (via Access Key)</p>
 <p><strong>• Fee Generate Key:</strong> 1 BossX</p>
 <p><strong>• Claim Reward:</strong> Tanpa minimal (kapan saja)</p>
-<p><strong>• Private Key:</strong> 25 karakter, one-time use</p>
+<p><strong>• Access Key:</strong> 25 karakter, one-time use</p>
 </div>
 </div>
 </div>
@@ -439,9 +439,9 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 <div class="flex items-center justify-between">
 <div>
 <h1 class="text-3xl font-bold text-purple-400 mb-2 flex items-center">
-<i data-lucide="key-round" class="w-8 h-8 mr-2"></i>Private Key
+<i data-lucide="key-round" class="w-8 h-8 mr-2"></i>Access Key
 </h1>
-<p class="text-gray-400">Generate dan kelola Private Key untuk aktivasi node validator</p>
+<p class="text-gray-400">Generate dan kelola Access Key untuk aktivasi node validator</p>
 </div>
 <div class="crypto-icon-large" style="background: linear-gradient(145deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)); border-color: rgba(168, 85, 247, 0.3);">
 <i data-lucide="key-round" class="text-purple-400 w-8 h-8"></i>
@@ -463,7 +463,7 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-<i data-lucide="wand-2" class="mr-2 text-purple-400 w-6 h-6"></i>Generate Private Key
+<i data-lucide="wand-2" class="mr-2 text-purple-400 w-6 h-6"></i>Generate Access Key
 </h3>
 <div class="space-y-4">
 <div class="space-y-2">
@@ -505,7 +505,7 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 </div>
 </div>
 <button id="generate-pk-button" class="node-button" onclick="generatePrivateKey()" style="background: linear-gradient(145deg, #a855f7, #7c3aed);">
-<i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate Private Key
+<i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate Access Key
 </button>
 </div>
 </div>
@@ -516,7 +516,7 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex justify-between items-center mb-6">
 <h3 class="text-xl font-bold text-white flex items-center">
-<i data-lucide="list" class="mr-2 text-purple-400 w-6 h-6"></i>History Private Key
+<i data-lucide="list" class="mr-2 text-purple-400 w-6 h-6"></i>History Access Key
 </h3>
 <button onclick="updatePrivateKeysList(); updatePKStatistics();" class="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors">
 <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>Refresh
@@ -530,7 +530,7 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-4"><h4 class="text-gray-400">Total Keys</h4><i data-lucide="key" class="text-purple-400 w-5 h-5"></i></div>
 <div id="pk-total-keys" class="text-2xl font-bold text-white">0</div>
-<p class="text-sm text-purple-400 mt-1">Private Key dibuat</p>
+<p class="text-sm text-purple-400 mt-1">Access Key dibuat</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
@@ -921,7 +921,6 @@ Beli Private Key di menu <span class="text-purple-400 font-semibold cursor-point
 </h1>
 <p class="text-gray-400">Temukan jawaban untuk pertanyaan yang sering diajukan tentang BossX.</p>
 </div>
-
 <div class="space-y-8">
 <!-- Category 1: Umum -->
 <div>
@@ -945,7 +944,6 @@ Bagaimana cara mendaftar akun?
 </details>
 </div>
 </div>
-
 <!-- Category 2: Masternode & Validator -->
 <div>
 <h2 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center gap-2">
@@ -975,37 +973,35 @@ Mengapa validasi berhenti otomatis jam 06:00?
 </details>
 </div>
 </div>
-
-<!-- Category 3: Private Key -->
+<!-- Category 3: Access Key -->
 <div>
 <h2 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center gap-2">
-<i data-lucide="key-round" class="w-5 h-5 text-purple-400"></i> Private Key
+<i data-lucide="key-round" class="w-5 h-5 text-purple-400"></i> Access Key
 </h2>
 <div class="space-y-3">
 <details class="bg-gray-900 border border-gray-700 rounded-lg p-4 group">
 <summary class="font-semibold text-amber-400 cursor-pointer list-none flex justify-between items-center">
-Apa fungsi Private Key?
+Apa fungsi Access Key?
 <span class="transition-transform group-open:rotate-180">▼</span>
 </summary>
 <p class="mt-3 text-gray-300 pl-2 border-l-2 border-amber-500/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 <details class="bg-gray-900 border border-gray-700 rounded-lg p-4 group">
 <summary class="font-semibold text-amber-400 cursor-pointer list-none flex justify-between items-center">
-Bagaimana cara mendapatkan Private Key?
+Bagaimana cara mendapatkan Access Key?
 <span class="transition-transform group-open:rotate-180">▼</span>
 </summary>
 <p class="mt-3 text-gray-300 pl-2 border-l-2 border-amber-500/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 <details class="bg-gray-900 border border-gray-700 rounded-lg p-4 group">
 <summary class="font-semibold text-amber-400 cursor-pointer list-none flex justify-between items-center">
-Mengapa Private Key hanya bisa digunakan sekali?
+Mengapa Access Key hanya bisa digunakan sekali?
 <span class="transition-transform group-open:rotate-180">▼</span>
 </summary>
 <p class="mt-3 text-gray-300 pl-2 border-l-2 border-amber-500/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
-
 <!-- Category 4: Reward & Claim -->
 <div>
 <h2 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center gap-2">
@@ -1035,7 +1031,6 @@ Bagaimana cara menjual BossX hasil reward?
 </details>
 </div>
 </div>
-
 <!-- Category 5: Deposit & Withdrawal -->
 <div>
 <h2 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center gap-2">
@@ -1622,12 +1617,12 @@ redeemedAt: null
 };
 existingKeys.unshift(newKey);
 savePrivateKeys(existingKeys);
-appendLog(`[SUCCESS] Private Key generated: ${newCode} | Stake: ${stakeAmount} BossX | Fee: ${PK_FEE} BossX | Total: ${totalRequired} BossX`, 'pk-success');
+appendLog(`[SUCCESS] Access Key generated: ${newCode} | Stake: ${stakeAmount} BossX | Fee: ${PK_FEE} BossX | Total: ${totalRequired} BossX`, 'pk-success');
 updateBalanceDisplays();
 updatePKStatistics();
 stakeInput.value = '';
 updatePKSummary();
-showSuccessMessage(`Private Key berhasil digenerate! Kode: ${newCode}`);
+showSuccessMessage(`Access Key berhasil digenerate! Kode: ${newCode}`);
 switchPKTab('mykeys');
 updatePrivateKeysList(newKey.id);
 }
@@ -1635,25 +1630,25 @@ function redeemPrivateKey() {
 const redeemInput = document.getElementById('redeem-input');
 const code = redeemInput.value.trim().toUpperCase();
 if (!code) {
-showErrorMessage('Masukkan Private Key terlebih dahulu!');
+showErrorMessage('Masukkan Access Key terlebih dahulu!');
 appendLog('[ERROR] Redeem failed: Kode kosong', 'pk-error');
 return;
 }
 if (code.length !== PK_CODE_LENGTH) {
-showErrorMessage(`Private Key tidak valid! Harus ${PK_CODE_LENGTH} karakter (saat ini: ${code.length})`);
+showErrorMessage(`Access Key tidak valid! Harus ${PK_CODE_LENGTH} karakter (saat ini: ${code.length})`);
 appendLog(`[ERROR] Redeem failed: Format invalid (${code.length}/${PK_CODE_LENGTH} karakter)`, 'pk-error');
 return;
 }
 const keys = loadPrivateKeys();
 const keyIndex = keys.findIndex(k => k.code === code);
 if (keyIndex === -1) {
-showErrorMessage('Private Key tidak ditemukan! Pastikan kode benar.');
+showErrorMessage('Access Key tidak ditemukan! Pastikan kode benar.');
 appendLog(`[ERROR] Redeem failed: Kode tidak ditemukan (${code})`, 'pk-error');
 return;
 }
 const key = keys[keyIndex];
 if (key.status === 'REDEEMED') {
-showErrorMessage('Private Key sudah digunakan! Gunakan key yang lain.');
+showErrorMessage('Access Key sudah digunakan! Gunakan key yang lain.');
 appendLog(`[ERROR] Redeem failed: Key sudah diredeem (${code})`, 'pk-error');
 return;
 }
@@ -1678,7 +1673,7 @@ document.getElementById('node-status').textContent = 'Aktif';
 document.getElementById('node-status').style.color = '#10b981';
 currentValidationReward = 0;
 totalRewardBalance = 0;
-appendLog(`[SUCCESS] Private Key redeemed: ${code} | Node activated with ${key.stake} BossX stake`, 'pk-success');
+appendLog(`[SUCCESS] Access Key redeemed: ${code} | Node activated with ${key.stake} BossX stake`, 'pk-success');
 appendLog(`[INFO] Reward rate: ${(key.stake * 0.000000038580246913580247).toFixed(12)} BossX/detik`);
 updateBalanceDisplays();
 updatePKStatistics();
@@ -1696,8 +1691,8 @@ listContainer.innerHTML = `
 <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
 <i data-lucide="key" class="text-gray-400 w-6 h-6"></i>
 </div>
-<h4 class="text-gray-400 text-lg font-semibold mb-2">Belum ada Private Key</h4>
-<p class="text-gray-500">Generate Private Key pertama Anda di tab "Generate"</p>
+<h4 class="text-gray-400 text-lg font-semibold mb-2">Belum ada Access Key</h4>
+<p class="text-gray-500">Generate Access Key pertama Anda di tab "Generate"</p>
 </div>
 `;
 } else {
@@ -1706,7 +1701,7 @@ let tableHTML = `
 <table class="w-full">
 <thead>
 <tr class="border-b border-gray-700">
-<th class="text-left p-3 text-gray-400 font-semibold">Private Key</th>
+<th class="text-left p-3 text-gray-400 font-semibold">Access Key</th>
 <th class="text-left p-3 text-gray-400 font-semibold">Stake</th>
 <th class="text-left p-3 text-gray-400 font-semibold">Tanggal</th>
 <th class="text-left p-3 text-gray-400 font-semibold">Status</th>
@@ -1783,7 +1778,7 @@ if (badgeEl) badgeEl.textContent = keys.length;
 function copyPrivateKey(code) {
 if (navigator.clipboard) {
 navigator.clipboard.writeText(code).then(() => {
-showSuccessMessage(`Private Key disalin: ${code}`);
+showSuccessMessage(`Access Key disalin: ${code}`);
 }).catch(() => {
 fallbackCopyPK(code);
 });
@@ -1798,7 +1793,7 @@ document.body.appendChild(textArea);
 textArea.select();
 try {
 document.execCommand('copy');
-showSuccessMessage(`Private Key disalin: ${text}`);
+showSuccessMessage(`Access Key disalin: ${text}`);
 } catch (err) {
 showErrorMessage('Gagal menyalin. Silakan copy manual.');
 }
