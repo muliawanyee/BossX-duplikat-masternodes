@@ -13,170 +13,228 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
-body { background: #020617; color: #ffffff; overflow-x: hidden; }
-.login-page { min-height: 100vh; background: linear-gradient(135deg, #020617 0%, #0C1222 50%, #020617 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.login-page::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%); animation: rotate 30s linear infinite; }
+body { background: #000814; color: #ffffff; overflow-x: hidden; }
+
+/* ===== GLACIER ULTRA SHARP PALETTE ===== */
+:root {
+  --glacier-primary: #00E5FF;
+  --glacier-bright: #00F5FF;
+  --glacier-electric: #7DF9FF;
+  --glacier-ice: #E0FFFF;
+  --glacier-frost: #B0E0E6;
+  --glacier-arctic: #00B8D4;
+  --glacier-deep: #0097A7;
+  --glacier-bg: #000814;
+  --glacier-card: #001233;
+  --glacier-elevated: #001845;
+  --glacier-border: #023E8A;
+  --glacier-success: #00FFC8;
+  --glacier-error: #FF006E;
+  --glacier-warning: #FFBE0B;
+}
+
+.login-page { min-height: 100vh; background: radial-gradient(ellipse at center, #001845 0%, #000814 50%, #000000 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.login-page::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(125, 249, 255, 0.1) 30%, transparent 70%); animation: rotate 30s linear infinite; }
+.login-page::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(0, 245, 255, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(125, 249, 255, 0.1) 0%, transparent 40%); pointer-events: none; }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .login-container { position: relative; z-index: 10; width: 100%; max-width: 450px; padding: 2rem; }
-.login-card { background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 1.5rem; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(6, 182, 212, 0.2); backdrop-filter: blur(10px); }
-.login-logo { width: 100px; height: 100px; margin: 0 auto 1.5rem; background: linear-gradient(145deg, #06B6D4, #0891B2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #fff; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4); overflow: hidden; border: 3px solid rgba(6, 182, 212, 0.5); }
+.login-card { background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95)); border: 2px solid rgba(0, 229, 255, 0.5); border-radius: 1.5rem; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 255, 0.4), inset 0 0 30px rgba(0, 229, 255, 0.05); backdrop-filter: blur(20px); }
+.login-logo { width: 100px; height: 100px; margin: 0 auto 1.5rem; background: linear-gradient(145deg, #00E5FF, #00B8D4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #fff; box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 0 80px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2); overflow: hidden; border: 3px solid rgba(224, 255, 255, 0.6); }
 .login-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.login-title { font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 0.5rem; background: linear-gradient(145deg, #22D3EE, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.login-subtitle { text-align: center; color: #94A3B8; margin-bottom: 2rem; font-size: 0.9rem; }
-.login-input { width: 100%; padding: 0.875rem 1rem; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 0.75rem; color: #ffffff; font-size: 1rem; transition: all 0.3s ease; margin-bottom: 1rem; }
-.login-input:focus { outline: none; border-color: #06B6D4; box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2); background: rgba(30, 41, 59, 0.95); }
-.login-input::placeholder { color: #64748B; }
-.login-button { width: 100%; padding: 1rem; background: linear-gradient(145deg, #06B6D4, #0891B2); border: none; border-radius: 0.75rem; color: #fff; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); margin-top: 1rem; }
-.login-button:hover:not(:disabled) { background: linear-gradient(145deg, #0891B2, #0E7490); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5); }
-.login-button:disabled { background: linear-gradient(145deg, #64748B, #475569); cursor: not-allowed; transform: none; }
-.login-error { background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); color: #FB7185; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1rem; font-size: 0.875rem; display: none; }
+.login-title { font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 0.5rem; background: linear-gradient(145deg, #E0FFFF, #00E5FF, #7DF9FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px rgba(0, 229, 255, 0.8); filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6)); }
+.login-subtitle { text-align: center; color: #B0E0E6; margin-bottom: 2rem; font-size: 0.9rem; text-shadow: 0 0 10px rgba(0, 229, 255, 0.3); }
+.login-input { width: 100%; padding: 0.875rem 1rem; background: rgba(0, 24, 69, 0.8); border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 0.75rem; color: #ffffff; font-size: 1rem; transition: all 0.3s ease; margin-bottom: 1rem; }
+.login-input:focus { outline: none; border-color: #00E5FF; box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.3), 0 0 20px rgba(0, 229, 255, 0.4); background: rgba(0, 24, 69, 0.95); }
+.login-input::placeholder { color: #7DF9FF; opacity: 0.6; }
+.login-button { width: 100%; padding: 1rem; background: linear-gradient(145deg, #00E5FF, #00B8D4); border: none; border-radius: 0.75rem; color: #000814; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(0, 229, 255, 0.6), 0 4px 15px rgba(0, 229, 255, 0.4); margin-top: 1rem; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+.login-button:hover:not(:disabled) { background: linear-gradient(145deg, #00F5FF, #00E5FF); transform: translateY(-2px); box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 6px 20px rgba(0, 229, 255, 0.6); }
+.login-button:disabled { background: linear-gradient(145deg, #475569, #334155); cursor: not-allowed; transform: none; box-shadow: none; }
+.login-error { background: rgba(255, 0, 110, 0.15); border: 2px solid rgba(255, 0, 110, 0.5); color: #FF006E; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1rem; font-size: 0.875rem; display: none; box-shadow: 0 0 20px rgba(255, 0, 110, 0.3); }
 .login-error.show { display: block; animation: shake 0.5s; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-.login-footer { text-align: center; margin-top: 2rem; color: #64748B; font-size: 0.875rem; }
-.login-footer a { color: #22D3EE; text-decoration: none; font-weight: 600; }
-.login-footer a:hover { text-decoration: underline; }
-.gradient-bg { background: linear-gradient(to bottom, #0F172A, #020617); }
-.gradient-border { border: 1px solid rgba(6, 182, 212, 0.2); }
+.login-footer { text-align: center; margin-top: 2rem; color: #7DF9FF; font-size: 0.875rem; }
+.login-footer a { color: #00E5FF; text-decoration: none; font-weight: 600; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+.login-footer a:hover { text-decoration: underline; color: #E0FFFF; }
+
+.gradient-bg { background: linear-gradient(to bottom, #001233, #000814); }
+.gradient-border { border: 2px solid rgba(0, 229, 255, 0.3); box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05); }
 .hover-scale { transition: transform 0.2s ease-in-out; }
 .hover-scale:hover { transform: scale(1.02); }
 .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-.sidebar { transition: width 0.3s ease-in-out; width: 14rem; min-width: 14rem; }
+
+.sidebar { transition: width 0.3s ease-in-out; width: 14rem; min-width: 14rem; background: linear-gradient(180deg, #001233 0%, #000814 100%); border-right: 2px solid rgba(0, 229, 255, 0.2); box-shadow: inset -10px 0 30px rgba(0, 229, 255, 0.05); }
 .sidebar.collapsed { width: 4rem; min-width: 4rem; }
-.menu-item { transition: all 0.2s ease-in-out; }
-.menu-item:hover { background-color: rgba(30, 41, 59, 0.5); transform: translateX(4px); }
-.menu-item.active { background: linear-gradient(to right, rgba(6, 182, 212, 0.2), rgba(34, 211, 238, 0.2)); color: #22D3EE; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-.crypto-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem; color: #fff; overflow: hidden; }
+.menu-item { transition: all 0.2s ease-in-out; border: 1px solid transparent; }
+.menu-item:hover { background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent); border-color: rgba(0, 229, 255, 0.3); transform: translateX(4px); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+.menu-item.active { background: linear-gradient(90deg, rgba(0, 229, 255, 0.25), rgba(125, 249, 255, 0.1)); color: #00E5FF; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), inset 0 0 10px rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.5); text-shadow: 0 0 10px rgba(0, 229, 255, 0.8); }
+
+.crypto-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem; color: #fff; overflow: hidden; box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
 .crypto-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 0.75rem; }
-.crypto-icon-large { width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, rgba(6, 182, 212, 0.1), rgba(34, 211, 238, 0.1)); border: 1px solid rgba(6, 182, 212, 0.3); }
-.profile-picture { width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.crypto-icon-large { width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, rgba(0, 229, 255, 0.2), rgba(125, 249, 255, 0.1)); border: 2px solid rgba(0, 229, 255, 0.5); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); }
+.profile-picture { width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(0, 229, 255, 0.5); box-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
 .profile-picture img { width: 100%; height: 100%; object-fit: cover; }
-.stat-card { background: #0F172A; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.25rem; transition: border-color 0.2s ease-in-out; position: relative; overflow: hidden; min-height: 200px; }
-.stat-card:hover { border-color: rgba(6, 182, 212, 0.5); }
-.corner-dot { position: absolute; width: 6px; height: 6px; background: radial-gradient(circle, #22D3EE, #06B6D4); border-radius: 50%; opacity: 0; transition: opacity 0.3s ease; box-shadow: 0 0 6px #06B6D4; pointer-events: none; }
+
+.stat-card { background: linear-gradient(145deg, #001233, #001845); border: 2px solid rgba(0, 229, 255, 0.2); border-radius: 0.75rem; padding: 1.25rem; transition: all 0.3s ease; position: relative; overflow: hidden; min-height: 200px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.03); }
+.stat-card:hover { border-color: rgba(0, 229, 255, 0.8); box-shadow: 0 0 30px rgba(0, 229, 255, 0.5), 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 229, 255, 0.08); transform: translateY(-2px); }
+
+.corner-dot { position: absolute; width: 8px; height: 8px; background: radial-gradient(circle, #E0FFFF, #00E5FF); border-radius: 50%; opacity: 0; transition: opacity 0.3s ease; box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; pointer-events: none; }
 .stat-card:hover .corner-dot { opacity: 1; animation: dotPulse 2s ease-in-out infinite; }
-.corner-dot.top-left { top: -3px; left: -3px; }
-.corner-dot.top-right { top: -3px; right: -3px; }
-.corner-dot.bottom-right { bottom: -3px; right: -3px; }
-.corner-dot.bottom-left { bottom: -3px; left: -3px; }
-@keyframes dotPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 6px #06B6D4; } 50% { transform: scale(1.2); box-shadow: 0 0 12px #22D3EE; } }
-.border-line { position: absolute; background: linear-gradient(90deg, transparent, #06B6D4, #22D3EE, #06B6D4, transparent); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.corner-dot.top-left { top: -4px; left: -4px; }
+.corner-dot.top-right { top: -4px; right: -4px; }
+.corner-dot.bottom-right { bottom: -4px; right: -4px; }
+.corner-dot.bottom-left { bottom: -4px; left: -4px; }
+@keyframes dotPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; } 50% { transform: scale(1.4); box-shadow: 0 0 15px #E0FFFF, 0 0 30px #00E5FF; } }
+
+.border-line { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .stat-card:hover .border-line { opacity: 1; }
-.border-top { top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #06B6D4, #22D3EE, #06B6D4, transparent); animation: borderTop 3s linear infinite; transform-origin: left; }
-.border-right { top: 0; right: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent, #06B6D4, #22D3EE, #06B6D4, transparent); animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
-.border-bottom { bottom: 0; right: 0; width: 100%; height: 2px; background: linear-gradient(270deg, transparent, #06B6D4, #22D3EE, #06B6D4, transparent); animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
-.border-left { bottom: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(0deg, transparent, #06B6D4, #22D3EE, #06B6D4, transparent); animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
+.border-top { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #00E5FF, #E0FFFF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF, 0 0 25px #00F5FF; animation: borderTop 3s linear infinite; transform-origin: left; }
+.border-right { top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, #00E5FF, #E0FFFF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF, 0 0 25px #00F5FF; animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
+.border-bottom { bottom: 0; right: 0; width: 100%; height: 3px; background: linear-gradient(270deg, transparent, #00E5FF, #E0FFFF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF, 0 0 25px #00F5FF; animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
+.border-left { bottom: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(0deg, transparent, #00E5FF, #E0FFFF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF, 0 0 25px #00F5FF; animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
 @keyframes borderTop { 0% { transform: scaleX(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleX(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleX(1); opacity: 0; } }
 @keyframes borderRight { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleY(1); opacity: 0; } }
 @keyframes borderBottom { 0% { transform: scaleX(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleX(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleX(1); opacity: 0; } }
 @keyframes borderLeft { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleY(1); opacity: 0; } }
-#running-text { animation: scroll-left 60s linear infinite; }
+
+#running-text { animation: scroll-left 60s linear infinite; text-shadow: 0 0 15px rgba(0, 229, 255, 0.8), 0 0 25px rgba(0, 229, 255, 0.5); }
 @keyframes scroll-left { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 #running-text:hover { animation-play-state: paused; }
-.power-button { position: relative; width: 60px; height: 60px; border-radius: 50%; border: 3px solid #334155; background: linear-gradient(145deg, #1E293B, #0F172A); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-.power-button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-.power-button.on { border-color: #14B8A6; background: linear-gradient(145deg, #0D9488, #0F766E); box-shadow: 0 8px 15px rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(20, 184, 166, 0.5); cursor: not-allowed; }
+
+.power-button { position: relative; width: 60px; height: 60px; border-radius: 50%; border: 3px solid rgba(0, 229, 255, 0.3); background: linear-gradient(145deg, #001845, #001233); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+.power-button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+.power-button.on { border-color: #00FFC8; background: linear-gradient(145deg, #00D4A8, #00B896); box-shadow: 0 0 30px rgba(0, 255, 200, 0.7), 0 0 60px rgba(0, 255, 200, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3); cursor: not-allowed; }
 .power-button.on:hover { transform: none; }
-.power-button.off { border-color: #F43F5E; background: linear-gradient(145deg, #E11D48, #BE123C); box-shadow: 0 8px 15px rgba(244, 63, 94, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(244, 63, 94, 0.5); }
-.power-button.off:hover { box-shadow: 0 12px 25px rgba(244, 63, 94, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 25px rgba(244, 63, 94, 0.6); }
-.power-icon { font-size: 24px; color: #ffffff; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+.power-button.off { border-color: #FF006E; background: linear-gradient(145deg, #D4005A, #B8004E); box-shadow: 0 0 30px rgba(255, 0, 110, 0.6), 0 0 60px rgba(255, 0, 110, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+.power-button.off:hover { box-shadow: 0 0 40px rgba(255, 0, 110, 0.8), 0 0 80px rgba(255, 0, 110, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+.power-icon { font-size: 24px; color: #ffffff; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)); }
+
 .copy-button { position: relative; overflow: hidden; }
-.copy-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s; }
+.copy-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(224, 255, 255, 0.4), transparent); transition: left 0.5s; }
 .copy-button:hover::before { left: 100%; }
+
 .tab-button { position: relative; transition: all 0.3s ease; }
-.tab-button.active::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #06B6D4; border-radius: 50%; animation: pulse 2s infinite; }
-.node-input { width: 100%; padding: 0.5rem; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 0.5rem; color: #ffffff; font-size: 0.875rem; transition: border-color 0.2s ease; position: relative; z-index: 10; }
-.node-input:focus { outline: none; border-color: #06B6D4; box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2); background: rgba(30, 41, 59, 0.9); }
-.node-input::placeholder { color: #94A3B8; }
-.node-input:disabled { background: rgba(30, 41, 59, 0.6); border-color: #475569; color: #94A3B8; cursor: not-allowed; }
-.node-button { width: 100%; padding: 0.75rem; background: linear-gradient(145deg, #06B6D4, #0891B2); border: none; border-radius: 0.5rem; color: #ffffff; font-weight: 600; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 8px rgba(6, 182, 212, 0.3); position: relative; z-index: 10; }
-.node-button:hover:not(:disabled) { background: linear-gradient(145deg, #0891B2, #0E7490); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(6, 182, 212, 0.4); }
+.tab-button.active::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #00E5FF; border-radius: 50%; animation: pulse 2s infinite; box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; }
+
+.node-input { width: 100%; padding: 0.5rem; background: rgba(0, 24, 69, 0.8); border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 0.5rem; color: #ffffff; font-size: 0.875rem; transition: all 0.2s ease; position: relative; z-index: 10; }
+.node-input:focus { outline: none; border-color: #00E5FF; box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.3), 0 0 15px rgba(0, 229, 255, 0.4); background: rgba(0, 24, 69, 0.95); }
+.node-input::placeholder { color: #7DF9FF; opacity: 0.6; }
+.node-input:disabled { background: rgba(0, 24, 69, 0.6); border-color: #023E8A; color: #7DF9FF; cursor: not-allowed; opacity: 0.6; }
+
+.node-button { width: 100%; padding: 0.75rem; background: linear-gradient(145deg, #00E5FF, #00B8D4); border: none; border-radius: 0.5rem; color: #000814; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 4px 8px rgba(0, 229, 255, 0.3); position: relative; z-index: 10; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+.node-button:hover:not(:disabled) { background: linear-gradient(145deg, #00F5FF, #00E5FF); transform: translateY(-2px); box-shadow: 0 0 30px rgba(0, 229, 255, 0.7), 0 6px 12px rgba(0, 229, 255, 0.5); }
 .node-button:active { transform: translateY(0); }
-.node-button:disabled { background: linear-gradient(145deg, #64748B, #475569); cursor: not-allowed; transform: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-.withdrawal-button { background: linear-gradient(145deg, #F43F5E, #E11D48) !important; box-shadow: 0 4px 8px rgba(244, 63, 94, 0.3) !important; }
-.withdrawal-button:hover:not(:disabled) { background: linear-gradient(145deg, #E11D48, #BE123C) !important; box-shadow: 0 6px 12px rgba(244, 63, 94, 0.4) !important; transform: translateY(-2px); }
-.success-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #14B8A6, #0D9488); color: white; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3); z-index: 1000; animation: slideIn 0.3s ease-out; }
-.error-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #F43F5E, #E11D48); color: white; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3); z-index: 1000; animation: slideIn 0.3s ease-out; }
+.node-button:disabled { background: linear-gradient(145deg, #475569, #334155); cursor: not-allowed; transform: none; box-shadow: none; color: #94A3B8; }
+
+.withdrawal-button { background: linear-gradient(145deg, #FF006E, #D4005A) !important; box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 4px 8px rgba(255, 0, 110, 0.3) !important; color: #fff !important; }
+.withdrawal-button:hover:not(:disabled) { background: linear-gradient(145deg, #FF3385, #FF006E) !important; box-shadow: 0 0 30px rgba(255, 0, 110, 0.7), 0 6px 12px rgba(255, 0, 110, 0.5) !important; transform: translateY(-2px); }
+
+.success-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #00FFC8, #00D4A8); color: #000814; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 0 30px rgba(0, 255, 200, 0.6), 0 4px 12px rgba(0, 255, 200, 0.4); z-index: 1000; animation: slideIn 0.3s ease-out; font-weight: 600; border: 2px solid rgba(224, 255, 255, 0.5); }
+.error-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #FF006E, #D4005A); color: #fff; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 0 30px rgba(255, 0, 110, 0.6), 0 4px 12px rgba(255, 0, 110, 0.4); z-index: 1000; animation: slideIn 0.3s ease-out; font-weight: 600; border: 2px solid rgba(255, 255, 255, 0.3); }
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-.network-option { padding: 0.75rem; border: 1px solid #334155; border-radius: 0.5rem; background: rgba(30, 41, 59, 0.5); cursor: pointer; transition: all 0.2s ease; }
-.network-option:hover { border-color: #06B6D4; background: rgba(6, 182, 212, 0.1); }
-.network-option.selected { border-color: #06B6D4; background: rgba(6, 182, 212, 0.2); }
+
+.network-option { padding: 0.75rem; border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 0.5rem; background: rgba(0, 24, 69, 0.5); cursor: pointer; transition: all 0.2s ease; }
+.network-option:hover { border-color: #00E5FF; background: rgba(0, 229, 255, 0.15); box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+.network-option.selected { border-color: #00E5FF; background: rgba(0, 229, 255, 0.25); box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); }
 .network-option input[type="radio"] { display: none; }
+
 .page-content { opacity: 0; transform: translateY(20px); transition: all 0.3s ease; display: none; }
 .page-content.active { opacity: 1; transform: translateY(0); display: block; }
+
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; width: 100%; }
 @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 1023px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
 @media (max-width: 1440px) { .sidebar { width: 12rem; min-width: 12rem; } .stat-card { padding: 1rem; } }
 @media (max-width: 1200px) { .sidebar { width: 10rem; min-width: 10rem; } .profile-picture { width: 1.5rem; height: 1.5rem; } }
+
 .main-container { max-width: 100vw; overflow-x: hidden; }
 .content-container { max-width: 100%; padding: 1rem; }
-.countdown-timer { font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: bold; color: #14B8A6; text-shadow: 0 0 10px rgba(20, 184, 166, 0.5); }
-.auto-claim-timer { font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; color: #38BDF8; text-shadow: 0 0 8px rgba(56, 189, 248, 0.5); }
+
+.countdown-timer { font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: bold; color: #00FFC8; text-shadow: 0 0 15px rgba(0, 255, 200, 0.8), 0 0 25px rgba(0, 255, 200, 0.5); }
+.auto-claim-timer { font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; color: #00E5FF; text-shadow: 0 0 15px rgba(0, 229, 255, 0.8), 0 0 25px rgba(0, 229, 255, 0.5); }
+
 @keyframes glowingBorder { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
-.glowing-border::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, #06B6D4, #38BDF8, #06B6D4); background-size: 300% 300%; z-index: -1; border-radius: 26px; opacity: 0.6; filter: blur(1px); animation: glowingBorder 8s linear infinite; pointer-events: none; }
+.glowing-border::before { content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px; background: linear-gradient(45deg, #00E5FF, #E0FFFF, #7DF9FF, #00E5FF); background-size: 300% 300%; z-index: -1; border-radius: 26px; opacity: 0.8; filter: blur(2px); animation: glowingBorder 6s linear infinite; box-shadow: 0 0 30px rgba(0, 229, 255, 0.6); pointer-events: none; }
+
 @keyframes messageIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 .message-animate { animation: messageIn 0.4s ease-out forwards; }
+
 .custom-scroll::-webkit-scrollbar { width: 6px; }
 .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-.custom-scroll::-webkit-scrollbar-thumb { background-color: rgba(148, 163, 184, 0.5); border-radius: 3px; }
-.custom-scroll::-webkit-scrollbar-thumb:hover { background-color: rgba(148, 163, 184, 0.7); }
+.custom-scroll::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00E5FF, #00B8D4); border-radius: 3px; box-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #00F5FF, #00E5FF); }
+
 .card-hover:hover { transform: scale(1.05); transition: all 0.3s ease; }
-.menu-item:hover { background: rgba(6, 182, 212, 0.05) !important; border-color: rgba(6, 182, 212, 0.5) !important; }
-.menu-item.active { background: rgba(6, 182, 212, 0.1) !important; border-color: #06B6D4 !important; color: #22D3EE; }
+
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-.live-indicator { animation: blink 1.5s infinite; }
-.hover-glow:hover::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, #06B6D4, #38BDF8, #06B6D4); z-index: -1; border-radius: 12px; opacity: 0.6; filter: blur(2px); animation: glowingBorder 8s linear infinite; }
-.log-entry { color: #14B8A6; }
-.log-entry.auto-claim { color: #06B6D4; }
-.log-entry.pk-success { color: #38BDF8; }
-.log-entry.pk-error { color: #FB7185; }
-.exchange-bg { background: linear-gradient(135deg, #020617 0%, #0C1222 50%, #020617 100%); box-shadow: inset 0 0 50px rgba(6, 182, 212, 0.1); }
-.exchange-card { background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9)); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 1rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(6, 182, 212, 0.2); transition: all 0.3s ease; }
-.exchange-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.3); transform: translateY(-5px); }
-.pair-button { background: linear-gradient(145deg, #06B6D4, #0891B2); color: #fff; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); margin-bottom: 1rem; display: block; min-width: 100px; flex-shrink: 0; width: auto; }
-.pair-button:hover { background: linear-gradient(145deg, #0891B2, #0E7490); box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5); transform: scale(1.05); }
-.pair-button.active { background: #22D3EE !important; color: #020617 !important; }
-.order-book th { background: rgba(6, 182, 212, 0.1); padding: 0.75rem; font-weight: bold; text-align: right; }
-.order-book td { padding: 0.5rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); text-align: right; overflow: hidden; text-overflow: ellipsis; }
+.live-indicator { animation: blink 1.5s infinite; box-shadow: 0 0 10px currentColor; }
+
+.log-entry { color: #00FFC8; text-shadow: 0 0 5px rgba(0, 255, 200, 0.5); }
+.log-entry.auto-claim { color: #00E5FF; text-shadow: 0 0 8px rgba(0, 229, 255, 0.7); }
+.log-entry.pk-success { color: #7DF9FF; text-shadow: 0 0 10px rgba(125, 249, 255, 0.8); }
+.log-entry.pk-error { color: #FF006E; text-shadow: 0 0 8px rgba(255, 0, 110, 0.6); }
+
+.exchange-bg { background: radial-gradient(ellipse at center, #001845 0%, #000814 50%, #000000 100%); box-shadow: inset 0 0 80px rgba(0, 229, 255, 0.1); }
+.exchange-card { background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95)); border: 2px solid rgba(0, 229, 255, 0.4); border-radius: 1rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.3); transition: all 0.3s ease; }
+.exchange-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 50px rgba(0, 229, 255, 0.5); transform: translateY(-5px); border-color: rgba(0, 229, 255, 0.7); }
+
+.pair-button { background: linear-gradient(145deg, #00E5FF, #00B8D4); color: #000814; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.5rem; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); margin-bottom: 1rem; display: block; min-width: 100px; flex-shrink: 0; width: auto; }
+.pair-button:hover { background: linear-gradient(145deg, #00F5FF, #00E5FF); box-shadow: 0 0 30px rgba(0, 229, 255, 0.7); transform: scale(1.05); }
+.pair-button.active { background: #E0FFFF !important; color: #000814 !important; box-shadow: 0 0 30px rgba(224, 255, 255, 0.8); }
+
+.order-book th { background: rgba(0, 229, 255, 0.15); padding: 0.75rem; font-weight: bold; text-align: right; color: #00E5FF; text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); }
+.order-book td { padding: 0.5rem; border-bottom: 1px solid rgba(0, 229, 255, 0.1); text-align: right; overflow: hidden; text-overflow: ellipsis; }
 .order-book table { width: 100%; table-layout: fixed; }
-.buy-order { color: #14B8A6; }
-.sell-order { color: #FB7185; }
-.market-data { background: #1E293B; border-radius: 0.75rem; padding: 1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
-.trade-button.buy { background: linear-gradient(145deg, #14B8A6, #0D9488); box-shadow: 0 4px 8px rgba(20, 184, 166, 0.3); }
-.trade-button.buy:hover { background: linear-gradient(145deg, #0D9488, #0F766E); box-shadow: 0 6px 12px rgba(20, 184, 166, 0.4); }
-.trade-button.sell { background: linear-gradient(145deg, #F43F5E, #E11D48); box-shadow: 0 4px 8px rgba(244, 63, 94, 0.3); }
-.trade-button.sell:hover { background: linear-gradient(145deg, #E11D48, #BE123C); box-shadow: 0 6px 12px rgba(244, 63, 94, 0.4); }
-.history-table th { background: rgba(6, 182, 212, 0.1); padding: 0.75rem; font-weight: bold; }
-.history-table td { padding: 0.5rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
-.border-line-gold { position: absolute; background: linear-gradient(90deg, transparent, #06B6D4, #0891B2, #06B6D4, transparent); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.buy-order { color: #00FFC8; text-shadow: 0 0 5px rgba(0, 255, 200, 0.5); }
+.sell-order { color: #FF006E; text-shadow: 0 0 5px rgba(255, 0, 110, 0.5); }
+
+.market-data { background: linear-gradient(145deg, #001845, #001233); border-radius: 0.75rem; padding: 1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; border: 1px solid rgba(0, 229, 255, 0.2); }
+
+.trade-button.buy { background: linear-gradient(145deg, #00FFC8, #00D4A8) !important; box-shadow: 0 0 20px rgba(0, 255, 200, 0.5); color: #000814 !important; }
+.trade-button.buy:hover { background: linear-gradient(145deg, #33FFD4, #00FFC8) !important; box-shadow: 0 0 30px rgba(0, 255, 200, 0.7); }
+.trade-button.sell { background: linear-gradient(145deg, #FF006E, #D4005A) !important; box-shadow: 0 0 20px rgba(255, 0, 110, 0.5); color: #fff !important; }
+.trade-button.sell:hover { background: linear-gradient(145deg, #FF3385, #FF006E) !important; box-shadow: 0 0 30px rgba(255, 0, 110, 0.7); }
+
+.history-table th { background: rgba(0, 229, 255, 0.15); padding: 0.75rem; font-weight: bold; color: #00E5FF; }
+.history-table td { padding: 0.5rem; border-bottom: 1px solid rgba(0, 229, 255, 0.1); }
+
+.border-line-gold { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .stat-card:hover .border-line-gold, .log-engine:hover .border-line-gold, .info-system:hover .border-line-gold { opacity: 1; }
-.border-top-gold { top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #06B6D4, #0891B2, #06B6D4, transparent); animation: borderTop 3s linear infinite; transform-origin: left; }
-.border-right-gold { top: 0; right: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent, #06B6D4, #0891B2, #06B6D4, transparent); animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
-.border-bottom-gold { bottom: 0; right: 0; width: 100%; height: 2px; background: linear-gradient(270deg, transparent, #06B6D4, #0891B2, #06B6D4, transparent); animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
-.border-left-gold { bottom: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(0deg, transparent, #06B6D4, #0891B2, #06B6D4, transparent); animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
-.border-line-white { position: absolute; background: linear-gradient(90deg, transparent, #E0F2FE, #BAE6FD, #E0F2FE, transparent); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.border-top-gold { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderTop 3s linear infinite; transform-origin: left; }
+.border-right-gold { top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
+.border-bottom-gold { bottom: 0; right: 0; width: 100%; height: 3px; background: linear-gradient(270deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
+.border-left-gold { bottom: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(0deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
+
+.border-line-white { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .exchange-card:hover .border-line-white { opacity: 1; }
-.border-top-white { top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #E0F2FE, #BAE6FD, #E0F2FE, transparent); animation: borderTop 3s linear infinite; transform-origin: left; }
-.border-right-white { top: 0; right: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent, #E0F2FE, #BAE6FD, #E0F2FE, transparent); animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
-.border-bottom-white { bottom: 0; right: 0; width: 100%; height: 2px; background: linear-gradient(270deg, transparent, #E0F2FE, #BAE6FD, #E0F2FE, transparent); animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
-.border-left-white { bottom: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(0deg, transparent, #E0F2FE, #BAE6FD, #E0F2FE, transparent); animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
+.border-top-white { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderTop 3s linear infinite; transform-origin: left; }
+.border-right-white { top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
+.border-bottom-white { bottom: 0; right: 0; width: 100%; height: 3px; background: linear-gradient(270deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
+.border-left-white { bottom: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(0deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
+
 .order-book-section { height: auto; max-height: 300px; overflow-y: auto; scrollbar-width: thin; }
-.depth-bar { position: absolute; left: 0; top: 0; height: 100%; opacity: 0.1; z-index: -1; }
-.buy-depth { background: #14B8A6; }
-.sell-depth { background: #FB7185; }
+.depth-bar { position: absolute; left: 0; top: 0; height: 100%; opacity: 0.15; z-index: -1; }
+.buy-depth { background: #00FFC8; box-shadow: inset 0 0 10px rgba(0, 255, 200, 0.5); }
+.sell-depth { background: #FF006E; box-shadow: inset 0 0 10px rgba(255, 0, 110, 0.5); }
 .recent-trades td { text-align: right; }
+
 #chart-container { height: 100% !important; min-height: 400px; }
 #tradingview-chart { height: 100%; width: 100%; }
-#spread { text-align: center; margin: 10px 0; font-size: 18px; color: #06B6D4; }
+#spread { text-align: center; margin: 10px 0; font-size: 18px; color: #00E5FF; text-shadow: 0 0 10px rgba(0, 229, 255, 0.7); }
 .skeleton-loading { animation: pulse 1.5s infinite; }
+
 @media (max-width: 768px) { .order-book-section { max-height: 200px; } .pair-button { padding: 0.5rem 1rem; } .market-data { grid-template-columns: repeat(2, 1fr); text-align: center; } }
-.pk-code-display { font-family: 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 2px; background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(6, 182, 212, 0.1)); border: 2px dashed #38BDF8; padding: 1rem; border-radius: 0.5rem; text-align: center; color: #38BDF8; font-weight: bold; word-break: break-all; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
-.pk-key-row-available { background: rgba(20, 184, 166, 0.05); border-left: 3px solid #14B8A6; }
-.pk-key-row-redeemed { background: rgba(56, 189, 248, 0.05); border-left: 3px solid #38BDF8; opacity: 0.7; }
+
+.pk-code-display { font-family: 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 2px; background: linear-gradient(145deg, rgba(125, 249, 255, 0.15), rgba(0, 229, 255, 0.15)); border: 2px dashed #7DF9FF; padding: 1rem; border-radius: 0.5rem; text-align: center; color: #7DF9FF; font-weight: bold; word-break: break-all; text-shadow: 0 0 15px rgba(125, 249, 255, 0.8), 0 0 25px rgba(125, 249, 255, 0.5); box-shadow: inset 0 0 20px rgba(125, 249, 255, 0.1); }
+.pk-key-row-available { background: rgba(0, 255, 200, 0.08); border-left: 3px solid #00FFC8; }
+.pk-key-row-redeemed { background: rgba(125, 249, 255, 0.08); border-left: 3px solid #7DF9FF; opacity: 0.8; }
 .pk-highlight-new { animation: pkHighlight 3s ease-out; }
-@keyframes pkHighlight { 0% { background: rgba(6, 182, 212, 0.3); transform: scale(1.02); } 100% { background: transparent; transform: scale(1); } }
+@keyframes pkHighlight { 0% { background: rgba(0, 229, 255, 0.4); transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 229, 255, 0.8); } 100% { background: transparent; transform: scale(1); } }
+
+/* Glacier Frost Effect - Tambahan */
+.frost-text { color: #E0FFFF; text-shadow: 0 0 10px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 229, 255, 0.5), 0 0 30px rgba(125, 249, 255, 0.3); }
+.ice-glow { box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(224, 255, 255, 0.1); }
 </style>
 </head>
 <body>
@@ -200,20 +258,20 @@ body { background: #020617; color: #ffffff; overflow-x: hidden; }
 </div>
 </div>
 </div>
-<div id="main-app" class="min-h-screen bg-black text-white flex main-container" style="display: none;">
-<div id="sidebar" class="sidebar h-screen gradient-bg gradient-border">
-<div class="p-3 border-b border-cyan-500/20">
+<div id="main-app" class="min-h-screen text-white flex main-container" style="display: none; background: #000814;">
+<div id="sidebar" class="sidebar h-screen">
+<div class="p-3 border-b border-cyan-400/30">
 <div class="flex items-center justify-between">
 <div class="flex items-center space-x-2">
 <div class="crypto-icon">
-<img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'background: linear-gradient(145deg, #06B6D4, #0891B2); color: white; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem;\'>BX</div>'" />
+<img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'background: linear-gradient(145deg, #00E5FF, #00B8D4); color: white; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem;\'>BX</div>'" />
 </div>
 <div id="logo-text">
-<h1 class="text-lg font-bold text-cyan-400">BossX</h1>
-<p class="text-xs text-slate-400">Crypto Exchange</p>
+<h1 class="text-lg font-bold frost-text">BossX</h1>
+<p class="text-xs text-cyan-200">Crypto Exchange</p>
 </div>
 </div>
-<button id="toggle-sidebar" class="text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 p-1 rounded">
+<button id="toggle-sidebar" class="text-cyan-200 hover:text-cyan-400 hover:bg-cyan-400/10 p-1 rounded">
 <i data-lucide="chevron-left"></i>
 </button>
 </div>
@@ -223,77 +281,77 @@ body { background: #020617; color: #ffffff; overflow-x: hidden; }
 <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Dashboard</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="private-key">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="private-key">
 <i data-lucide="key-round" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Access Key</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="deposit">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="deposit">
 <i data-lucide="arrow-down-circle" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Deposit</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="withdrawal">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="withdrawal">
 <i data-lucide="arrow-up-circle" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Withdrawal</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="p2p">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="p2p">
 <i data-lucide="users" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Peer to Peer</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="chat-room">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="chat-room">
 <i data-lucide="message-circle" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Chat Room</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="referral">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="referral">
 <i data-lucide="user-plus" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Referral</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="team-developer">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="team-developer">
 <i data-lucide="users" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Team Developer</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="faq">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="faq">
 <i data-lucide="help-circle" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">FAQ</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="settings">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="settings">
 <i data-lucide="settings" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Setting</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-slate-400" data-page="logout" onclick="handleLogout(event); return false;">
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="logout" onclick="handleLogout(event); return false;">
 <i data-lucide="log-out" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Logout</span>
 </a>
 </nav>
 </div>
 <div class="flex-1 flex flex-col min-w-0">
-<header class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border-b border-cyan-500/20 px-4 py-3">
+<header class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-b-2 border-cyan-400/30 px-4 py-3" style="box-shadow: 0 4px 20px rgba(0, 229, 255, 0.15);">
 <div class="flex items-center justify-between">
 <div class="flex flex-col">
-<div id="time" class="text-cyan-400 text-lg font-bold">00:00:00</div>
-<div id="date" class="text-slate-400 text-sm">Loading...</div>
+<div id="time" class="text-cyan-400 text-lg font-bold frost-text">00:00:00</div>
+<div id="date" class="text-cyan-200 text-sm">Loading...</div>
 </div>
 <div class="flex-1 max-w-sm mx-4">
 <div class="relative">
-<i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-<input type="text" placeholder="Cari cryptocurrency, transaksi..." class="w-full pl-10 pr-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/20" />
+<i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-300 w-4 h-4"></i>
+<input type="text" placeholder="Cari cryptocurrency, transaksi..." class="w-full pl-10 pr-4 py-2 bg-[#001845]/70 border-2 border-cyan-400/30 rounded-lg text-white placeholder-cyan-300/60 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30" />
 </div>
 </div>
 <div class="flex items-center space-x-3">
-<a href="#" class="flex items-center space-x-2 px-2 py-1 bg-teal-500/10 rounded-lg border border-teal-500/20 hover:bg-teal-500/20 transition-colors" onclick="showPage('exchange'); return false;">
-<i data-lucide="globe" class="w-4 h-4 text-teal-400"></i>
-<span class="text-teal-400 text-sm font-medium">Market Open</span>
+<a href="#" class="flex items-center space-x-2 px-2 py-1 bg-emerald-400/10 rounded-lg border-2 border-emerald-400/30 hover:bg-emerald-400/20 transition-colors" onclick="showPage('exchange'); return false;">
+<i data-lucide="globe" class="w-4 h-4 text-emerald-400"></i>
+<span class="text-emerald-400 text-sm font-medium">Market Open</span>
 </a>
-<button class="relative text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 p-2 rounded">
+<button class="relative text-cyan-200 hover:text-cyan-400 hover:bg-cyan-400/10 p-2 rounded">
 <i data-lucide="bell" class="w-4 h-4"></i>
 <span class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
 </button>
-<div class="flex items-center space-x-2 px-2 py-1 bg-slate-800/50 rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-colors cursor-pointer">
+<div class="flex items-center space-x-2 px-2 py-1 bg-[#001845]/70 rounded-lg border-2 border-cyan-400/30 hover:border-cyan-400/60 transition-colors cursor-pointer">
 <div class="profile-picture">
-<img src="https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg" alt="Fery Muliawan" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'background: linear-gradient(145deg, #38BDF8, #0EA5E9); color: white; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem; border-radius: 50%;\'>FM</div>'" />
+<img src="https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg" alt="Fery Muliawan" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'background: linear-gradient(145deg, #00E5FF, #00B8D4); color: white; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem; border-radius: 50%;\'>FM</div>'" />
 </div>
 <div class="text-sm">
 <p class="text-white font-medium">Fery Muliawan</p>
-<p class="text-cyan-400 text-xs">Validator: 8055x</p>
+<p class="text-cyan-400 text-xs frost-text">Validator: 8055x</p>
 </div>
 </div>
 </div>
@@ -302,7 +360,7 @@ body { background: #020617; color: #ffffff; overflow-x: hidden; }
 <main class="flex-1 overflow-auto">
 <div id="content" class="content-container space-y-4">
 <div id="dashboard-page" class="page-content active">
-<div class="bg-slate-900 border border-cyan-500/20 rounded-xl p-3 overflow-hidden">
+<div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-3 overflow-hidden" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="relative">
 <div id="running-text" class="whitespace-nowrap text-cyan-400 font-medium text-sm">
 🧊 BTC +5.2% $35,000 • ETH +3.8% $1,875 • BNB -1.2% $206 • ADA +7.1% $0.52 • SOL +12.5% $98 • DOT +2.3% $6.75 • MATIC +8.9% $0.89 • LINK +4.2% $14.30 • UNI +6.7% $7.25 • AVAX +9.1% $28.40 • Market Cap: $1.2T • 24h Vol: $45.6B 🚀 | BossX Validator Masternode System Active
@@ -314,16 +372,16 @@ body { background: #020617; color: #ffffff; overflow-x: hidden; }
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-3">
-<p class="text-sm text-slate-400">Redeem Access Key</p>
-<i data-lucide="key-round" class="w-4 h-4 text-sky-400"></i>
+<p class="text-sm text-cyan-200">Redeem Access Key</p>
+<i data-lucide="key-round" class="w-4 h-4 text-cyan-300"></i>
 </div>
 <div class="space-y-3" style="margin-top: auto;">
 <input id="redeem-input" type="text" placeholder="Redeem Key" class="node-input" maxlength="25" style="text-transform: uppercase; font-family: 'Courier New', monospace; letter-spacing: 1px;" />
-<button id="redeem-button" class="node-button" onclick="redeemPrivateKey()" style="background: linear-gradient(145deg, #38BDF8, #0EA5E9);">
+<button id="redeem-button" class="node-button" onclick="redeemPrivateKey()" style="background: linear-gradient(145deg, #7DF9FF, #00E5FF);">
 <i data-lucide="unlock" class="w-4 h-4 inline mr-1"></i>Redeem Now
 </button>
-<p class="text-xs text-slate-500 text-center">
-Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" onclick="showPage('private-key')">"Access Key"</span>
+<p class="text-xs text-cyan-300 text-center">
+Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer frost-text" onclick="showPage('private-key')">"Access Key"</span>
 </p>
 </div>
 </div>
@@ -331,36 +389,36 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-3">
-<p class="text-sm text-slate-400">Validasi Running</p>
-<i data-lucide="zap" class="w-4 h-4 text-teal-400"></i>
+<p class="text-sm text-cyan-200">Validasi Running</p>
+<i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
 </div>
 <div class="text-lg font-bold text-white mb-3">
 <span id="validation-balance">0.000000000 BossX</span>
 </div>
 <div class="text-center space-y-3">
-<p id="validation-status" class="text-sm text-slate-400" style="display: none;">Belum berjalan</p>
+<p id="validation-status" class="text-sm text-cyan-200" style="display: none;">Belum berjalan</p>
 <div id="countdown-display" class="countdown-timer" style="display: none;">Countdown: <span id="countdown-time">00:00:00</span></div>
 <div class="flex justify-center">
 <button id="power-btn" class="power-button off" onclick="togglePower()">
 <i id="power-icon" data-lucide="power" class="power-icon"></i>
 </button>
 </div>
-<p id="power-status" class="text-xs text-slate-500" style="display: none;">Masternode sedang running - Auto stop jam 06:00</p>
+<p id="power-status" class="text-xs text-cyan-300" style="display: none;">Masternode sedang running - Auto stop jam 06:00</p>
 </div>
 </div>
 <div class="stat-card hover-scale" style="display: flex; flex-direction: column; justify-content: space-between;">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-3">
-<p class="text-sm text-slate-400">Reward Validasi</p>
-<i data-lucide="gift" class="w-4 h-4 text-sky-400"></i>
+<p class="text-sm text-cyan-200">Reward Validasi</p>
+<i data-lucide="gift" class="w-4 h-4 text-cyan-300"></i>
 </div>
 <div class="text-lg font-bold text-white mb-3">
 <span id="reward-balance">0.000000000 BossX</span>
 </div>
 <div class="space-y-3" style="margin-top: auto;">
-<p class="text-xs text-sky-400">Auto claim in: <span id="auto-claim-timer" class="auto-claim-timer">--</span>s</p>
-<button class="node-button" onclick="claimToWallet()" style="background: linear-gradient(145deg, #06B6D4, #0891B2);">
+<p class="text-xs text-cyan-300">Auto claim in: <span id="auto-claim-timer" class="auto-claim-timer">--</span>s</p>
+<button class="node-button" onclick="claimToWallet()" style="background: linear-gradient(145deg, #00E5FF, #00B8D4);">
 <i data-lucide="wallet" class="w-4 h-4 inline mr-1"></i>Claim to Wallet
 </button>
 </div>
@@ -369,61 +427,61 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex items-center justify-between mb-3">
-<p class="text-sm text-slate-400">My Wallet Balance</p>
-<i data-lucide="wallet" class="w-4 h-4 text-teal-400"></i>
+<p class="text-sm text-cyan-200">My Wallet Balance</p>
+<i data-lucide="wallet" class="w-4 h-4 text-emerald-400"></i>
 </div>
 <div class="space-y-3">
-<div class="bg-gradient-to-r from-teal-500/10 to-cyan-500/5 border border-teal-500/20 rounded-lg p-3">
+<div class="bg-gradient-to-r from-emerald-400/15 to-cyan-400/5 border-2 border-emerald-400/30 rounded-lg p-3" style="box-shadow: inset 0 0 15px rgba(0, 255, 200, 0.05);">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center">
-<i data-lucide="dollar-sign" class="w-4 h-4 text-teal-400"></i>
+<div class="w-8 h-8 rounded-full bg-emerald-400/20 flex items-center justify-center" style="box-shadow: 0 0 10px rgba(0, 255, 200, 0.4);">
+<i data-lucide="dollar-sign" class="w-4 h-4 text-emerald-400"></i>
 </div>
-<span class="text-sm text-slate-400">USDT</span>
+<span class="text-sm text-cyan-200">USDT</span>
 </div>
-<span class="text-xs text-teal-400">TRC20/BEP20</span>
+<span class="text-xs text-emerald-400">TRC20/BEP20</span>
 </div>
 <div class="text-xl font-bold text-white mt-2">
-<span id="usdt-balance">1000.00</span> <span class="text-sm text-slate-400">USDT</span>
+<span id="usdt-balance">1000.00</span> <span class="text-sm text-cyan-200">USDT</span>
 </div>
 </div>
-<div class="bg-gradient-to-r from-cyan-500/10 to-sky-500/5 border border-cyan-500/20 rounded-lg p-3">
+<div class="bg-gradient-to-r from-cyan-400/15 to-sky-400/5 border-2 border-cyan-400/30 rounded-lg p-3" style="box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-cyan-400/20 flex items-center justify-center" style="box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">
 <i data-lucide="coins" class="w-4 h-4 text-cyan-400"></i>
 </div>
-<span class="text-sm text-slate-400">BOSSX</span>
+<span class="text-sm text-cyan-200">BOSSX</span>
 </div>
 <span class="text-xs text-cyan-400">Internal Token</span>
 </div>
 <div class="text-xl font-bold text-white mt-2">
-<span id="bossx-balance">1000.000000000</span> <span class="text-sm text-slate-400">BossX</span>
+<span id="bossx-balance">1000.000000000</span> <span class="text-sm text-cyan-200">BossX</span>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="log-engine" class="bg-slate-900 border border-cyan-500/20 rounded-xl p-4 mt-6 relative overflow-hidden log-engine">
+<div id="log-engine" class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-4 mt-6 relative overflow-hidden log-engine" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
 <div class="flex justify-between items-center mb-3">
-<h3 class="text-lg font-semibold text-cyan-400">Log Engine Masterxcloud</h3>
-<button id="clear-log" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm transition-colors">Clear Log</button>
+<h3 class="text-lg font-semibold text-cyan-400 frost-text">Log Engine Masterxcloud</h3>
+<button id="clear-log" class="px-3 py-1 bg-rose-500 hover:bg-rose-600 text-white rounded-lg text-sm transition-colors" style="box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);">Clear Log</button>
 </div>
-<div id="log-output" class="bg-slate-950 p-4 rounded-lg overflow-y-auto h-64 text-sm font-mono whitespace-pre-wrap space-y-1"></div>
+<div id="log-output" class="bg-[#000814] p-4 rounded-lg overflow-y-auto h-64 text-sm font-mono whitespace-pre-wrap space-y-1 border border-cyan-400/20"></div>
 </div>
-<div class="bg-slate-900 border border-sky-500/20 rounded-xl p-4 mt-6 relative overflow-hidden info-system">
+<div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-4 mt-6 relative overflow-hidden info-system" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
 <div class="flex items-center mb-3">
-<i data-lucide="info" class="w-5 h-5 text-sky-400 mr-2"></i>
-<h3 class="text-lg font-semibold text-sky-400">Informasi Sistem BossX Validator</h3>
+<i data-lucide="info" class="w-5 h-5 text-cyan-300 mr-2"></i>
+<h3 class="text-lg font-semibold text-cyan-300 frost-text">Informasi Sistem BossX Validator</h3>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-cyan-100">
 <div>
 <p><strong>• Node Status:</strong> <span id="node-status">Belum Aktif</span></p>
 <p><strong>• Auto Stop:</strong> Setiap hari jam 06:00</p>
 <p><strong>• Auto Claim:</strong> Setiap 60 detik (masuk Pending Reward)</p>
-<p><strong>• Masa Berlaku Validasi:</strong> <span id="masa-berlaku" style="color: #FB7185; font-weight: 600;">40.000.000 detik</span></p>
+<p><strong>• Masa Berlaku Validasi:</strong> <span id="masa-berlaku" style="color: #FF006E; font-weight: 600; text-shadow: 0 0 10px rgba(255, 0, 110, 0.6);">40.000.000 detik</span></p>
 </div>
 <div>
 <p><strong>• Minimal Stake:</strong> 10 BossX (via Access Key)</p>
@@ -435,27 +493,27 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </div>
 </div>
 <div id="private-key-page" class="page-content">
-<div class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-sky-500/20 rounded-xl p-6 mb-6">
+<div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-cyan-300/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
 <div class="flex items-center justify-between">
 <div>
-<h1 class="text-3xl font-bold text-sky-400 mb-2 flex items-center">
+<h1 class="text-3xl font-bold text-cyan-300 mb-2 flex items-center frost-text">
 <i data-lucide="key-round" class="w-8 h-8 mr-2"></i>Access Key
 </h1>
-<p class="text-slate-400">Generate dan kelola Access Key untuk aktivasi node validator</p>
+<p class="text-cyan-200">Generate dan kelola Access Key untuk aktivasi node validator</p>
 </div>
-<div class="crypto-icon-large" style="background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(6, 182, 212, 0.1)); border-color: rgba(56, 189, 248, 0.3);">
-<i data-lucide="key-round" class="text-sky-400 w-8 h-8"></i>
+<div class="crypto-icon-large" style="background: linear-gradient(145deg, rgba(125, 249, 255, 0.15), rgba(0, 229, 255, 0.15)); border-color: rgba(125, 249, 255, 0.5); box-shadow: 0 0 30px rgba(125, 249, 255, 0.4);">
+<i data-lucide="key-round" class="text-cyan-300 w-8 h-8"></i>
 </div>
 </div>
 </div>
-<div class="bg-slate-900 border border-sky-500/20 rounded-xl p-6 mb-6">
+<div class="bg-[#001233] border-2 border-cyan-300/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);">
 <div class="flex space-x-4 mb-6">
-<button id="generate-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-sky-500 to-cyan-500 text-white">
+<button id="generate-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-300 to-cyan-400 text-[#000814]" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);">
 <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate
 </button>
-<button id="mykeys-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white">
+<button id="mykeys-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30">
 <i data-lucide="list" class="w-4 h-4 inline mr-2"></i>My Keys
-<span id="keys-count-badge" class="ml-2 bg-sky-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+<span id="keys-count-badge" class="ml-2 bg-cyan-300 text-[#000814] text-xs font-bold px-2 py-0.5 rounded-full">0</span>
 </button>
 </div>
 <div id="generate-content">
@@ -463,21 +521,21 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-<i data-lucide="wand-2" class="mr-2 text-sky-400 w-6 h-6"></i>Generate Access Key
+<i data-lucide="wand-2" class="mr-2 text-cyan-300 w-6 h-6"></i>Generate Access Key
 </h3>
 <div class="space-y-4">
 <div class="space-y-2">
-<label class="text-sm text-slate-400">Jumlah BossX untuk Stake:</label>
+<label class="text-sm text-cyan-200">Jumlah BossX untuk Stake:</label>
 <div class="relative">
 <input id="pk-stake-amount" type="number" placeholder="Minimal 10 BossX" class="node-input pr-16" min="10" step="0.000000001" />
-<button id="pk-max-stake" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-sky-500 text-white text-xs rounded font-semibold hover:bg-sky-600 transition-colors">MAX</button>
+<button id="pk-max-stake" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-cyan-300 text-[#000814] text-xs rounded font-semibold hover:bg-cyan-400 transition-colors" style="box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">MAX</button>
 </div>
 </div>
-<div class="bg-sky-500/10 border border-sky-500/30 rounded-xl p-4">
-<h4 class="text-sky-400 font-semibold mb-2 flex items-center">
+<div class="bg-cyan-400/10 border-2 border-cyan-400/30 rounded-xl p-4" style="box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);">
+<h4 class="text-cyan-300 font-semibold mb-2 flex items-center">
 <i data-lucide="info" class="mr-2 w-4 h-4"></i>Informasi
 </h4>
-<ul class="text-sm text-slate-300 space-y-1">
+<ul class="text-sm text-cyan-100 space-y-1">
 <li>• <strong>Minimal stake:</strong> 10 BossX</li>
 <li>• <strong>Fee transaksi:</strong> 1 BossX (dipotong otomatis)</li>
 <li>• <strong>Format:</strong> 25 karakter (huruf + angka)</li>
@@ -485,26 +543,26 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <li>• <strong>Cara pakai:</strong> Copy kode → paste di Dashboard → Redeem</li>
 </ul>
 </div>
-<div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+<div class="bg-[#001845]/70 border-2 border-cyan-400/20 rounded-xl p-4">
 <div class="flex justify-between items-center mb-2">
-<span class="text-slate-400">Jumlah Stake:</span>
+<span class="text-cyan-200">Jumlah Stake:</span>
 <span id="pk-summary-stake" class="text-white font-mono">0.00 BossX</span>
 </div>
 <div class="flex justify-between items-center mb-2">
-<span class="text-slate-400">Fee:</span>
+<span class="text-cyan-200">Fee:</span>
 <span id="pk-summary-fee" class="text-rose-400 font-mono">1.00 BossX</span>
 </div>
-<hr class="border-slate-600 my-3">
+<hr class="border-cyan-400/20 my-3">
 <div class="flex justify-between items-center">
-<span class="text-slate-400 font-semibold">Total Terpotong:</span>
-<span id="pk-summary-total" class="text-sky-400 font-mono font-bold">1.00 BossX</span>
+<span class="text-cyan-200 font-semibold">Total Terpotong:</span>
+<span id="pk-summary-total" class="text-cyan-300 font-mono font-bold frost-text">1.00 BossX</span>
 </div>
 <div class="flex justify-between items-center mt-2">
-<span class="text-slate-400 text-sm">Saldo saat ini:</span>
-<span id="pk-summary-balance" class="text-teal-400 font-mono text-sm">1000.00 BossX</span>
+<span class="text-cyan-200 text-sm">Saldo saat ini:</span>
+<span id="pk-summary-balance" class="text-emerald-400 font-mono text-sm">1000.00 BossX</span>
 </div>
 </div>
-<button id="generate-pk-button" class="node-button" onclick="generatePrivateKey()" style="background: linear-gradient(145deg, #38BDF8, #0EA5E9);">
+<button id="generate-pk-button" class="node-button" onclick="generatePrivateKey()" style="background: linear-gradient(145deg, #7DF9FF, #00E5FF);">
 <i data-lucide="wand-2" class="w-4 h-4 inline mr-2"></i>Generate Access Key
 </button>
 </div>
@@ -516,9 +574,9 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
 <div class="flex justify-between items-center mb-6">
 <h3 class="text-xl font-bold text-white flex items-center">
-<i data-lucide="list" class="mr-2 text-sky-400 w-6 h-6"></i>History Access Key
+<i data-lucide="list" class="mr-2 text-cyan-300 w-6 h-6"></i>History Access Key
 </h3>
-<button onclick="updatePrivateKeysList(); updatePKStatistics();" class="flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors">
+<button onclick="updatePrivateKeysList(); updatePKStatistics();" class="flex items-center px-4 py-2 bg-[#001845] hover:bg-[#001233] text-white rounded-lg transition-colors border-2 border-cyan-400/30">
 <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>Refresh
 </button>
 </div>
@@ -528,42 +586,42 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Total Keys</h4><i data-lucide="key" class="text-sky-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Total Keys</h4><i data-lucide="key" class="text-cyan-300 w-5 h-5"></i></div>
 <div id="pk-total-keys" class="text-2xl font-bold text-white">0</div>
-<p class="text-sm text-sky-400 mt-1">Access Key dibuat</p>
+<p class="text-sm text-cyan-300 mt-1">Access Key dibuat</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Available</h4><i data-lucide="check-circle" class="text-teal-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Available</h4><i data-lucide="check-circle" class="text-emerald-400 w-5 h-5"></i></div>
 <div id="pk-available-keys" class="text-2xl font-bold text-white">0</div>
-<p class="text-sm text-teal-400 mt-1">Belum diredeem</p>
+<p class="text-sm text-emerald-400 mt-1">Belum diredeem</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Redeemed</h4><i data-lucide="check-check" class="text-sky-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Redeemed</h4><i data-lucide="check-check" class="text-cyan-300 w-5 h-5"></i></div>
 <div id="pk-redeemed-keys" class="text-2xl font-bold text-white">0</div>
-<p class="text-sm text-sky-400 mt-1">Sudah digunakan</p>
+<p class="text-sm text-cyan-300 mt-1">Sudah digunakan</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div id="deposit-page" class="page-content">
-<div class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-cyan-500/20 rounded-xl p-6 mb-6">
+<div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-cyan-400/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
 <div class="flex items-center justify-between">
 <div>
-<h1 class="text-3xl font-bold text-cyan-400 mb-2">Deposit Crypto</h1>
-<p class="text-slate-400">Deposit USDT dan BOSSX ke wallet Anda</p>
+<h1 class="text-3xl font-bold text-cyan-400 mb-2 frost-text">Deposit Crypto</h1>
+<p class="text-cyan-200">Deposit USDT dan BOSSX ke wallet Anda</p>
 </div>
 <div class="crypto-icon-large"><i data-lucide="wallet" class="text-cyan-400 w-8 h-8"></i></div>
 </div>
 </div>
-<div class="bg-slate-900 border border-cyan-500/20 rounded-xl p-6 mb-6">
+<div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);">
 <div class="flex space-x-4 mb-6">
-<button id="usdt-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-500 to-sky-500 text-white">USDT</button>
-<button id="bossx-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white">BOSSX</button>
+<button id="usdt-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-400 to-cyan-300 text-[#000814]" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);">USDT</button>
+<button id="bossx-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30">BOSSX</button>
 </div>
 <div class="grid lg:grid-cols-2 gap-8">
 <div class="space-y-6">
@@ -574,8 +632,8 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <h3 class="text-xl font-bold text-white mb-4 flex items-center justify-center">
 <i data-lucide="qr-code" class="mr-2 text-cyan-400 w-6 h-6"></i>QR Code <span id="qr-currency">USDT</span>
 </h3>
-<img id="qr-code-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM" alt="QR Code" class="w-48 h-48 mx-auto border-4 border-cyan-500/30 rounded-xl" />
-<button id="download-qr" class="mt-4 flex items-center justify-center mx-auto px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg transition-colors">
+<img id="qr-code-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM&color=00E5FF" alt="QR Code" class="w-48 h-48 mx-auto border-4 border-cyan-400/50 rounded-xl" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);" />
+<button id="download-qr" class="mt-4 flex items-center justify-center mx-auto px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors" style="box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);">
 <i data-lucide="download" class="mr-2 w-4 h-4"></i>Download QR Code
 </button>
 </div>
@@ -589,24 +647,24 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <i data-lucide="wallet" class="mr-2 text-cyan-400 w-6 h-6"></i>Alamat Wallet <span id="wallet-currency">USDT</span>
 </h3>
 <div class="space-y-4">
-<div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-<p class="text-sm text-slate-400 mb-2">Network:</p>
+<div class="bg-[#001845]/70 border-2 border-cyan-400/20 rounded-xl p-4">
+<p class="text-sm text-cyan-200 mb-2">Network:</p>
 <p class="text-white font-mono">TRON (TRC20)</p>
 </div>
-<div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-<p class="text-sm text-slate-400 mb-2">Alamat Wallet:</p>
+<div class="bg-[#001845]/70 border-2 border-cyan-400/20 rounded-xl p-4">
+<p class="text-sm text-cyan-200 mb-2">Alamat Wallet:</p>
 <div class="flex items-center space-x-2">
 <p id="wallet-address" class="text-white font-mono text-sm break-all flex-1">TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM</p>
-<button id="copy-address" class="copy-button flex items-center px-3 py-2 bg-gradient-to-r from-cyan-500 to-sky-500 text-white rounded-lg font-semibold">
+<button id="copy-address" class="copy-button flex items-center px-3 py-2 bg-gradient-to-r from-cyan-400 to-cyan-300 text-[#000814] rounded-lg font-semibold" style="box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);">
 <i data-lucide="copy" class="mr-1 w-4 h-4"></i>Copy
 </button>
 </div>
 </div>
-<div class="bg-sky-500/10 border border-sky-500/30 rounded-xl p-4">
-<h4 class="text-sky-400 font-semibold mb-2 flex items-center">
+<div class="bg-cyan-400/10 border-2 border-cyan-400/30 rounded-xl p-4">
+<h4 class="text-cyan-300 font-semibold mb-2 flex items-center">
 <i data-lucide="trending-up" class="mr-2 w-4 h-4"></i>Penting!
 </h4>
-<ul class="text-sm text-slate-300 space-y-1">
+<ul class="text-sm text-cyan-100 space-y-1">
 <li id="warning-currency">• Hanya kirim USDT ke alamat ini</li>
 <li>• Pastikan menggunakan network TRON (TRC20)</li>
 <li id="min-deposit">• Minimal deposit: 10 USDT</li>
@@ -618,12 +676,12 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </div>
 </div>
 </div>
-<div class="bg-slate-900 border border-cyan-500/20 rounded-xl p-6 mb-6">
+<div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);">
 <div class="flex items-center justify-between mb-6">
 <h3 class="text-xl font-bold text-white flex items-center">
 <i data-lucide="calendar" class="mr-2 text-cyan-400 w-6 h-6"></i>History Deposit <span id="history-currency">USDT</span>
 </h3>
-<button id="refresh-history" class="flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors">
+<button id="refresh-history" class="flex items-center px-4 py-2 bg-[#001845] hover:bg-[#001233] text-white rounded-lg transition-colors border-2 border-cyan-400/30">
 <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>Refresh
 </button>
 </div>
@@ -633,40 +691,40 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Total Deposit</h4><i data-lucide="trending-up" class="text-teal-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Total Deposit</h4><i data-lucide="trending-up" class="text-emerald-400 w-5 h-5"></i></div>
 <div id="total-deposits" class="text-2xl font-bold text-white">2</div>
-<p class="text-sm text-teal-400 mt-1">Transaksi berhasil</p>
+<p class="text-sm text-emerald-400 mt-1">Transaksi berhasil</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Total Amount</h4><i data-lucide="wallet" class="text-cyan-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Total Amount</h4><i data-lucide="wallet" class="text-cyan-400 w-5 h-5"></i></div>
 <div id="total-amount" class="text-2xl font-bold text-white">351.25</div>
 <p id="amount-currency" class="text-sm text-cyan-400 mt-1">USDT</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Pending</h4><i data-lucide="loader" class="text-sky-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Pending</h4><i data-lucide="loader" class="text-cyan-300 w-5 h-5"></i></div>
 <div id="pending-deposits" class="text-2xl font-bold text-white">1</div>
-<p class="text-sm text-sky-400 mt-1">Menunggu konfirmasi</p>
+<p class="text-sm text-cyan-300 mt-1">Menunggu konfirmasi</p>
 </div>
 </div>
 </div>
 <div id="withdrawal-page" class="page-content">
-<div class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-rose-500/20 rounded-xl p-6 mb-6">
+<div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-rose-500/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(255, 0, 110, 0.2);">
 <div class="flex items-center justify-between">
 <div>
-<h1 class="text-3xl font-bold text-rose-400 mb-2">Withdrawal Crypto</h1>
-<p class="text-slate-400">Tarik USDT dan BOSSX dari wallet Anda</p>
+<h1 class="text-3xl font-bold text-rose-400 mb-2" style="text-shadow: 0 0 15px rgba(255, 0, 110, 0.6);">Withdrawal Crypto</h1>
+<p class="text-cyan-200">Tarik USDT dan BOSSX dari wallet Anda</p>
 </div>
-<div class="crypto-icon-large"><i data-lucide="arrow-up" class="text-rose-400 w-8 h-8"></i></div>
+<div class="crypto-icon-large" style="background: linear-gradient(145deg, rgba(255, 0, 110, 0.15), rgba(212, 0, 90, 0.15)); border-color: rgba(255, 0, 110, 0.5); box-shadow: 0 0 25px rgba(255, 0, 110, 0.4);"><i data-lucide="arrow-up" class="text-rose-400 w-8 h-8"></i></div>
 </div>
 </div>
-<div class="bg-slate-900 border border-rose-500/20 rounded-xl p-6 mb-6">
+<div class="bg-[#001233] border-2 border-rose-500/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.15);">
 <div class="flex space-x-4 mb-6">
-<button id="withdrawal-usdt-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-rose-500 to-rose-600 text-white">USDT</button>
-<button id="withdrawal-bossx-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white">BOSSX</button>
+<button id="withdrawal-usdt-tab" class="tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-rose-500 to-rose-600 text-white" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);">USDT</button>
+<button id="withdrawal-bossx-tab" class="tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-rose-500/30">BOSSX</button>
 </div>
 <div class="grid lg:grid-cols-2 gap-8">
 <div class="space-y-6">
@@ -677,34 +735,34 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <i data-lucide="wallet" class="mr-2 text-rose-400 w-6 h-6"></i>Balance <span id="withdrawal-currency">USDT</span>
 </h3>
 <div class="text-center mb-6">
-<div class="text-3xl font-bold text-teal-400 mb-2"><span id="withdrawal-balance">50.00 USDT</span></div>
-<p class="text-sm text-slate-400">Saldo tersedia</p>
+<div class="text-3xl font-bold text-emerald-400 mb-2" style="text-shadow: 0 0 15px rgba(0, 255, 200, 0.6);"><span id="withdrawal-balance">50.00 USDT</span></div>
+<p class="text-sm text-cyan-200">Saldo tersedia</p>
 </div>
 <div class="space-y-4">
 <div id="network-selection" class="space-y-3">
-<label class="text-sm text-slate-400">Pilih Network:</label>
+<label class="text-sm text-cyan-200">Pilih Network:</label>
 <div class="grid grid-cols-2 gap-3">
 <label class="network-option selected">
 <input type="radio" name="withdrawal-network" value="TRC20" checked>
-<div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-slate-400">TRON</span></div>
-<div class="text-xs text-slate-500 mt-1">Fee: 1 USDT</div>
+<div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-cyan-200">TRON</span></div>
+<div class="text-xs text-cyan-300 mt-1">Fee: 1 USDT</div>
 </label>
 <label class="network-option">
 <input type="radio" name="withdrawal-network" value="BEP20">
-<div class="flex items-center justify-between"><span class="font-semibold text-white">BEP20</span><span class="text-xs text-slate-400">BSC</span></div>
-<div class="text-xs text-slate-500 mt-1">Fee: 1 USDT</div>
+<div class="flex items-center justify-between"><span class="font-semibold text-white">BEP20</span><span class="text-xs text-cyan-200">BSC</span></div>
+<div class="text-xs text-cyan-300 mt-1">Fee: 1 USDT</div>
 </label>
 </div>
 </div>
 <div class="space-y-2">
-<label class="text-sm text-slate-400">Alamat Wallet Tujuan:</label>
+<label class="text-sm text-cyan-200">Alamat Wallet Tujuan:</label>
 <input id="withdrawal-address" type="text" placeholder="Masukkan alamat wallet tujuan" class="node-input" />
 </div>
 <div class="space-y-2">
-<label class="text-sm text-slate-400">Jumlah Withdrawal:</label>
+<label class="text-sm text-cyan-200">Jumlah Withdrawal:</label>
 <div class="relative">
 <input id="withdrawal-amount" type="number" placeholder="0.00" class="node-input pr-16" step="0.01" min="0" />
-<button id="max-withdrawal" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-cyan-500 text-white text-xs rounded font-semibold hover:bg-cyan-600 transition-colors">MAX</button>
+<button id="max-withdrawal" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-cyan-400 text-[#000814] text-xs rounded font-semibold hover:bg-cyan-300 transition-colors" style="box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">MAX</button>
 </div>
 </div>
 </div>
@@ -718,18 +776,18 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <i data-lucide="file-text" class="mr-2 text-rose-400 w-6 h-6"></i>Ringkasan Withdrawal
 </h3>
 <div class="space-y-4">
-<div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-<div class="flex justify-between items-center mb-2"><span class="text-slate-400">Network:</span><span id="summary-network" class="text-white font-mono">TRC20</span></div>
-<div class="flex justify-between items-center mb-2"><span class="text-slate-400">Jumlah:</span><span id="summary-amount" class="text-white font-mono">0.00</span></div>
-<div class="flex justify-between items-center mb-2"><span class="text-slate-400">Fee:</span><span id="summary-fee" class="text-rose-400 font-mono">1.00</span></div>
-<hr class="border-slate-600 my-3">
-<div class="flex justify-between items-center"><span class="text-slate-400 font-semibold">Total Diterima:</span><span id="summary-received" class="text-teal-400 font-mono font-bold">0.00</span></div>
+<div class="bg-[#001845]/70 border-2 border-cyan-400/20 rounded-xl p-4">
+<div class="flex justify-between items-center mb-2"><span class="text-cyan-200">Network:</span><span id="summary-network" class="text-white font-mono">TRC20</span></div>
+<div class="flex justify-between items-center mb-2"><span class="text-cyan-200">Jumlah:</span><span id="summary-amount" class="text-white font-mono">0.00</span></div>
+<div class="flex justify-between items-center mb-2"><span class="text-cyan-200">Fee:</span><span id="summary-fee" class="text-rose-400 font-mono">1.00</span></div>
+<hr class="border-cyan-400/20 my-3">
+<div class="flex justify-between items-center"><span class="text-cyan-200 font-semibold">Total Diterima:</span><span id="summary-received" class="text-emerald-400 font-mono font-bold">0.00</span></div>
 </div>
-<div class="bg-sky-500/10 border border-sky-500/30 rounded-xl p-4">
-<h4 class="text-sky-400 font-semibold mb-2 flex items-center">
+<div class="bg-cyan-400/10 border-2 border-cyan-400/30 rounded-xl p-4">
+<h4 class="text-cyan-300 font-semibold mb-2 flex items-center">
 <i data-lucide="alert-triangle" class="mr-2 w-4 h-4"></i>Perhatian!
 </h4>
-<ul class="text-sm text-slate-300 space-y-1">
+<ul class="text-sm text-cyan-100 space-y-1">
 <li id="withdrawal-min">• Minimal withdrawal: 10 USDT</li>
 <li id="withdrawal-fee">• Fee withdrawal: 1 USDT</li>
 <li>• Periksa kembali alamat tujuan sebelum konfirmasi</li>
@@ -744,12 +802,12 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </div>
 </div>
 </div>
-<div class="bg-slate-900 border border-rose-500/20 rounded-xl p-6 mb-6">
+<div class="bg-[#001233] border-2 border-rose-500/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.15);">
 <div class="flex items-center justify-between mb-6">
 <h3 class="text-xl font-bold text-white flex items-center">
 <i data-lucide="calendar" class="mr-2 text-rose-400 w-6 h-6"></i>History Withdrawal <span id="withdrawal-history-currency">USDT</span>
 </h3>
-<button id="refresh-withdrawal-history" class="flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors">
+<button id="refresh-withdrawal-history" class="flex items-center px-4 py-2 bg-[#001845] hover:bg-[#001233] text-white rounded-lg transition-colors border-2 border-rose-500/30">
 <i data-lucide="refresh-cw" class="mr-2 w-4 h-4"></i>Refresh
 </button>
 </div>
@@ -759,23 +817,23 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Total Withdrawal</h4><i data-lucide="trending-down" class="text-rose-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Total Withdrawal</h4><i data-lucide="trending-down" class="text-rose-400 w-5 h-5"></i></div>
 <div id="total-withdrawals" class="text-2xl font-bold text-white">0</div>
 <p class="text-sm text-rose-400 mt-1">Transaksi berhasil</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Total Amount</h4><i data-lucide="wallet" class="text-rose-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Total Amount</h4><i data-lucide="wallet" class="text-rose-400 w-5 h-5"></i></div>
 <div id="total-withdrawal-amount" class="text-2xl font-bold text-white">0.00</div>
 <p id="withdrawal-amount-currency" class="text-sm text-rose-400 mt-1">USDT</p>
 </div>
 <div class="stat-card p-6">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
-<div class="flex items-center justify-between mb-4"><h4 class="text-slate-400">Processing</h4><i data-lucide="loader" class="text-sky-400 w-5 h-5"></i></div>
+<div class="flex items-center justify-between mb-4"><h4 class="text-cyan-200">Processing</h4><i data-lucide="loader" class="text-cyan-300 w-5 h-5"></i></div>
 <div id="processing-withdrawals" class="text-2xl font-bold text-white">0</div>
-<p class="text-sm text-sky-400 mt-1">Sedang diproses</p>
+<p class="text-sm text-cyan-300 mt-1">Sedang diproses</p>
 </div>
 </div>
 </div>
@@ -784,86 +842,86 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </div>
 <div id="referral-page" class="page-content">
 <div class="p-6">
-<h1 class="text-2xl font-bold text-cyan-400 mb-4">Referral</h1>
+<h1 class="text-2xl font-bold text-cyan-400 mb-4 frost-text">Referral</h1>
 <div class="stat-card p-6 mb-6">
 <h3 class="text-xl font-bold text-white mb-4">Kode Referral Anda</h3>
 <div class="flex items-center space-x-2 mb-4">
 <input id="referral-code" type="text" class="node-input flex-1" readonly value="REF-XXXXXX" />
-<button onclick="copyReferralCode()" class="copy-button flex items-center px-3 py-2 bg-gradient-to-r from-cyan-500 to-sky-500 text-white rounded-lg font-semibold">
+<button onclick="copyReferralCode()" class="copy-button flex items-center px-3 py-2 bg-gradient-to-r from-cyan-400 to-cyan-300 text-[#000814] rounded-lg font-semibold" style="box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);">
 <i data-lucide="copy" class="mr-1 w-4 h-4"></i>Copy
 </button>
 </div>
 <button onclick="generateReferralCode()" class="node-button mb-4">Generate Kode Baru</button>
-<p class="text-slate-400">Bagikan kode referral Anda untuk mendapatkan reward.</p>
+<p class="text-cyan-200">Bagikan kode referral Anda untuk mendapatkan reward.</p>
 </div>
 <div class="stat-card p-6">
 <h3 class="text-xl font-bold text-white mb-4">Statistik Referral</h3>
 <div class="grid grid-cols-2 gap-4">
-<div><p class="text-slate-400">Total Referral</p><p class="text-2xl font-bold text-white">0</p></div>
-<div><p class="text-slate-400">Reward Didapat</p><p class="text-2xl font-bold text-white">0 BossX</p></div>
+<div><p class="text-cyan-200">Total Referral</p><p class="text-2xl font-bold text-white">0</p></div>
+<div><p class="text-cyan-200">Reward Didapat</p><p class="text-2xl font-bold text-white">0 BossX</p></div>
 </div>
 </div>
 </div>
 </div>
 <div id="team-developer-page" class="page-content">
 <div class="p-6">
-<h1 class="text-3xl font-bold text-cyan-400 mb-6">Team Developer</h1>
-<p class="text-slate-400 mb-8">Temui tim di balik BossX Crypto Exchange Platform.</p>
+<h1 class="text-3xl font-bold text-cyan-400 mb-6 frost-text">Team Developer</h1>
+<p class="text-cyan-200 mb-8">Temui tim di balik BossX Crypto Exchange Platform.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 <div class="exchange-card p-6 text-center relative overflow-hidden">
 <div class="border-line-white border-top-white"></div><div class="border-line-white border-right-white"></div><div class="border-line-white border-bottom-white"></div><div class="border-line-white border-left-white"></div>
-<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-500">
+<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);">
 <img src="https://i.ibb.co.com/N2RF70Vs/IMG-1097-removebg-preview.png" alt="CEO" class="w-full h-full object-cover">
 </div>
 <h3 class="text-xl font-bold text-white mb-2">Fery Muliawan</h3>
-<p class="text-cyan-400 mb-4">CEO (Chief Executive Officer)</p>
-<p class="text-slate-300">Pendiri dan visioner BossX.</p>
+<p class="text-cyan-400 mb-4 frost-text">CEO (Chief Executive Officer)</p>
+<p class="text-cyan-100">Pendiri dan visioner BossX.</p>
 </div>
 <div class="exchange-card p-6 text-center relative overflow-hidden">
 <div class="border-line-white border-top-white"></div><div class="border-line-white border-right-white"></div><div class="border-line-white border-bottom-white"></div><div class="border-line-white border-left-white"></div>
-<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-500">
+<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);">
 <img src="https://i.ibb.co.com/xKDSrKYw/Picsart-25-10-03-12-44-06-927.png" alt="CFO" class="w-full h-full object-cover">
 </div>
 <h3 class="text-xl font-bold text-white mb-2">Mr.Ramadhan</h3>
-<p class="text-cyan-400 mb-4">CFO Chief Financial Officer</p>
-<p class="text-slate-300">Mengawasi operasi harian.</p>
+<p class="text-cyan-400 mb-4 frost-text">CFO Chief Financial Officer</p>
+<p class="text-cyan-100">Mengawasi operasi harian.</p>
 </div>
 <div class="exchange-card p-6 text-center relative overflow-hidden">
 <div class="border-line-white border-top-white"></div><div class="border-line-white border-right-white"></div><div class="border-line-white border-bottom-white"></div><div class="border-line-white border-left-white"></div>
-<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-500">
-<img src="https://via.placeholder.com/150?text=Manager" alt="Manager" class="w-full h-full object-cover">
+<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);">
+<img src="https://via.placeholder.com/150/00E5FF/000814?text=Manager" alt="Manager" class="w-full h-full object-cover">
 </div>
 <h3 class="text-xl font-bold text-white mb-2">Michael Johnson</h3>
-<p class="text-cyan-400 mb-4">Manager</p>
-<p class="text-slate-300">Mengatur tim operasional.</p>
+<p class="text-cyan-400 mb-4 frost-text">Manager</p>
+<p class="text-cyan-100">Mengatur tim operasional.</p>
 </div>
 <div class="exchange-card p-6 text-center relative overflow-hidden">
 <div class="border-line-white border-top-white"></div><div class="border-line-white border-right-white"></div><div class="border-line-white border-bottom-white"></div><div class="border-line-white border-left-white"></div>
-<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-500">
+<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);">
 <img src="https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg" alt="CTO" class="w-full h-full object-cover">
 </div>
 <h3 class="text-xl font-bold text-white mb-2">Lee</h3>
-<p class="text-cyan-400 mb-4">CTO (Chief Technology Officer)</p>
-<p class="text-slate-300">Infrastruktur teknis & keamanan.</p>
+<p class="text-cyan-400 mb-4 frost-text">CTO (Chief Technology Officer)</p>
+<p class="text-cyan-100">Infrastruktur teknis & keamanan.</p>
 </div>
 <div class="exchange-card p-6 text-center relative overflow-hidden">
 <div class="border-line-white border-top-white"></div><div class="border-line-white border-right-white"></div><div class="border-line-white border-bottom-white"></div><div class="border-line-white border-left-white"></div>
-<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-500">
-<img src="https://via.placeholder.com/150?text=Secretary" alt="Secretary" class="w-full h-full object-cover">
+<div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);">
+<img src="https://via.placeholder.com/150/00E5FF/000814?text=Secretary" alt="Secretary" class="w-full h-full object-cover">
 </div>
 <h3 class="text-xl font-bold text-white mb-2">Emily Brown</h3>
-<p class="text-cyan-400 mb-4">Secretary</p>
-<p class="text-slate-300">Administrasi & komunikasi.</p>
+<p class="text-cyan-400 mb-4 frost-text">Secretary</p>
+<p class="text-cyan-100">Administrasi & komunikasi.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="p2p-page" class="page-content exchange-bg">
 <div class="exchange-card p-6 mb-6">
-<h1 class="text-3xl font-bold text-cyan-400 mb-4 flex items-center">
+<h1 class="text-3xl font-bold text-cyan-400 mb-4 flex items-center frost-text">
 <i data-lucide="users" class="w-8 h-8 mr-2"></i>Peer to Peer Transfer
 </h1>
-<p class="text-slate-400 mb-6">Transfer BossX ke sesama pengguna menggunakan @username.</p>
+<p class="text-cyan-200 mb-6">Transfer BossX ke sesama pengguna menggunakan @username.</p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 <div class="exchange-card p-6">
@@ -872,14 +930,14 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </h2>
 <div class="space-y-4">
 <div class="space-y-2">
-<label class="text-sm text-slate-400">Username Penerima:</label>
+<label class="text-sm text-cyan-200">Username Penerima:</label>
 <input id="p2p-username" type="text" placeholder="@username" class="node-input" />
 </div>
 <div class="space-y-2">
-<label class="text-sm text-slate-400">Jumlah BossX:</label>
+<label class="text-sm text-cyan-200">Jumlah BossX:</label>
 <div class="relative">
 <input id="p2p-amount" type="number" placeholder="0.00" class="node-input pr-16" step="0.000000001" min="1" />
-<button id="p2p-max" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-cyan-500 text-white text-xs rounded font-semibold hover:bg-cyan-600 transition-colors">MAX</button>
+<button id="p2p-max" class="absolute right-2 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-cyan-400 text-[#000814] text-xs rounded font-semibold hover:bg-cyan-300 transition-colors" style="box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">MAX</button>
 </div>
 </div>
 <button id="p2p-submit" class="node-button" onclick="submitP2PTransfer()">
@@ -893,11 +951,11 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 </h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <div class="stat-card p-4">
-<div class="flex items-center justify-between mb-2"><p class="text-sm text-slate-400">Total Dikirim</p><i data-lucide="arrow-up-circle" class="w-4 h-4 text-rose-400"></i></div>
+<div class="flex items-center justify-between mb-2"><p class="text-sm text-cyan-200">Total Dikirim</p><i data-lucide="arrow-up-circle" class="w-4 h-4 text-rose-400"></i></div>
 <div id="p2p-total-sent" class="text-xl font-bold text-white">0 BossX</div>
 </div>
 <div class="stat-card p-4">
-<div class="flex items-center justify-between mb-2"><p class="text-sm text-slate-400">Total Diterima</p><i data-lucide="arrow-down-circle" class="w-4 h-4 text-teal-400"></i></div>
+<div class="flex items-center justify-between mb-2"><p class="text-sm text-cyan-200">Total Diterima</p><i data-lucide="arrow-down-circle" class="w-4 h-4 text-emerald-400"></i></div>
 <div id="p2p-total-received" class="text-xl font-bold text-white">0 BossX</div>
 </div>
 </div>
@@ -913,142 +971,106 @@ Beli Access Key di menu <span class="text-sky-400 font-semibold cursor-pointer" 
 <div id="faq-page" class="page-content">
 <div class="p-6 max-w-4xl mx-auto">
 <div class="text-center mb-10">
-<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center justify-center gap-2">
+<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center justify-center gap-2 frost-text">
 <i data-lucide="help-circle" class="w-8 h-8"></i> FAQ (Pertanyaan Umum)
 </h1>
-<p class="text-slate-400">Temukan jawaban untuk pertanyaan yang sering diajukan tentang BossX.</p>
+<p class="text-cyan-200">Temukan jawaban untuk pertanyaan yang sering diajukan tentang BossX.</p>
 </div>
 <div class="space-y-8">
 <div>
-<h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
+<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
 <i data-lucide="info" class="w-5 h-5 text-cyan-400"></i> Umum
 </h2>
 <div class="space-y-3">
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">
 Apa itu BossX?
 <span class="transition-transform group-open:rotate-180">▼</span>
 </summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">BossX adalah salah satu cryptocurrency yang berjalan pada jaringan blockchain TRC20 </p>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">BossX adalah salah satu cryptocurrency yang berjalan pada jaringan blockchain TRC20 </p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">
 Bagaimana cara mendaftar akun?
 <span class="transition-transform group-open:rotate-180">▼</span>
 </summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
 <div>
-<h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-<i data-lucide="server" class="w-5 h-5 text-teal-400"></i> Masternode & Validator
+<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
+<i data-lucide="server" class="w-5 h-5 text-emerald-400"></i> Masternode & Validator
 </h2>
 <div class="space-y-3">
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Apa itu Masternode Validator?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apa itu Masternode Validator?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Berapa minimal stake untuk menjalankan Masternode?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa minimal stake untuk menjalankan Masternode?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Mengapa validasi berhenti otomatis jam 06:00?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Mengapa validasi berhenti otomatis jam 06:00?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
 <div>
-<h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-<i data-lucide="key-round" class="w-5 h-5 text-sky-400"></i> Access Key
+<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
+<i data-lucide="key-round" class="w-5 h-5 text-cyan-300"></i> Access Key
 </h2>
 <div class="space-y-3">
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Apa fungsi Access Key?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apa fungsi Access Key?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Bagaimana cara mendapatkan Access Key?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Bagaimana cara mendapatkan Access Key?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Mengapa Access Key hanya bisa digunakan sekali?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Mengapa Access Key hanya bisa digunakan sekali?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
 <div>
-<h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-<i data-lucide="gift" class="w-5 h-5 text-sky-400"></i> Reward & Claim
+<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
+<i data-lucide="gift" class="w-5 h-5 text-cyan-300"></i> Reward & Claim
 </h2>
 <div class="space-y-3">
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Kapan reward bisa di-claim?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Kapan reward bisa di-claim?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Apakah ada minimal claim reward?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apakah ada minimal claim reward?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Bagaimana cara menjual BossX hasil reward?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Bagaimana cara menjual BossX hasil reward?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
 <div>
-<h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-<i data-lucide="wallet" class="w-5 h-5 text-teal-400"></i> Deposit & Withdrawal
+<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
+<i data-lucide="wallet" class="w-5 h-5 text-emerald-400"></i> Deposit & Withdrawal
 </h2>
 <div class="space-y-3">
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Berapa minimal deposit USDT?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa minimal deposit USDT?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Berapa lama proses deposit?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa lama proses deposit?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
-<details class="bg-slate-900 border border-slate-700 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center">
-Berapa fee withdrawal?
-<span class="transition-transform group-open:rotate-180">▼</span>
-</summary>
-<p class="mt-3 text-slate-300 pl-2 border-l-2 border-cyan-500/50">[Silakan tulis jawaban Anda di sini...]</p>
+<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
+<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa fee withdrawal?<span class="transition-transform group-open:rotate-180">▼</span></summary>
+<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
 </details>
 </div>
 </div>
@@ -1057,16 +1079,16 @@ Berapa fee withdrawal?
 </div>
 <div id="settings-page" class="page-content">
 <div class="p-6">
-<h1 class="text-2xl font-bold text-cyan-400 mb-4">Settings</h1>
-<p class="text-slate-400">Fitur Settings akan segera hadir...</p>
+<h1 class="text-2xl font-bold text-cyan-400 mb-4 frost-text">Settings</h1>
+<p class="text-cyan-200">Fitur Settings akan segera hadir...</p>
 </div>
 </div>
 <div id="exchange-page" class="page-content exchange-bg">
 <div class="exchange-card p-4 mb-4">
-<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center">
+<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center frost-text">
 <i data-lucide="dollar-sign" class="w-8 h-8 mr-2"></i>Internal Market - BossX
 </h1>
-<p class="text-slate-400 mb-4">Trade cryptocurrency with Binance-like interface and real data.</p>
+<p class="text-cyan-200 mb-4">Trade cryptocurrency with Binance-like interface and real data.</p>
 </div>
 <div class="exchange-card p-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
 <div>
@@ -1079,10 +1101,10 @@ Berapa fee withdrawal?
 </div>
 </div>
 <div class="market-data w-full md:w-auto">
-<div><p class="text-slate-400 text-sm">Price</p><p id="current-price" class="text-lg font-bold text-white">$0.00</p></div>
-<div><p class="text-slate-400 text-sm">24h Change</p><p id="price-change" class="text-lg font-bold text-teal-400">+0.00%</p></div>
-<div><p class="text-slate-400 text-sm">24h Volume</p><p id="volume" class="text-lg font-bold text-white">$0.00</p></div>
-<div><p class="text-slate-400 text-sm">24h High/Low</p><p id="high-low" class="text-lg text-white">$0.00 / $0.00</p></div>
+<div><p class="text-cyan-200 text-sm">Price</p><p id="current-price" class="text-lg font-bold text-white">$0.00</p></div>
+<div><p class="text-cyan-200 text-sm">24h Change</p><p id="price-change" class="text-lg font-bold text-emerald-400">+0.00%</p></div>
+<div><p class="text-cyan-200 text-sm">24h Volume</p><p id="volume" class="text-lg font-bold text-white">$0.00</p></div>
+<div><p class="text-cyan-200 text-sm">24h High/Low</p><p id="high-low" class="text-lg text-white">$0.00 / $0.00</p></div>
 </div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" style="height: 90vh;">
@@ -1096,13 +1118,13 @@ Berapa fee withdrawal?
 </div>
 <div class="exchange-card p-4 col-span-1">
 <h2 class="text-lg font-bold text-white mb-4 flex items-center">
-<i data-lucide="book-open" class="w-5 h-5 mr-2 text-teal-400"></i>Buy Orders
+<i data-lucide="book-open" class="w-5 h-5 mr-2 text-emerald-400"></i>Buy Orders
 </h2>
 <div class="order-book-section mb-4">
 <table class="w-full order-book">
 <thead><tr><th>Price(USDT)</th><th>Amount</th><th>Total</th></tr></thead>
 <tbody id="buy-orders" class="buy-order">
-<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-slate-700 rounded"></td></tr>
+<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-cyan-400/10 rounded"></td></tr>
 </tbody>
 </table>
 </div>
@@ -1111,12 +1133,12 @@ Berapa fee withdrawal?
 <h2 class="text-lg font-bold text-white mb-4 flex items-center">
 <i data-lucide="activity" class="w-5 h-5 mr-2 text-cyan-400"></i>Recent Trades
 </h2>
-<div id="spread" class="text-center py-2 mb-3 bg-slate-800/50 rounded-lg text-cyan-400 font-semibold">Spread: Loading...</div>
+<div id="spread" class="text-center py-2 mb-3 bg-[#001845]/70 rounded-lg text-cyan-400 font-semibold">Spread: Loading...</div>
 <div class="order-book-section">
 <table class="w-full order-book">
 <thead><tr><th>Price</th><th>Amount</th><th>Time</th></tr></thead>
 <tbody id="recent-trades">
-<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-slate-700 rounded"></td></tr>
+<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-cyan-400/10 rounded"></td></tr>
 </tbody>
 </table>
 </div>
@@ -1129,7 +1151,7 @@ Berapa fee withdrawal?
 <table class="w-full order-book">
 <thead><tr><th>Price(USDT)</th><th>Amount</th><th>Total</th></tr></thead>
 <tbody id="sell-orders" class="sell-order">
-<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-slate-700 rounded"></td></tr>
+<tr class="skeleton-loading"><td colspan="3" class="h-4 bg-rose-400/10 rounded"></td></tr>
 </tbody>
 </table>
 </div>
@@ -1143,14 +1165,14 @@ Berapa fee withdrawal?
 <select id="buy-order-type" class="node-input"><option value="limit">Limit</option><option value="market">Market</option></select>
 <input id="buy-amount" type="number" placeholder="Amount" class="node-input" min="0" step="0.01" />
 <input id="buy-price" type="number" placeholder="Price (Limit)" class="node-input" min="0" step="0.01" />
-<p class="text-sm text-slate-400">AVBL: <span id="buy-avbl">1000 USDT</span></p>
+<p class="text-sm text-cyan-200">AVBL: <span id="buy-avbl">1000 USDT</span></p>
 <button class="trade-button buy node-button w-full" onclick="demoTrade('buy')">Buy</button>
 </div>
 <div class="space-y-4">
 <select id="sell-order-type" class="node-input"><option value="limit">Limit</option><option value="market">Market</option></select>
 <input id="sell-amount" type="number" placeholder="Amount" class="node-input" min="0" step="0.01" />
 <input id="sell-price" type="number" placeholder="Price (Limit)" class="node-input" min="0" step="0.01" />
-<p class="text-sm text-slate-400">AVBL: <span id="sell-avbl">1000 BossX</span></p>
+<p class="text-sm text-cyan-200">AVBL: <span id="sell-avbl">1000 BossX</span></p>
 <button class="trade-button sell node-button w-full" onclick="demoTrade('sell')">Sell</button>
 </div>
 </div>
@@ -1257,8 +1279,8 @@ let lastClaimTime = 0;
 let masaBerlaku = 40000000;
 let masaInterval;
 const walletAddresses = {
-USDT: { address: 'TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM' },
-BOSSX: { address: 'TTfKjrU18mi223ukVmz6FMNgBkma13kVA3', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TTfKjrU18mi223ukVmz6FMNgBkma13kVA3' }
+USDT: { address: 'TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM&color=00E5FF' },
+BOSSX: { address: 'TTfKjrU18mi223ukVmz6FMNgBkma13kVA3', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TTfKjrU18mi223ukVmz6FMNgBkma13kVA3&color=00E5FF' }
 };
 const withdrawalConfig = {
 USDT: { networks: { TRC20: { fee: 1, min: 10 }, BEP20: { fee: 1, min: 10 } } },
@@ -1318,12 +1340,12 @@ const targetPage = document.getElementById(pageId + '-page');
 if (targetPage) targetPage.classList.add('active');
 document.querySelectorAll('.menu-item').forEach(item => {
 item.classList.remove('active');
-item.classList.add('text-slate-400');
+item.classList.add('text-cyan-200');
 });
 const activeMenuItem = document.querySelector(`[data-page="${pageId}"]`);
 if (activeMenuItem) {
 activeMenuItem.classList.add('active');
-activeMenuItem.classList.remove('text-slate-400');
+activeMenuItem.classList.remove('text-cyan-200');
 }
 currentPage = pageId;
 if (pageId === 'deposit') updateDepositContent();
@@ -1381,12 +1403,12 @@ function updateMasaBerlaku() {
 const el = document.getElementById('masa-berlaku');
 if (!el) return;
 el.textContent = masaBerlaku.toLocaleString('id-ID') + ' detik';
-el.style.color = '#FB7185';
+el.style.color = '#FF006E';
 el.style.fontWeight = '600';
 if (masaBerlaku <= 0) {
 clearInterval(masaInterval);
 el.textContent = '0 detik (Kontrak Berakhir)';
-el.style.color = '#F43F5E';
+el.style.color = '#FF006E';
 forceStopValidation();
 appendLog('[STATUS] Masa berlaku validasi berakhir (0 detik)');
 showErrorMessage('Kontrak validasi berakhir! Aktivasi ulang diperlukan.');
@@ -1483,7 +1505,7 @@ powerBtn.classList.add('on');
 if (statusText) statusText.textContent = 'Stop validasi setiap jam 06.00';
 countdownDisplay.style.display = 'block';
 powerStatus.style.display = 'block';
-powerStatus.style.color = '#14B8A6';
+powerStatus.style.color = '#00FFC8';
 startCountdown();
 startValidationRunning();
 startMasaCountdown();
@@ -1658,11 +1680,11 @@ stakedAmount = key.stake;
 const redeemButton = document.getElementById('redeem-button');
 const redeemInputEl = document.getElementById('redeem-input');
 redeemButton.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>Node Aktif ✓';
-redeemButton.style.background = 'linear-gradient(145deg, #14B8A6, #0D9488)';
+redeemButton.style.background = 'linear-gradient(145deg, #00FFC8, #00D4A8)';
 redeemButton.disabled = true;
 redeemInputEl.disabled = true;
 document.getElementById('node-status').textContent = 'Aktif';
-document.getElementById('node-status').style.color = '#14B8A6';
+document.getElementById('node-status').style.color = '#00FFC8';
 currentValidationReward = 0;
 totalRewardBalance = 0;
 appendLog(`[SUCCESS] Access Key redeemed: ${code} | Node activated with ${key.stake} BossX stake`, 'pk-success');
@@ -1680,11 +1702,11 @@ if (!listContainer) return;
 if (keys.length === 0) {
 listContainer.innerHTML = `
 <div class="text-center py-12">
-<div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-<i data-lucide="key" class="text-slate-400 w-6 h-6"></i>
+<div class="w-16 h-16 bg-[#001845] rounded-full flex items-center justify-center mx-auto mb-4" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);">
+<i data-lucide="key" class="text-cyan-300 w-6 h-6"></i>
 </div>
-<h4 class="text-slate-400 text-lg font-semibold mb-2">Belum ada Access Key</h4>
-<p class="text-slate-500">Generate Access Key pertama Anda di tab "Generate"</p>
+<h4 class="text-cyan-200 text-lg font-semibold mb-2">Belum ada Access Key</h4>
+<p class="text-cyan-300">Generate Access Key pertama Anda di tab "Generate"</p>
 </div>
 `;
 } else {
@@ -1692,12 +1714,12 @@ let tableHTML = `
 <div class="overflow-x-auto">
 <table class="w-full">
 <thead>
-<tr class="border-b border-slate-700">
-<th class="text-left p-3 text-slate-400 font-semibold">Access Key</th>
-<th class="text-left p-3 text-slate-400 font-semibold">Stake</th>
-<th class="text-left p-3 text-slate-400 font-semibold">Tanggal</th>
-<th class="text-left p-3 text-slate-400 font-semibold">Status</th>
-<th class="text-left p-3 text-slate-400 font-semibold">Aksi</th>
+<tr class="border-b-2 border-cyan-400/30">
+<th class="text-left p-3 text-cyan-300 font-semibold">Access Key</th>
+<th class="text-left p-3 text-cyan-300 font-semibold">Stake</th>
+<th class="text-left p-3 text-cyan-300 font-semibold">Tanggal</th>
+<th class="text-left p-3 text-cyan-300 font-semibold">Status</th>
+<th class="text-left p-3 text-cyan-300 font-semibold">Aksi</th>
 </tr>
 </thead>
 <tbody>
@@ -1707,33 +1729,33 @@ const isHighlighted = key.id === highlightId;
 const highlightClass = isHighlighted ? 'pk-highlight-new' : '';
 const rowClass = key.status === 'AVAILABLE' ? 'pk-key-row-available' : 'pk-key-row-redeemed';
 const statusIcon = key.status === 'AVAILABLE'
-? '<i data-lucide="check-circle" class="text-teal-400 w-4 h-4"></i>'
-: '<i data-lucide="check-check" class="text-sky-400 w-4 h-4"></i>';
-const statusColor = key.status === 'AVAILABLE' ? 'text-teal-400' : 'text-sky-400';
+? '<i data-lucide="check-circle" class="text-emerald-400 w-4 h-4"></i>'
+: '<i data-lucide="check-check" class="text-cyan-300 w-4 h-4"></i>';
+const statusColor = key.status === 'AVAILABLE' ? 'text-emerald-400' : 'text-cyan-300';
 const statusText = key.status === 'AVAILABLE' ? 'AVAILABLE' : 'REDEEMED';
 const createdDate = new Date(key.createdAt).toLocaleString('id-ID', {
 year: 'numeric', month: 'short', day: 'numeric',
 hour: '2-digit', minute: '2-digit'
 });
 const actionButton = key.status === 'AVAILABLE'
-? `<button onclick="copyPrivateKey('${key.code}')" class="flex items-center px-3 py-1 bg-sky-500 hover:bg-sky-600 text-white rounded text-xs font-semibold transition-colors">
+? `<button onclick="copyPrivateKey('${key.code}')" class="flex items-center px-3 py-1 bg-cyan-300 hover:bg-cyan-400 text-[#000814] rounded text-xs font-semibold transition-colors" style="box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">
 <i data-lucide="copy" class="w-3 h-3 mr-1"></i>Copy
 </button>`
-: `<span class="text-slate-500 text-xs">-</span>`;
+: `<span class="text-cyan-300 text-xs">-</span>`;
 tableHTML += `
-<tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors ${rowClass} ${highlightClass}">
+<tr class="border-b border-cyan-400/10 hover:bg-cyan-400/5 transition-colors ${rowClass} ${highlightClass}">
 <td class="p-3">
-<div class="font-mono text-sm text-sky-400 break-all tracking-wider">
+<div class="font-mono text-sm text-cyan-300 break-all tracking-wider frost-text">
 ${key.code}
 </div>
 </td>
 <td class="p-3">
 <div class="font-semibold text-white">${key.stake.toFixed(2)} BossX</div>
-<div class="text-xs text-slate-500">Fee: ${key.fee} BossX</div>
+<div class="text-xs text-cyan-300">Fee: ${key.fee} BossX</div>
 </td>
 <td class="p-3">
 <div class="flex items-center text-white text-sm">
-<i data-lucide="clock" class="mr-2 text-slate-400 w-4 h-4"></i>
+<i data-lucide="clock" class="mr-2 text-cyan-200 w-4 h-4"></i>
 ${createdDate}
 </div>
 </td>
@@ -1798,13 +1820,13 @@ const generateContent = document.getElementById('generate-content');
 const mykeysContent = document.getElementById('mykeys-content');
 if (!generateTab || !mykeysTab) return;
 if (tab === 'generate') {
-generateTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-sky-500 to-cyan-500 text-white';
-mykeysTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+generateTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-300 to-cyan-400 text-[#000814]';
+mykeysTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30';
 generateContent.style.display = 'block';
 mykeysContent.style.display = 'none';
 } else {
-mykeysTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-sky-500 to-cyan-500 text-white';
-generateTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+mykeysTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-300 to-cyan-400 text-[#000814]';
+generateTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30';
 mykeysContent.style.display = 'block';
 generateContent.style.display = 'none';
 updatePrivateKeysList();
@@ -1844,11 +1866,11 @@ document.getElementById('amount-currency').textContent = activeTab;
 const usdtTab = document.getElementById('usdt-tab');
 const bossxTab = document.getElementById('bossx-tab');
 if (activeTab === 'USDT') {
-usdtTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-500 to-sky-500 text-white';
-bossxTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+usdtTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-400 to-cyan-300 text-[#000814]';
+bossxTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30';
 } else {
-bossxTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-500 to-sky-500 text-white';
-usdtTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+bossxTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-cyan-400 to-cyan-300 text-[#000814]';
+usdtTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-cyan-400/30';
 }
 updateDepositHistory();
 updateDepositStatistics();
@@ -1858,14 +1880,14 @@ const history = depositHistory[activeTab] || [];
 const historyContent = document.getElementById('history-content');
 if (!historyContent) return;
 if (history.length === 0) {
-historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-slate-400 w-6 h-6"></i></div><h4 class="text-slate-400 text-lg font-semibold mb-2">Belum ada history deposit</h4><p class="text-slate-500">History deposit ${activeTab} Anda akan muncul di sini</p></div>`;
+historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-[#001845] rounded-full flex items-center justify-center mx-auto mb-4" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);"><i data-lucide="calendar" class="text-cyan-300 w-6 h-6"></i></div><h4 class="text-cyan-200 text-lg font-semibold mb-2">Belum ada history deposit</h4><p class="text-cyan-300">History deposit ${activeTab} Anda akan muncul di sini</p></div>`;
 } else {
-let tableHTML = `<div class="overflow-x-auto"><table class="w-full"><thead><tr class="border-b border-slate-700"><th class="text-left p-3 text-slate-400 font-semibold">Tanggal</th><th class="text-left p-3 text-slate-400 font-semibold">Jumlah</th><th class="text-left p-3 text-slate-400 font-semibold">TX Hash</th><th class="text-left p-3 text-slate-400 font-semibold">Status</th><th class="text-left p-3 text-slate-400 font-semibold">Konfirmasi</th></tr></thead><tbody>`;
+let tableHTML = `<div class="overflow-x-auto"><table class="w-full"><thead><tr class="border-b-2 border-cyan-400/30"><th class="text-left p-3 text-cyan-300 font-semibold">Tanggal</th><th class="text-left p-3 text-cyan-300 font-semibold">Jumlah</th><th class="text-left p-3 text-cyan-300 font-semibold">TX Hash</th><th class="text-left p-3 text-cyan-300 font-semibold">Status</th><th class="text-left p-3 text-cyan-300 font-semibold">Konfirmasi</th></tr></thead><tbody>`;
 history.forEach(deposit => {
 const statusIcon = getStatusIcon(deposit.status);
 const statusColor = getStatusColor(deposit.status);
 const statusText = getStatusText(deposit.status);
-tableHTML += `<tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-slate-400 w-4 h-4"></i>${formatDate(deposit.timestamp)}</div></td><td class="p-3"><div class="font-semibold text-cyan-400">${formatAmount(deposit.amount)} ${activeTab}</div></td><td class="p-3"><div class="font-mono text-sm text-slate-300 max-w-32 truncate">${deposit.txHash}</div></td><td class="p-3"><div class="flex items-center ${statusColor}">${statusIcon}<span class="ml-2 capitalize font-semibold">${statusText}</span></div></td><td class="p-3"><div class="text-slate-300">${deposit.confirmationCount}/1</div></td></tr>`;
+tableHTML += `<tr class="border-b border-cyan-400/10 hover:bg-cyan-400/5 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-cyan-200 w-4 h-4"></i>${formatDate(deposit.timestamp)}</div></td><td class="p-3"><div class="font-semibold text-cyan-400 frost-text">${formatAmount(deposit.amount)} ${activeTab}</div></td><td class="p-3"><div class="font-mono text-sm text-cyan-100 max-w-32 truncate">${deposit.txHash}</div></td><td class="p-3"><div class="flex items-center ${statusColor}">${statusIcon}<span class="ml-2 capitalize font-semibold">${statusText}</span></div></td><td class="p-3"><div class="text-cyan-100">${deposit.confirmationCount}/1</div></td></tr>`;
 });
 tableHTML += `</tbody></table></div>`;
 historyContent.innerHTML = tableHTML;
@@ -1883,16 +1905,16 @@ document.getElementById('pending-deposits').textContent = pendingDeposits.length
 }
 function getStatusIcon(status) {
 switch (status) {
-case 'confirmed': return '<i data-lucide="check-circle" class="text-teal-400 w-4 h-4"></i>';
+case 'confirmed': return '<i data-lucide="check-circle" class="text-emerald-400 w-4 h-4"></i>';
 case 'failed': return '<i data-lucide="x-circle" class="text-rose-400 w-4 h-4"></i>';
-default: return '<i data-lucide="loader" class="text-sky-400 w-4 h-4 animate-spin"></i>';
+default: return '<i data-lucide="loader" class="text-cyan-300 w-4 h-4 animate-spin"></i>';
 }
 }
 function getStatusColor(status) {
 switch (status) {
-case 'confirmed': return 'text-teal-400';
+case 'confirmed': return 'text-emerald-400';
 case 'failed': return 'text-rose-400';
-default: return 'text-sky-400';
+default: return 'text-cyan-300';
 }
 }
 function getStatusText(status) {
@@ -1911,12 +1933,12 @@ document.getElementById('withdrawal-amount-currency').textContent = activeWithdr
 const networkSelection = document.getElementById('network-selection');
 if (activeWithdrawalTab === 'USDT') {
 networkSelection.style.display = 'block';
-networkSelection.innerHTML = `<label class="text-sm text-slate-400">Pilih Network:</label><div class="grid grid-cols-2 gap-3"><label class="network-option selected"><input type="radio" name="withdrawal-network" value="TRC20" checked><div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-slate-400">TRON</span></div><div class="text-xs text-slate-500 mt-1">Fee: 1 USDT</div></label><label class="network-option"><input type="radio" name="withdrawal-network" value="BEP20"><div class="flex items-center justify-between"><span class="font-semibold text-white">BEP20</span><span class="text-xs text-slate-400">BSC</span></div><div class="text-xs text-slate-500 mt-1">Fee: 1 USDT</div></label></div>`;
+networkSelection.innerHTML = `<label class="text-sm text-cyan-200">Pilih Network:</label><div class="grid grid-cols-2 gap-3"><label class="network-option selected"><input type="radio" name="withdrawal-network" value="TRC20" checked><div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-cyan-200">TRON</span></div><div class="text-xs text-cyan-300 mt-1">Fee: 1 USDT</div></label><label class="network-option"><input type="radio" name="withdrawal-network" value="BEP20"><div class="flex items-center justify-between"><span class="font-semibold text-white">BEP20</span><span class="text-xs text-cyan-200">BSC</span></div><div class="text-xs text-cyan-300 mt-1">Fee: 1 USDT</div></label></div>`;
 document.getElementById('withdrawal-min').textContent = '• Minimal withdrawal: 10 USDT';
 document.getElementById('withdrawal-fee').textContent = '• Fee withdrawal: 1 USDT';
 } else {
 networkSelection.style.display = 'block';
-networkSelection.innerHTML = `<label class="text-sm text-slate-400">Network:</label><div class="grid grid-cols-1 gap-3"><label class="network-option selected"><input type="radio" name="withdrawal-network" value="TRC20" checked><div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-slate-400">TRON</span></div><div class="text-xs text-slate-500 mt-1">Fee: 0.1 BOSSX</div></label></div>`;
+networkSelection.innerHTML = `<label class="text-sm text-cyan-200">Network:</label><div class="grid grid-cols-1 gap-3"><label class="network-option selected"><input type="radio" name="withdrawal-network" value="TRC20" checked><div class="flex items-center justify-between"><span class="font-semibold text-white">TRC20</span><span class="text-xs text-cyan-200">TRON</span></div><div class="text-xs text-cyan-300 mt-1">Fee: 0.1 BOSSX</div></label></div>`;
 document.getElementById('withdrawal-min').textContent = '• Minimal withdrawal: 1 BOSSX';
 document.getElementById('withdrawal-fee').textContent = '• Fee withdrawal: 0.1 BOSSX';
 }
@@ -1924,10 +1946,10 @@ const usdtTab = document.getElementById('withdrawal-usdt-tab');
 const bossxTab = document.getElementById('withdrawal-bossx-tab');
 if (activeWithdrawalTab === 'USDT') {
 usdtTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-rose-500 to-rose-600 text-white';
-bossxTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+bossxTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-rose-500/30';
 } else {
 bossxTab.className = 'tab-button active relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-rose-500 to-rose-600 text-white';
-usdtTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white';
+usdtTab.className = 'tab-button relative px-8 py-3 rounded-xl font-semibold transition-all duration-300 bg-[#001845] text-cyan-200 hover:bg-[#001233] hover:text-white border-2 border-rose-500/30';
 }
 setupNetworkSelection();
 updateWithdrawalSummary();
@@ -2001,14 +2023,14 @@ const history = withdrawalHistory[activeWithdrawalTab] || [];
 const historyContent = document.getElementById('withdrawal-history-content');
 if (!historyContent) return;
 if (history.length === 0) {
-historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-slate-400 w-6 h-6"></i></div><h4 class="text-slate-400 text-lg font-semibold mb-2">Belum ada history withdrawal</h4><p class="text-slate-500">History withdrawal ${activeWithdrawalTab} Anda akan muncul di sini</p></div>`;
+historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-[#001845] rounded-full flex items-center justify-center mx-auto mb-4" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);"><i data-lucide="calendar" class="text-rose-400 w-6 h-6"></i></div><h4 class="text-cyan-200 text-lg font-semibold mb-2">Belum ada history withdrawal</h4><p class="text-cyan-300">History withdrawal ${activeWithdrawalTab} Anda akan muncul di sini</p></div>`;
 } else {
-let tableHTML = `<div class="overflow-x-auto"><table class="w-full"><thead><tr class="border-b border-slate-700"><th class="text-left p-3 text-slate-400 font-semibold">Tanggal</th><th class="text-left p-3 text-slate-400 font-semibold">Jumlah</th><th class="text-left p-3 text-slate-400 font-semibold">Network</th><th class="text-left p-3 text-slate-400 font-semibold">Alamat</th><th class="text-left p-3 text-slate-400 font-semibold">Status</th></tr></thead><tbody>`;
+let tableHTML = `<div class="overflow-x-auto"><table class="w-full"><thead><tr class="border-b-2 border-rose-500/30"><th class="text-left p-3 text-cyan-300 font-semibold">Tanggal</th><th class="text-left p-3 text-cyan-300 font-semibold">Jumlah</th><th class="text-left p-3 text-cyan-300 font-semibold">Network</th><th class="text-left p-3 text-cyan-300 font-semibold">Alamat</th><th class="text-left p-3 text-cyan-300 font-semibold">Status</th></tr></thead><tbody>`;
 history.forEach(withdrawal => {
 const statusIcon = getWithdrawalStatusIcon(withdrawal.status);
 const statusColor = getWithdrawalStatusColor(withdrawal.status);
 const statusText = getWithdrawalStatusText(withdrawal.status);
-tableHTML += `<tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-slate-400 w-4 h-4"></i>${formatDate(withdrawal.timestamp)}</div></td><td class="p-3"><div class="font-semibold text-rose-400">${formatAmount(withdrawal.amount)} ${activeWithdrawalTab}</div><div class="text-xs text-slate-400">Fee: ${formatAmount(withdrawal.fee)} ${activeWithdrawalTab}</div></td><td class="p-3"><div class="text-white font-mono text-sm">${withdrawal.network}</div></td><td class="p-3"><div class="font-mono text-sm text-slate-300 max-w-32 truncate">${withdrawal.address}</div></td><td class="p-3"><div class="flex items-center ${statusColor}">${statusIcon}<span class="ml-2 capitalize font-semibold">${statusText}</span></div></td></tr>`;
+tableHTML += `<tr class="border-b border-rose-500/10 hover:bg-rose-500/5 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-cyan-200 w-4 h-4"></i>${formatDate(withdrawal.timestamp)}</div></td><td class="p-3"><div class="font-semibold text-rose-400">${formatAmount(withdrawal.amount)} ${activeWithdrawalTab}</div><div class="text-xs text-cyan-200">Fee: ${formatAmount(withdrawal.fee)} ${activeWithdrawalTab}</div></td><td class="p-3"><div class="text-white font-mono text-sm">${withdrawal.network}</div></td><td class="p-3"><div class="font-mono text-sm text-cyan-100 max-w-32 truncate">${withdrawal.address}</div></td><td class="p-3"><div class="flex items-center ${statusColor}">${statusIcon}<span class="ml-2 capitalize font-semibold">${statusText}</span></div></td></tr>`;
 });
 tableHTML += `</tbody></table></div>`;
 historyContent.innerHTML = tableHTML;
@@ -2026,16 +2048,16 @@ document.getElementById('processing-withdrawals').textContent = processingWithdr
 }
 function getWithdrawalStatusIcon(status) {
 switch (status) {
-case 'completed': return '<i data-lucide="check-circle" class="text-teal-400 w-4 h-4"></i>';
+case 'completed': return '<i data-lucide="check-circle" class="text-emerald-400 w-4 h-4"></i>';
 case 'failed': return '<i data-lucide="x-circle" class="text-rose-400 w-4 h-4"></i>';
-default: return '<i data-lucide="loader" class="text-sky-400 w-4 h-4 animate-spin"></i>';
+default: return '<i data-lucide="loader" class="text-cyan-300 w-4 h-4 animate-spin"></i>';
 }
 }
 function getWithdrawalStatusColor(status) {
 switch (status) {
-case 'completed': return 'text-teal-400';
+case 'completed': return 'text-emerald-400';
 case 'failed': return 'text-rose-400';
-default: return 'text-sky-400';
+default: return 'text-cyan-300';
 }
 }
 function getWithdrawalStatusText(status) {
@@ -2071,13 +2093,13 @@ function updateP2PHistory() {
 const historyContent = document.getElementById('p2p-history-content');
 if (!historyContent) return;
 if (p2pHistory.length === 0) {
-historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="calendar" class="text-slate-400 w-6 h-6"></i></div><h4 class="text-slate-400 text-lg font-semibold mb-2">Belum ada history transfer</h4><p class="text-slate-500">History transfer P2P Anda akan muncul di sini</p></div>`;
+historyContent.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-[#001845] rounded-full flex items-center justify-center mx-auto mb-4" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);"><i data-lucide="calendar" class="text-cyan-300 w-6 h-6"></i></div><h4 class="text-cyan-200 text-lg font-semibold mb-2">Belum ada history transfer</h4><p class="text-cyan-300">History transfer P2P Anda akan muncul di sini</p></div>`;
 } else {
 let tableHTML = `<table class="w-full history-table text-sm"><thead><tr><th class="text-left">Tanggal</th><th class="text-left">Tipe</th><th class="text-left">Username</th><th class="text-left">Jumlah</th><th class="text-left">Status</th></tr></thead><tbody>`;
 p2pHistory.forEach(transfer => {
 const typeText = transfer.type === 'out' ? 'Keluar' : 'Masuk';
-const typeColor = transfer.type === 'out' ? 'text-rose-400' : 'text-teal-400';
-tableHTML += `<tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-slate-400 w-4 h-4"></i>${formatDate(transfer.timestamp)}</div></td><td class="p-3 ${typeColor} font-semibold">${typeText}</td><td class="p-3 text-white">${transfer.username}</td><td class="p-3 ${typeColor}">${formatAmount(transfer.amount)} BossX</td><td class="p-3 flex items-center text-teal-400"><i data-lucide="check-circle" class="text-teal-400 w-4 h-4"></i><span class="ml-2">Selesai</span></td></tr>`;
+const typeColor = transfer.type === 'out' ? 'text-rose-400' : 'text-emerald-400';
+tableHTML += `<tr class="border-b border-cyan-400/10 hover:bg-cyan-400/5 transition-colors"><td class="p-3"><div class="flex items-center text-white"><i data-lucide="clock" class="mr-2 text-cyan-200 w-4 h-4"></i>${formatDate(transfer.timestamp)}</div></td><td class="p-3 ${typeColor} font-semibold">${typeText}</td><td class="p-3 text-white">${transfer.username}</td><td class="p-3 ${typeColor}">${formatAmount(transfer.amount)} BossX</td><td class="p-3 flex items-center text-emerald-400"><i data-lucide="check-circle" class="text-emerald-400 w-4 h-4"></i><span class="ml-2">Selesai</span></td></tr>`;
 });
 tableHTML += `</tbody></table>`;
 historyContent.innerHTML = tableHTML;
@@ -2164,7 +2186,7 @@ function loadChart(symbol) {
 const chartContainer = document.getElementById('tradingview-chart');
 chartContainer.innerHTML = '';
 if (isBossXPair(symbol)) {
-chartContainer.innerHTML = `<div class="flex items-center justify-center h-full bg-slate-900/50 rounded-lg border border-cyan-500/20"><div class="text-center p-8 max-w-md"><i data-lucide="info" class="w-16 h-16 text-cyan-400 mx-auto mb-4"></i><h3 class="text-xl font-bold text-white mb-2">BossX - Internal Token</h3><p class="text-slate-400 mb-3">BossX adalah token internal platform BossX.<br>Data chart real-time dari Binance tidak tersedia.</p><p class="text-cyan-400 text-sm">💡 Pilih pasangan lain untuk melihat chart real-time.</p></div></div>`;
+chartContainer.innerHTML = `<div class="flex items-center justify-center h-full bg-[#001845]/70 rounded-lg border-2 border-cyan-400/30" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);"><div class="text-center p-8 max-w-md"><i data-lucide="info" class="w-16 h-16 text-cyan-400 mx-auto mb-4"></i><h3 class="text-xl font-bold text-white mb-2 frost-text">BossX - Internal Token</h3><p class="text-cyan-200 mb-3">BossX adalah token internal platform BossX.<br>Data chart real-time dari Binance tidak tersedia.</p><p class="text-cyan-400 text-sm frost-text">💡 Pilih pasangan lain untuk melihat chart real-time.</p></div></div>`;
 lucide.createIcons();
 return;
 }
@@ -2172,7 +2194,7 @@ new TradingView.widget({
 "width": "100%", "height": "100%",
 "symbol": `BINANCE:${symbol}`,
 "interval": "D", "timezone": "Etc/UTC", "theme": "dark",
-"style": "1", "locale": "en", "toolbar_bg": "#0F172A",
+"style": "1", "locale": "en", "toolbar_bg": "#001233",
 "enable_publishing": false, "allow_symbol_change": true,
 "container_id": "tradingview-chart"
 });
@@ -2188,9 +2210,9 @@ const debouncedLoadMarketData = debounce(loadMarketData, 300);
 function loadMarketData(pair) {
 const symbol = pair.replace('/', '').toUpperCase();
 if (isBossXPair(symbol)) {
-document.getElementById('current-price').innerHTML = '<span class="text-slate-500 text-sm">Internal Token</span>';
+document.getElementById('current-price').innerHTML = '<span class="text-cyan-300 text-sm">Internal Token</span>';
 document.getElementById('price-change').textContent = '—';
-document.getElementById('price-change').className = 'text-lg font-bold text-slate-500';
+document.getElementById('price-change').className = 'text-lg font-bold text-cyan-300';
 document.getElementById('volume').textContent = '—';
 document.getElementById('high-low').textContent = '— / —';
 return;
@@ -2199,7 +2221,7 @@ fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`)
 .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
 .then(data => {
 const changePercent = data.priceChangePercent > 0 ? `+${parseFloat(data.priceChangePercent).toFixed(2)}%` : `${parseFloat(data.priceChangePercent).toFixed(2)}%`;
-const changeColor = data.priceChangePercent > 0 ? 'text-teal-400' : 'text-rose-400';
+const changeColor = data.priceChangePercent > 0 ? 'text-emerald-400' : 'text-rose-400';
 document.getElementById('current-price').textContent = `$${parseFloat(data.lastPrice).toLocaleString()}`;
 document.getElementById('price-change').textContent = changePercent;
 document.getElementById('price-change').className = `text-lg font-bold ${changeColor}`;
@@ -2227,8 +2249,8 @@ document.getElementById('high-low').textContent = '$0.00 / $0.00';
 function loadOrderBook(symbol) {
 if (wsDepth) { wsDepth.close(); wsDepth = null; }
 if (isBossXPair(symbol)) {
-document.getElementById('buy-orders').innerHTML = `<tr><td colspan="3" class="text-center text-slate-500 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Order book tidak tersedia untuk BossX</td></tr>`;
-document.getElementById('sell-orders').innerHTML = `<tr><td colspan="3" class="text-center text-slate-500 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Order book tidak tersedia untuk BossX</td></tr>`;
+document.getElementById('buy-orders').innerHTML = `<tr><td colspan="3" class="text-center text-cyan-300 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Order book tidak tersedia untuk BossX</td></tr>`;
+document.getElementById('sell-orders').innerHTML = `<tr><td colspan="3" class="text-center text-cyan-300 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Order book tidak tersedia untuk BossX</td></tr>`;
 document.getElementById('spread').textContent = 'Spread: N/A';
 lucide.createIcons();
 return;
@@ -2292,7 +2314,7 @@ if (wsTrades) { wsTrades.close(); wsTrades = null; }
 if (isBossXPair(symbol)) {
 const tradesBody = document.getElementById('recent-trades');
 if (tradesBody) {
-tradesBody.innerHTML = `<tr><td colspan="3" class="text-center text-slate-500 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Recent trades tidak tersedia untuk BossX</td></tr>`;
+tradesBody.innerHTML = `<tr><td colspan="3" class="text-center text-cyan-300 py-8 text-sm"><i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-cyan-400"></i><br>Recent trades tidak tersedia untuk BossX</td></tr>`;
 lucide.createIcons();
 }
 return;
@@ -2310,9 +2332,9 @@ if (placeholder) placeholder.remove();
 const infoRow = tradesBody.querySelector('td[colspan]');
 if (infoRow && infoRow.textContent.includes('tidak tersedia')) infoRow.parentElement.remove();
 const row = document.createElement('tr');
-const sideColor = trade.m ? 'text-rose-400' : 'text-teal-400';
+const sideColor = trade.m ? 'text-rose-400' : 'text-emerald-400';
 const time = new Date(trade.T).toLocaleTimeString();
-row.innerHTML = `<td class="${sideColor}">${parseFloat(trade.p).toFixed(2)}</td><td class="text-white">${parseFloat(trade.q).toFixed(4)}</td><td class="text-slate-400 text-xs">${time}</td>`;
+row.innerHTML = `<td class="${sideColor}">${parseFloat(trade.p).toFixed(2)}</td><td class="text-white">${parseFloat(trade.q).toFixed(4)}</td><td class="text-cyan-200 text-xs">${time}</td>`;
 tradesBody.prepend(row);
 while (tradesBody.children.length > 50) tradesBody.removeChild(tradesBody.lastChild);
 }
@@ -2434,45 +2456,45 @@ setMessageInput('');
 };
 const handleKeyPress = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } };
 const currentRoomMessages = messages.filter(msg => msg.room === currentRoom);
-return h('div', { className: "min-h-screen bg-slate-950 text-white p-4" },
-h('button', { onClick: () => onNavigate('dashboard'), className: "mb-4 text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-lg font-medium" }, "← Kembali ke Dashboard"),
-h('div', { className: "relative bg-slate-900/90 border border-slate-700 backdrop-blur-sm h-[calc(100vh-100px)] overflow-hidden rounded-3xl glowing-border" },
-h('div', { className: "relative bg-slate-900/95 rounded-3xl h-full" },
-h('div', { className: "bg-slate-950/50 border-b border-slate-700 p-6" },
+return h('div', { className: "min-h-screen text-white p-4", style: { background: '#000814' } },
+h('button', { onClick: () => onNavigate('dashboard'), className: "mb-4 text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-lg font-medium frost-text" }, "← Kembali ke Dashboard"),
+h('div', { className: "relative border-2 border-cyan-400/50 backdrop-blur-sm h-[calc(100vh-100px)] overflow-hidden rounded-3xl glowing-border", style: { background: 'rgba(0, 18, 51, 0.9)' } },
+h('div', { className: "relative rounded-3xl h-full", style: { background: 'linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95))' } },
+h('div', { className: "border-b-2 border-cyan-400/30 p-6", style: { background: 'rgba(0, 8, 20, 0.5)' } },
 h('div', { className: "flex justify-between items-center" },
-h('div', { className: "flex items-center gap-4" }, h(MessageCircleIcon, { size: 32, className: "text-cyan-400" }), h('h1', { className: "text-2xl font-bold text-cyan-400" }, "Chat Room BossX")),
-h('div', { className: "bg-teal-500/10 border border-teal-500/30 text-teal-400 px-4 py-2 text-lg font-bold rounded-full flex items-center gap-2" }, h(UsersIcon, { size: 16 }), "15 Online")
+h('div', { className: "flex items-center gap-4" }, h(MessageCircleIcon, { size: 32, className: "text-cyan-400" }), h('h1', { className: "text-2xl font-bold text-cyan-400 frost-text" }, "Chat Room BossX")),
+h('div', { className: "bg-emerald-400/10 border-2 border-emerald-400/30 text-emerald-400 px-4 py-2 text-lg font-bold rounded-full flex items-center gap-2", style: { boxShadow: '0 0 20px rgba(0, 255, 200, 0.3)' } }, h(UsersIcon, { size: 16 }), "15 Online")
 )
 ),
 h('div', { className: "flex h-[calc(100%-85px)]" },
-h('div', { className: "w-80 bg-slate-950/80 border-r border-slate-700 p-6" },
-h('h3', { className: "text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2" }, h(MessageCircleIcon, { size: 20 }), "Chat Rooms"),
-h('div', { className: "space-y-4" }, mockRooms.map(room => h('div', { key: room.id, onClick: () => setCurrentRoom(room.id), className: `p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${currentRoom === room.id ? 'active' : ''}`, style: { backgroundColor: currentRoom === room.id ? 'rgba(6, 182, 212, 0.1)' : 'rgba(255,255,255,0.05)', borderColor: currentRoom === room.id ? '#06B6D4' : 'rgb(51, 65, 85)' } }, h('div', { className: "font-bold text-lg text-cyan-400" }, room.id), h('div', { className: "text-sm text-slate-400 mt-1" }, room.description))))
+h('div', { className: "w-80 border-r-2 border-cyan-400/30 p-6", style: { background: 'rgba(0, 8, 20, 0.8)' } },
+h('h3', { className: "text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2 frost-text" }, h(MessageCircleIcon, { size: 20 }), "Chat Rooms"),
+h('div', { className: "space-y-4" }, mockRooms.map(room => h('div', { key: room.id, onClick: () => setCurrentRoom(room.id), className: `p-5 rounded-2xl cursor-pointer transition-all duration-300 border-2 ${currentRoom === room.id ? 'active' : ''}`, style: { backgroundColor: currentRoom === room.id ? 'rgba(0, 229, 255, 0.15)' : 'rgba(255,255,255,0.03)', borderColor: currentRoom === room.id ? '#00E5FF' : 'rgba(0, 229, 255, 0.2)', boxShadow: currentRoom === room.id ? '0 0 20px rgba(0, 229, 255, 0.4)' : 'none' } }, h('div', { className: "font-bold text-lg text-cyan-400 frost-text" }, room.id), h('div', { className: "text-sm text-cyan-200 mt-1" }, room.description))))
 ),
-h('div', { className: "flex-1 flex flex-col bg-slate-950/50" },
-h('div', { className: "flex justify-between items-center p-6 border-b-2 border-slate-700" },
-h('div', { className: "flex items-center gap-4" }, h('span', { className: "text-2xl font-bold text-cyan-400" }, currentRoom)),
-h('div', { className: "flex items-center gap-2 text-teal-400 font-bold" }, h('div', { className: "w-3 h-3 bg-teal-400 rounded-full live-indicator" }), "Live")
+h('div', { className: "flex-1 flex flex-col", style: { background: 'rgba(0, 8, 20, 0.5)' } },
+h('div', { className: "flex justify-between items-center p-6 border-b-2 border-cyan-400/30" },
+h('div', { className: "flex items-center gap-4" }, h('span', { className: "text-2xl font-bold text-cyan-400 frost-text" }, currentRoom)),
+h('div', { className: "flex items-center gap-2 text-emerald-400 font-bold" }, h('div', { className: "w-3 h-3 bg-emerald-400 rounded-full live-indicator" }), "Live")
 ),
 h('div', { className: "flex-1 p-6 overflow-y-auto custom-scroll" },
 h('div', { className: "space-y-4" },
 currentRoomMessages.length > 0 ? currentRoomMessages.map(msg => h('div', { key: msg.id, className: "flex gap-4 message-animate" },
 h('div', { className: "flex flex-col items-center gap-1" },
-h('div', { className: `w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${msg.isUser ? 'bg-gradient-to-br from-sky-500 to-cyan-600' : 'bg-gradient-to-br from-cyan-500 to-teal-600'}` }, msg.sender.charAt(0).toUpperCase()),
-h('span', { className: "text-xs text-slate-400 max-w-[60px] truncate" }, msg.sender)
+h('div', { className: `w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${msg.isUser ? '' : ''}`, style: { background: msg.isUser ? 'linear-gradient(135deg, #00E5FF, #00B8D4)' : 'linear-gradient(135deg, #7DF9FF, #00E5FF)', boxShadow: '0 0 15px rgba(0, 229, 255, 0.5)' } }, msg.sender.charAt(0).toUpperCase()),
+h('span', { className: "text-xs text-cyan-200 max-w-[60px] truncate" }, msg.sender)
 ),
 h('div', { className: "flex-1" },
-h('div', { className: "flex justify-between items-center mb-2" }, h('span', { className: "font-bold text-cyan-400" }, msg.sender), h('span', { className: "text-xs text-slate-500 flex items-center gap-1" }, h(ClockIcon, { size: 12 }), msg.timestamp)),
-h('div', { className: "bg-white/5 backdrop-blur-sm rounded-2xl rounded-tl-sm p-4 max-w-[85%] border border-slate-700/50" }, h('p', { className: "text-white leading-relaxed whitespace-pre-wrap" }, msg.content))
+h('div', { className: "flex justify-between items-center mb-2" }, h('span', { className: "font-bold text-cyan-400 frost-text" }, msg.sender), h('span', { className: "text-xs text-cyan-300 flex items-center gap-1" }, h(ClockIcon, { size: 12 }), msg.timestamp)),
+h('div', { className: "rounded-2xl rounded-tl-sm p-4 max-w-[85%] border-2 border-cyan-400/30", style: { background: 'rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(10px)', boxShadow: '0 0 15px rgba(0, 229, 255, 0.2)' } }, h('p', { className: "text-white leading-relaxed whitespace-pre-wrap" }, msg.content))
 )
-)) : h('div', { className: "text-center text-slate-500 py-8" }, h('p', null, "Belum ada pesan di room ini.")),
+)) : h('div', { className: "text-center text-cyan-300 py-8" }, h('p', null, "Belum ada pesan di room ini.")),
 h('div', { ref: messagesEndRef })
 )
 ),
-h('div', { className: "p-6 border-t-2 border-slate-700 bg-slate-950/50" },
+h('div', { className: "p-6 border-t-2 border-cyan-400/30", style: { background: 'rgba(0, 8, 20, 0.5)' } },
 h('div', { className: "flex gap-4" },
-h('textarea', { value: messageInput, onChange: (e) => setMessageInput(e.target.value), onKeyPress: handleKeyPress, placeholder: "Tulis pesan...", maxLength: 500, className: "flex-1 bg-slate-800 border border-slate-600 text-white placeholder:text-slate-400 rounded-2xl resize-none min-h-[60px] p-4 focus:border-cyan-500 focus:outline-none" }),
-h('button', { onClick: handleSendMessage, className: "bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-white font-bold px-8 py-4 rounded-2xl min-w-[140px] transition-all duration-300 flex items-center gap-2" }, h(SendIcon, { size: 20 }), "Kirim")
+h('textarea', { value: messageInput, onChange: (e) => setMessageInput(e.target.value), onKeyPress: handleKeyPress, placeholder: "Tulis pesan...", maxLength: 500, className: "flex-1 text-white rounded-2xl resize-none min-h-[60px] p-4 focus:outline-none", style: { background: 'rgba(0, 24, 69, 0.8)', border: '2px solid rgba(0, 229, 255, 0.3)', boxShadow: 'inset 0 0 10px rgba(0, 229, 255, 0.05)' } }),
+h('button', { onClick: handleSendMessage, className: "text-[#000814] font-bold px-8 py-4 rounded-2xl min-w-[140px] transition-all duration-300 flex items-center gap-2", style: { background: 'linear-gradient(145deg, #00E5FF, #00B8D4)', boxShadow: '0 0 25px rgba(0, 229, 255, 0.6)' } }, h(SendIcon, { size: 20 }), "Kirim")
 )
 )
 )
