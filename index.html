@@ -6,32 +6,27 @@
 <title>BossX - Crypto Exchange Platform | Validator Masternode System</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
 body { background: #000814; color: #ffffff; overflow-x: hidden; }
-
 :root {
-  --glacier-primary: #00E5FF;
-  --glacier-bright: #00F5FF;
-  --glacier-electric: #7DF9FF;
-  --glacier-ice: #E0FFFF;
-  --glacier-frost: #B0E0E6;
-  --glacier-arctic: #00B8D4;
-  --glacier-deep: #0097A7;
-  --glacier-bg: #000814;
-  --glacier-card: #001233;
-  --glacier-elevated: #001845;
-  --glacier-border: #023E8A;
-  --glacier-success: #00FFC8;
-  --glacier-error: #FF006E;
-  --glacier-warning: #FFBE0B;
+--glacier-primary: #00E5FF;
+--glacier-bright: #00F5FF;
+--glacier-electric: #7DF9FF;
+--glacier-ice: #E0FFFF;
+--glacier-frost: #B0E0E6;
+--glacier-arctic: #00B8D4;
+--glacier-deep: #0097A7;
+--glacier-bg: #000814;
+--glacier-card: #001233;
+--glacier-elevated: #001845;
+--glacier-border: #023E8A;
+--glacier-success: #00FFC8;
+--glacier-error: #FF006E;
+--glacier-warning: #FFBE0B;
 }
-
 .login-page { min-height: 100vh; background: radial-gradient(ellipse at center, #001845 0%, #000814 50%, #000000 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .login-page::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(125, 249, 255, 0.1) 30%, transparent 70%); animation: rotate 30s linear infinite; }
 .login-page::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(0, 245, 255, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(125, 249, 255, 0.1) 0%, transparent 40%); pointer-events: none; }
@@ -54,29 +49,24 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 .login-footer { text-align: center; margin-top: 2rem; color: #7DF9FF; font-size: 0.875rem; }
 .login-footer a { color: #00E5FF; text-decoration: none; font-weight: 600; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
 .login-footer a:hover { text-decoration: underline; color: #E0FFFF; }
-
 .gradient-bg { background: linear-gradient(to bottom, #001233, #000814); }
 .gradient-border { border: 2px solid rgba(0, 229, 255, 0.3); box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05); }
 .hover-scale { transition: transform 0.2s ease-in-out; }
 .hover-scale:hover { transform: scale(1.02); }
 .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-
 .sidebar { transition: width 0.3s ease-in-out; width: 14rem; min-width: 14rem; background: linear-gradient(180deg, #001233 0%, #000814 100%); border-right: 2px solid rgba(0, 229, 255, 0.2); box-shadow: inset -10px 0 30px rgba(0, 229, 255, 0.05); }
 .sidebar.collapsed { width: 4rem; min-width: 4rem; }
 .menu-item { transition: all 0.2s ease-in-out; border: 1px solid transparent; }
 .menu-item:hover { background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent); border-color: rgba(0, 229, 255, 0.3); transform: translateX(4px); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
 .menu-item.active { background: linear-gradient(90deg, rgba(0, 229, 255, 0.25), rgba(125, 249, 255, 0.1)); color: #00E5FF; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), inset 0 0 10px rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.5); text-shadow: 0 0 10px rgba(0, 229, 255, 0.8); }
-
 .crypto-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.75rem; color: #fff; overflow: hidden; box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
 .crypto-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 0.75rem; }
 .crypto-icon-large { width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, rgba(0, 229, 255, 0.2), rgba(125, 249, 255, 0.1)); border: 2px solid rgba(0, 229, 255, 0.5); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); }
 .profile-picture { width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(0, 229, 255, 0.5); box-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
 .profile-picture img { width: 100%; height: 100%; object-fit: cover; }
-
 .stat-card { background: linear-gradient(145deg, #001233, #001845); border: 2px solid rgba(0, 229, 255, 0.2); border-radius: 0.75rem; padding: 1.25rem; transition: all 0.3s ease; position: relative; overflow: hidden; min-height: 200px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.03); }
 .stat-card:hover { border-color: rgba(0, 229, 255, 0.8); box-shadow: 0 0 30px rgba(0, 229, 255, 0.5), 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 229, 255, 0.08); transform: translateY(-2px); }
-
 .corner-dot { position: absolute; width: 8px; height: 8px; background: radial-gradient(circle, #E0FFFF, #00E5FF); border-radius: 50%; opacity: 0; transition: opacity 0.3s ease; box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; pointer-events: none; }
 .stat-card:hover .corner-dot { opacity: 1; animation: dotPulse 2s ease-in-out infinite; }
 .corner-dot.top-left { top: -4px; left: -4px; }
@@ -84,7 +74,6 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 .corner-dot.bottom-right { bottom: -4px; right: -4px; }
 .corner-dot.bottom-left { bottom: -4px; left: -4px; }
 @keyframes dotPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; } 50% { transform: scale(1.4); box-shadow: 0 0 15px #E0FFFF, 0 0 30px #00E5FF; } }
-
 .border-line { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .stat-card:hover .border-line { opacity: 1; }
 .border-top { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #00E5FF, #E0FFFF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF, 0 0 25px #00F5FF; animation: borderTop 3s linear infinite; transform-origin: left; }
@@ -95,11 +84,9 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 @keyframes borderRight { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleY(1); opacity: 0; } }
 @keyframes borderBottom { 0% { transform: scaleX(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleX(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleX(1); opacity: 0; } }
 @keyframes borderLeft { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: scaleY(1); opacity: 1; } 30% { opacity: 0; } 100% { transform: scaleY(1); opacity: 0; } }
-
 #running-text { animation: scroll-left 60s linear infinite; text-shadow: 0 0 15px rgba(0, 229, 255, 0.8), 0 0 25px rgba(0, 229, 255, 0.5); }
 @keyframes scroll-left { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 #running-text:hover { animation-play-state: paused; }
-
 .power-button { position: relative; width: 60px; height: 60px; border-radius: 50%; border: 3px solid rgba(0, 229, 255, 0.3); background: linear-gradient(145deg, #001845, #001233); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
 .power-button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
 .power-button.on { border-color: #00FFC8; background: linear-gradient(145deg, #00D4A8, #00B896); box-shadow: 0 0 30px rgba(0, 255, 200, 0.7), 0 0 60px rgba(0, 255, 200, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3); cursor: not-allowed; }
@@ -107,140 +94,537 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 .power-button.off { border-color: #FF006E; background: linear-gradient(145deg, #D4005A, #B8004E); box-shadow: 0 0 30px rgba(255, 0, 110, 0.6), 0 0 60px rgba(255, 0, 110, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
 .power-button.off:hover { box-shadow: 0 0 40px rgba(255, 0, 110, 0.8), 0 0 80px rgba(255, 0, 110, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
 .power-icon { font-size: 24px; color: #ffffff; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)); }
-
 .copy-button { position: relative; overflow: hidden; }
 .copy-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(224, 255, 255, 0.4), transparent); transition: left 0.5s; }
 .copy-button:hover::before { left: 100%; }
-
 .tab-button { position: relative; transition: all 0.3s ease; }
 .tab-button.active::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #00E5FF; border-radius: 50%; animation: pulse 2s infinite; box-shadow: 0 0 10px #00E5FF, 0 0 20px #00F5FF; }
-
 .node-input { width: 100%; padding: 0.5rem; background: rgba(0, 24, 69, 0.8); border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 0.5rem; color: #ffffff; font-size: 0.875rem; transition: all 0.2s ease; position: relative; z-index: 10; }
 .node-input:focus { outline: none; border-color: #00E5FF; box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.3), 0 0 15px rgba(0, 229, 255, 0.4); background: rgba(0, 24, 69, 0.95); }
 .node-input::placeholder { color: #7DF9FF; opacity: 0.6; }
 .node-input:disabled { background: rgba(0, 24, 69, 0.6); border-color: #023E8A; color: #7DF9FF; cursor: not-allowed; opacity: 0.6; }
-
 .node-button { width: 100%; padding: 0.75rem; background: linear-gradient(145deg, #00E5FF, #00B8D4); border: none; border-radius: 0.5rem; color: #000814; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 4px 8px rgba(0, 229, 255, 0.3); position: relative; z-index: 10; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
 .node-button:hover:not(:disabled) { background: linear-gradient(145deg, #00F5FF, #00E5FF); transform: translateY(-2px); box-shadow: 0 0 30px rgba(0, 229, 255, 0.7), 0 6px 12px rgba(0, 229, 255, 0.5); }
 .node-button:active { transform: translateY(0); }
 .node-button:disabled { background: linear-gradient(145deg, #475569, #334155); cursor: not-allowed; transform: none; box-shadow: none; color: #94A3B8; }
-
 .withdrawal-button { background: linear-gradient(145deg, #FF006E, #D4005A) !important; box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 4px 8px rgba(255, 0, 110, 0.3) !important; color: #fff !important; }
 .withdrawal-button:hover:not(:disabled) { background: linear-gradient(145deg, #FF3385, #FF006E) !important; box-shadow: 0 0 30px rgba(255, 0, 110, 0.7), 0 6px 12px rgba(255, 0, 110, 0.5) !important; transform: translateY(-2px); }
-
 .success-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #00FFC8, #00D4A8); color: #000814; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 0 30px rgba(0, 255, 200, 0.6), 0 4px 12px rgba(0, 255, 200, 0.4); z-index: 1000; animation: slideIn 0.3s ease-out; font-weight: 600; border: 2px solid rgba(224, 255, 255, 0.5); }
 .error-message { position: fixed; top: 20px; right: 20px; background: linear-gradient(145deg, #FF006E, #D4005A); color: #fff; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 0 30px rgba(255, 0, 110, 0.6), 0 4px 12px rgba(255, 0, 110, 0.4); z-index: 1000; animation: slideIn 0.3s ease-out; font-weight: 600; border: 2px solid rgba(255, 255, 255, 0.3); }
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
 .network-option { padding: 0.75rem; border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 0.5rem; background: rgba(0, 24, 69, 0.5); cursor: pointer; transition: all 0.2s ease; }
 .network-option:hover { border-color: #00E5FF; background: rgba(0, 229, 255, 0.15); box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
 .network-option.selected { border-color: #00E5FF; background: rgba(0, 229, 255, 0.25); box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); }
 .network-option input[type="radio"] { display: none; }
-
 .page-content { opacity: 0; transform: translateY(20px); transition: all 0.3s ease; display: none; }
 .page-content.active { opacity: 1; transform: translateY(0); display: block; }
-
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; width: 100%; }
 @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 1023px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
 @media (max-width: 1440px) { .sidebar { width: 12rem; min-width: 12rem; } .stat-card { padding: 1rem; } }
 @media (max-width: 1200px) { .sidebar { width: 10rem; min-width: 10rem; } .profile-picture { width: 1.5rem; height: 1.5rem; } }
-
 .main-container { max-width: 100vw; overflow-x: hidden; }
 .content-container { max-width: 100%; padding: 1rem; }
-
 .countdown-timer { font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: bold; color: #00FFC8; text-shadow: 0 0 15px rgba(0, 255, 200, 0.8), 0 0 25px rgba(0, 255, 200, 0.5); }
 .auto-claim-timer { font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; color: #00E5FF; text-shadow: 0 0 15px rgba(0, 229, 255, 0.8), 0 0 25px rgba(0, 229, 255, 0.5); }
-
 @keyframes glowingBorder { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
 .glowing-border::before { content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px; background: linear-gradient(45deg, #00E5FF, #E0FFFF, #7DF9FF, #00E5FF); background-size: 300% 300%; z-index: -1; border-radius: 26px; opacity: 0.8; filter: blur(2px); animation: glowingBorder 6s linear infinite; box-shadow: 0 0 30px rgba(0, 229, 255, 0.6); pointer-events: none; }
-
 @keyframes messageIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 .message-animate { animation: messageIn 0.4s ease-out forwards; }
-
 .custom-scroll::-webkit-scrollbar { width: 6px; }
 .custom-scroll::-webkit-scrollbar-track { background: transparent; }
 .custom-scroll::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00E5FF, #00B8D4); border-radius: 3px; box-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #00F5FF, #00E5FF); }
-
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 .live-indicator { animation: blink 1.5s infinite; box-shadow: 0 0 10px currentColor; }
-
 .log-entry { color: #00FFC8; text-shadow: 0 0 5px rgba(0, 255, 200, 0.5); }
 .log-entry.auto-claim { color: #00E5FF; text-shadow: 0 0 8px rgba(0, 229, 255, 0.7); }
 .log-entry.pk-success { color: #7DF9FF; text-shadow: 0 0 10px rgba(125, 249, 255, 0.8); }
 .log-entry.pk-error { color: #FF006E; text-shadow: 0 0 8px rgba(255, 0, 110, 0.6); }
-
 .exchange-bg { background: radial-gradient(ellipse at center, #001845 0%, #000814 50%, #000000 100%); box-shadow: inset 0 0 80px rgba(0, 229, 255, 0.1); }
 .exchange-card { background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95)); border: 2px solid rgba(0, 229, 255, 0.4); border-radius: 1rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.3); transition: all 0.3s ease; }
 .exchange-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 50px rgba(0, 229, 255, 0.5); transform: translateY(-5px); border-color: rgba(0, 229, 255, 0.7); }
-
 .pair-button { background: linear-gradient(145deg, #00E5FF, #00B8D4); color: #000814; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.5rem; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); margin-bottom: 1rem; display: block; min-width: 100px; flex-shrink: 0; width: auto; }
 .pair-button:hover { background: linear-gradient(145deg, #00F5FF, #00E5FF); box-shadow: 0 0 30px rgba(0, 229, 255, 0.7); transform: scale(1.05); }
 .pair-button.active { background: #E0FFFF !important; color: #000814 !important; box-shadow: 0 0 30px rgba(224, 255, 255, 0.8); }
-
 .order-book th { background: rgba(0, 229, 255, 0.15); padding: 0.75rem; font-weight: bold; text-align: right; color: #00E5FF; text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); }
 .order-book td { padding: 0.5rem; border-bottom: 1px solid rgba(0, 229, 255, 0.1); text-align: right; overflow: hidden; text-overflow: ellipsis; }
 .order-book table { width: 100%; table-layout: fixed; }
 .buy-order { color: #00FFC8; text-shadow: 0 0 5px rgba(0, 255, 200, 0.5); }
 .sell-order { color: #FF006E; text-shadow: 0 0 5px rgba(255, 0, 110, 0.5); }
-
 .market-data { background: linear-gradient(145deg, #001845, #001233); border-radius: 0.75rem; padding: 1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; border: 1px solid rgba(0, 229, 255, 0.2); }
-
 .trade-button.buy { background: linear-gradient(145deg, #00FFC8, #00D4A8) !important; box-shadow: 0 0 20px rgba(0, 255, 200, 0.5); color: #000814 !important; }
 .trade-button.buy:hover { background: linear-gradient(145deg, #33FFD4, #00FFC8) !important; box-shadow: 0 0 30px rgba(0, 255, 200, 0.7); }
 .trade-button.sell { background: linear-gradient(145deg, #FF006E, #D4005A) !important; box-shadow: 0 0 20px rgba(255, 0, 110, 0.5); color: #fff !important; }
 .trade-button.sell:hover { background: linear-gradient(145deg, #FF3385, #FF006E) !important; box-shadow: 0 0 30px rgba(255, 0, 110, 0.7); }
-
 .history-table th { background: rgba(0, 229, 255, 0.15); padding: 0.75rem; font-weight: bold; color: #00E5FF; }
 .history-table td { padding: 0.5rem; border-bottom: 1px solid rgba(0, 229, 255, 0.1); }
-
 .border-line-gold { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .stat-card:hover .border-line-gold, .log-engine:hover .border-line-gold, .info-system:hover .border-line-gold { opacity: 1; }
 .border-top-gold { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderTop 3s linear infinite; transform-origin: left; }
 .border-right-gold { top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
 .border-bottom-gold { bottom: 0; right: 0; width: 100%; height: 3px; background: linear-gradient(270deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
 .border-left-gold { bottom: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(0deg, transparent, #00E5FF, #7DF9FF, #00E5FF, transparent); box-shadow: 0 0 15px #00E5FF; animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
-
 .border-line-white { position: absolute; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .exchange-card:hover .border-line-white { opacity: 1; }
 .border-top-white { top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderTop 3s linear infinite; transform-origin: left; }
 .border-right-white { top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderRight 3s linear infinite 0.7s; transform-origin: top; }
 .border-bottom-white { bottom: 0; right: 0; width: 100%; height: 3px; background: linear-gradient(270deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderBottom 3s linear infinite 1.4s; transform-origin: right; }
 .border-left-white { bottom: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(0deg, transparent, #E0FFFF, #ffffff, #E0FFFF, transparent); box-shadow: 0 0 15px #E0FFFF; animation: borderLeft 3s linear infinite 2.1s; transform-origin: bottom; }
-
 .order-book-section { height: auto; max-height: 300px; overflow-y: auto; scrollbar-width: thin; }
 .depth-bar { position: absolute; left: 0; top: 0; height: 100%; opacity: 0.15; z-index: -1; }
 .buy-depth { background: #00FFC8; box-shadow: inset 0 0 10px rgba(0, 255, 200, 0.5); }
 .sell-depth { background: #FF006E; box-shadow: inset 0 0 10px rgba(255, 0, 110, 0.5); }
 .recent-trades td { text-align: right; }
-
 #chart-container { height: 100% !important; min-height: 400px; }
 #tradingview-chart { height: 100%; width: 100%; }
 #spread { text-align: center; margin: 10px 0; font-size: 18px; color: #00E5FF; text-shadow: 0 0 10px rgba(0, 229, 255, 0.7); }
 .skeleton-loading { animation: pulse 1.5s infinite; }
-
 @media (max-width: 768px) { .order-book-section { max-height: 200px; } .pair-button { padding: 0.5rem 1rem; } .market-data { grid-template-columns: repeat(2, 1fr); text-align: center; } }
-
 .pk-code-display { font-family: 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 2px; background: linear-gradient(145deg, rgba(125, 249, 255, 0.15), rgba(0, 229, 255, 0.15)); border: 2px dashed #7DF9FF; padding: 1rem; border-radius: 0.5rem; text-align: center; color: #7DF9FF; font-weight: bold; word-break: break-all; text-shadow: 0 0 15px rgba(125, 249, 255, 0.8), 0 0 25px rgba(125, 249, 255, 0.5); box-shadow: inset 0 0 20px rgba(125, 249, 255, 0.1); }
 .pk-key-row-available { background: rgba(0, 255, 200, 0.08); border-left: 3px solid #00FFC8; }
 .pk-key-row-redeemed { background: rgba(125, 249, 255, 0.08); border-left: 3px solid #7DF9FF; opacity: 0.8; }
 .pk-highlight-new { animation: pkHighlight 3s ease-out; }
 @keyframes pkHighlight { 0% { background: rgba(0, 229, 255, 0.4); transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 229, 255, 0.8); } 100% { background: transparent; transform: scale(1); } }
-
 .frost-text { color: #E0FFFF; text-shadow: 0 0 10px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 229, 255, 0.5), 0 0 30px rgba(125, 249, 255, 0.3); }
 .ice-glow { box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(224, 255, 255, 0.1); }
+.validation-card { display: flex; flex-direction: column; justify-content: space-between; }
+.validation-bottom-section { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(0, 229, 255, 0.15); }
 
-.validation-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* ============================================ */
+/* BOSSX AI AGENT - FLOATING CHATBOT STYLES     */
+/* ============================================ */
+.bossx-ai-fab { position: fixed; bottom: 24px; right: 24px; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(145deg, #00E5FF, #00B8D4); border: 3px solid rgba(224, 255, 255, 0.6); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.7), 0 0 60px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2); z-index: 9999; transition: all 0.3s ease; animation: fabPulse 3s ease-in-out infinite; }
+.bossx-ai-fab:hover { transform: scale(1.08) rotate(8deg); box-shadow: 0 0 40px rgba(0, 229, 255, 0.9), 0 0 80px rgba(0, 229, 255, 0.5), inset 0 0 25px rgba(255, 255, 255, 0.3); }
+.bossx-ai-fab.minimized { animation: fabPulse 3s ease-in-out infinite; }
+@keyframes fabPulse { 0%, 100% { box-shadow: 0 0 30px rgba(0, 229, 255, 0.7), 0 0 60px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2); } 50% { box-shadow: 0 0 40px rgba(0, 229, 255, 0.9), 0 0 80px rgba(0, 229, 255, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.3); } }
+.bossx-ai-fab-icon { font-size: 28px; color: #000814; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+.bossx-ai-fab-badge { position: absolute; top: -4px; right: -4px; background: linear-gradient(145deg, #FF006E, #D4005A); color: #fff; font-size: 11px; font-weight: bold; padding: 3px 7px; border-radius: 10px; border: 2px solid #000814; box-shadow: 0 0 15px rgba(255, 0, 110, 0.6); animation: badgeBounce 2s ease-in-out infinite; }
+@keyframes badgeBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.bossx-ai-window { position: fixed; bottom: 100px; right: 24px; width: 400px; max-width: calc(100vw - 48px); height: 600px; max-height: calc(100vh - 140px); background: linear-gradient(145deg, rgba(0, 18, 51, 0.98), rgba(0, 24, 69, 0.98)); border: 2px solid rgba(0, 229, 255, 0.5); border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 229, 255, 0.4), inset 0 0 30px rgba(0, 229, 255, 0.05); backdrop-filter: blur(20px); z-index: 9998; display: none; flex-direction: column; overflow: hidden; animation: windowSlideIn 0.4s ease-out; }
+.bossx-ai-window.active { display: flex; }
+.bossx-ai-window.minimized { height: 60px !important; max-height: 60px !important; }
+@keyframes windowSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.bossx-ai-header { background: linear-gradient(145deg, rgba(0, 8, 20, 0.9), rgba(0, 18, 51, 0.9)); border-bottom: 2px solid rgba(0, 229, 255, 0.4); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.bossx-ai-header-left { display: flex; align-items: center; gap: 12px; }
+.bossx-ai-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, #00E5FF, #00B8D4); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0, 229, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2); border: 2px solid rgba(224, 255, 255, 0.6); position: relative; }
+.bossx-ai-avatar-icon { font-size: 20px; color: #000814; font-weight: bold; }
+.bossx-ai-avatar-status { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; background: #00FFC8; border-radius: 50%; border: 2px solid #000814; box-shadow: 0 0 10px rgba(0, 255, 200, 0.8); animation: statusPulse 2s ease-in-out infinite; }
+@keyframes statusPulse { 0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 200, 0.8); } 50% { box-shadow: 0 0 15px rgba(0, 255, 200, 1), 0 0 20px rgba(0, 255, 200, 0.6); } }
+.bossx-ai-header-info h3 { color: #E0FFFF; font-size: 15px; font-weight: bold; margin: 0; text-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
+.bossx-ai-header-info p { color: #7DF9FF; font-size: 11px; margin: 2px 0 0 0; display: flex; align-items: center; gap: 4px; }
+.bossx-ai-header-info p::before { content: ''; width: 6px; height: 6px; background: #00FFC8; border-radius: 50%; box-shadow: 0 0 6px rgba(0, 255, 200, 0.8); }
+.bossx-ai-header-actions { display: flex; gap: 6px; }
+.bossx-ai-header-btn { width: 30px; height: 30px; border-radius: 8px; background: rgba(0, 24, 69, 0.8); border: 1px solid rgba(0, 229, 255, 0.3); color: #7DF9FF; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; font-size: 14px; }
+.bossx-ai-header-btn:hover { background: rgba(0, 229, 255, 0.2); border-color: #00E5FF; color: #E0FFFF; box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
+.bossx-ai-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: thin; scrollbar-color: #00E5FF transparent; }
+.bossx-ai-body::-webkit-scrollbar { width: 6px; }
+.bossx-ai-body::-webkit-scrollbar-track { background: transparent; }
+.bossx-ai-body::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00E5FF, #00B8D4); border-radius: 3px; }
+.bossx-ai-msg { display: flex; gap: 10px; animation: msgFadeIn 0.4s ease-out; max-width: 100%; }
+@keyframes msgFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.bossx-ai-msg.user { flex-direction: row-reverse; }
+.bossx-ai-msg-avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+.bossx-ai-msg.bot .bossx-ai-msg-avatar { background: linear-gradient(145deg, #00E5FF, #00B8D4); color: #000814; box-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+.bossx-ai-msg.user .bossx-ai-msg-avatar { background: linear-gradient(145deg, #7DF9FF, #00E5FF); color: #000814; box-shadow: 0 0 10px rgba(125, 249, 255, 0.5); }
+.bossx-ai-msg-content { max-width: 75%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; word-wrap: break-word; }
+.bossx-ai-msg.bot .bossx-ai-msg-content { background: rgba(0, 24, 69, 0.8); border: 1px solid rgba(0, 229, 255, 0.3); color: #E0FFFF; border-top-left-radius: 4px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.05); }
+.bossx-ai-msg.user .bossx-ai-msg-content { background: linear-gradient(145deg, #00E5FF, #00B8D4); color: #000814; border-top-right-radius: 4px; font-weight: 500; box-shadow: 0 2px 10px rgba(0, 229, 255, 0.4); }
+.bossx-ai-msg-content strong { color: #00E5FF; font-weight: 700; }
+.bossx-ai-msg.user .bossx-ai-msg-content strong { color: #000814; }
+.bossx-ai-msg-content ul, .bossx-ai-msg-content ol { margin: 6px 0; padding-left: 18px; }
+.bossx-ai-msg-content li { margin: 3px 0; }
+.bossx-ai-typing { display: flex; gap: 4px; padding: 12px 14px; align-items: center; }
+.bossx-ai-typing-dot { width: 8px; height: 8px; background: #00E5FF; border-radius: 50%; animation: typingBounce 1.4s ease-in-out infinite; box-shadow: 0 0 8px rgba(0, 229, 255, 0.8); }
+.bossx-ai-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.bossx-ai-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-8px); opacity: 1; } }
+.bossx-ai-quick-replies { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px 16px; flex-shrink: 0; }
+.bossx-ai-quick-btn { padding: 7px 12px; background: rgba(0, 24, 69, 0.8); border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px; color: #7DF9FF; font-size: 12px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+.bossx-ai-quick-btn:hover { background: rgba(0, 229, 255, 0.2); border-color: #00E5FF; color: #E0FFFF; box-shadow: 0 0 12px rgba(0, 229, 255, 0.4); transform: translateY(-1px); }
+.bossx-ai-footer { border-top: 2px solid rgba(0, 229, 255, 0.3); padding: 12px; display: flex; gap: 8px; align-items: center; background: rgba(0, 8, 20, 0.6); flex-shrink: 0; }
+.bossx-ai-input { flex: 1; padding: 10px 14px; background: rgba(0, 24, 69, 0.8); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 20px; color: #fff; font-size: 13.5px; outline: none; transition: all 0.2s ease; }
+.bossx-ai-input:focus { border-color: #00E5FF; box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.3); }
+.bossx-ai-input::placeholder { color: #7DF9FF; opacity: 0.6; }
+.bossx-ai-send-btn, .bossx-ai-clear-btn { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
+.bossx-ai-send-btn { background: linear-gradient(145deg, #00E5FF, #00B8D4); color: #000814; box-shadow: 0 0 15px rgba(0, 229, 255, 0.5); }
+.bossx-ai-send-btn:hover:not(:disabled) { background: linear-gradient(145deg, #00F5FF, #00E5FF); box-shadow: 0 0 20px rgba(0, 229, 255, 0.7); transform: scale(1.05); }
+.bossx-ai-send-btn:disabled { background: #475569; cursor: not-allowed; box-shadow: none; }
+.bossx-ai-clear-btn { background: rgba(255, 0, 110, 0.15); color: #FF006E; border: 1px solid rgba(255, 0, 110, 0.4); }
+.bossx-ai-clear-btn:hover { background: rgba(255, 0, 110, 0.25); box-shadow: 0 0 12px rgba(255, 0, 110, 0.4); }
+@media (max-width: 480px) { .bossx-ai-window { width: calc(100vw - 24px); right: 12px; bottom: 90px; height: calc(100vh - 120px); } .bossx-ai-fab { bottom: 16px; right: 16px; width: 56px; height: 56px; } }
+
+/* ============================================ */
+/* SOCIALFI STYLES (Modul Terpisah - Prefix sfi) */
+/* ============================================ */
+.sfi-subscribe-card {
+  background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95));
+  border: 2px solid rgba(0, 229, 255, 0.4);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.3);
 }
-.validation-bottom-section {
-  margin-top: auto;
-  padding-top: 1rem;
+.sfi-subscribe-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(145deg, #00E5FF, #00B8D4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(224, 255, 255, 0.6);
+  animation: fabPulse 3s ease-in-out infinite;
+}
+.sfi-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.sfi-status-badge.active {
+  background: rgba(0, 255, 200, 0.15);
+  color: #00FFC8;
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+}
+.sfi-status-badge.inactive {
+  background: rgba(255, 0, 110, 0.15);
+  color: #FF006E;
+  border: 1px solid rgba(255, 0, 110, 0.4);
+}
+.sfi-post-card {
+  background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95));
+  border: 2px solid rgba(0, 229, 255, 0.3);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.03);
+  transition: all 0.3s ease;
+  animation: msgFadeIn 0.4s ease-out;
+}
+.sfi-post-card:hover {
+  border-color: rgba(0, 229, 255, 0.6);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 229, 255, 0.3);
+}
+.sfi-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.sfi-post-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+  flex-shrink: 0;
+  background: linear-gradient(145deg, #00E5FF, #00B8D4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000814;
+  font-weight: bold;
+  font-size: 16px;
+}
+.sfi-post-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sfi-post-meta {
+  flex: 1;
+}
+.sfi-post-author {
+  color: #E0FFFF;
+  font-weight: 600;
+  font-size: 14px;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+.sfi-post-role {
+  color: #7DF9FF;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.sfi-post-time {
+  color: #7DF9FF;
+  font-size: 11px;
+  opacity: 0.7;
+}
+.sfi-post-content {
+  color: #E0FFFF;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  word-wrap: break-word;
+}
+.sfi-post-media {
+  width: 100%;
+  max-height: 400px;
+  border-radius: 0.75rem;
+  margin-bottom: 12px;
+  border: 2px solid rgba(0, 229, 255, 0.3);
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+.sfi-post-media-video {
+  width: 100%;
+  max-height: 400px;
+  border-radius: 0.75rem;
+  margin-bottom: 12px;
+  border: 2px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+.sfi-post-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 12px;
   border-top: 1px solid rgba(0, 229, 255, 0.15);
+}
+.sfi-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(0, 24, 69, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 20px;
+  color: #7DF9FF;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sfi-action-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00E5FF;
+  color: #E0FFFF;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+.sfi-action-btn.liked {
+  background: rgba(255, 0, 110, 0.15);
+  border-color: rgba(255, 0, 110, 0.5);
+  color: #FF006E;
+  box-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+}
+.sfi-comments-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 229, 255, 0.15);
+}
+.sfi-comment {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  animation: msgFadeIn 0.3s ease-out;
+}
+.sfi-comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #7DF9FF, #00E5FF);
+  color: #000814;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+.sfi-comment-body {
+  flex: 1;
+  background: rgba(0, 24, 69, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+.sfi-comment-author {
+  color: #00E5FF;
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.sfi-comment-text {
+  color: #E0FFFF;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.sfi-comment-time {
+  color: #7DF9FF;
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+.sfi-reply-btn {
+  background: none;
+  border: none;
+  color: #7DF9FF;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 6px;
+  margin-left: 8px;
+}
+.sfi-reply-btn:hover {
+  color: #00E5FF;
+  text-decoration: underline;
+}
+.sfi-reply {
+  margin-left: 42px;
+  padding: 6px 0;
+}
+.sfi-reply .sfi-comment-avatar {
+  width: 26px;
+  height: 26px;
+  font-size: 10px;
+  background: linear-gradient(145deg, #00E5FF, #00B8D4);
+}
+.sfi-comment-input-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.sfi-comment-input {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(0, 24, 69, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+}
+.sfi-comment-input:focus {
+  border-color: #00E5FF;
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+}
+.sfi-comment-send {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #00E5FF, #00B8D4);
+  color: #000814;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+.sfi-comment-send:hover {
+  background: linear-gradient(145deg, #00F5FF, #00E5FF);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+.sfi-compose-card {
+  background: linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95));
+  border: 2px solid rgba(0, 229, 255, 0.4);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.2);
+}
+.sfi-compose-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  background: rgba(0, 24, 69, 0.8);
+  border: 2px solid rgba(0, 229, 255, 0.3);
+  border-radius: 0.75rem;
+  color: #fff;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+}
+.sfi-compose-textarea:focus {
+  border-color: #00E5FF;
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+}
+.sfi-media-toggle {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.sfi-media-btn {
+  padding: 6px 12px;
+  background: rgba(0, 24, 69, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 20px;
+  color: #7DF9FF;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sfi-media-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00E5FF;
+  color: #E0FFFF;
+}
+.sfi-media-btn.active {
+  background: rgba(0, 229, 255, 0.25);
+  border-color: #00E5FF;
+  color: #E0FFFF;
+}
+.sfi-media-url-input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 10px;
+  background: rgba(0, 24, 69, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  display: none;
+}
+.sfi-media-url-input.show { display: block; }
+.sfi-media-url-input:focus {
+  border-color: #00E5FF;
+}
+.sfi-media-preview {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  display: none;
+}
+.sfi-media-preview.show { display: block; }
+.sfi-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sfi-stat-card {
+  background: linear-gradient(145deg, #001233, #001845);
+  border: 2px solid rgba(0, 229, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+.sfi-stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00E5FF;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+.sfi-stat-label {
+  font-size: 12px;
+  color: #7DF9FF;
+  margin-top: 4px;
 }
 </style>
 </head>
@@ -284,13 +668,13 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 </div>
 </div>
 <nav class="mt-4 px-2">
-<a href="#" class="menu-item active flex items-center px-2 py-2 mb-2 rounded-xl" data-page="dashboard">
-<i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-<span class="ml-2 font-medium menu-text text-sm">Dashboard</span>
-</a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="private-key">
+<a href="#" class="menu-item active flex items-center px-2 py-2 mb-2 rounded-xl" data-page="private-key">
 <i data-lucide="key-round" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Access Key</span>
+</a>
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="dashboard">
+<i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+<span class="ml-2 font-medium menu-text text-sm">Dashboard</span>
 </a>
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="deposit">
 <i data-lucide="arrow-down-circle" class="w-4 h-4"></i>
@@ -304,9 +688,9 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 <i data-lucide="users" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Peer to Peer</span>
 </a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="chat-room">
-<i data-lucide="message-circle" class="w-4 h-4"></i>
-<span class="ml-2 font-medium menu-text text-sm">Chat Room</span>
+<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="socialfi">
+<i data-lucide="share-2" class="w-4 h-4"></i>
+<span class="ml-2 font-medium menu-text text-sm">SocialFi</span>
 </a>
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="referral">
 <i data-lucide="user-plus" class="w-4 h-4"></i>
@@ -315,10 +699,6 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="team-developer">
 <i data-lucide="users" class="w-4 h-4"></i>
 <span class="ml-2 font-medium menu-text text-sm">Team Developer</span>
-</a>
-<a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="faq">
-<i data-lucide="help-circle" class="w-4 h-4"></i>
-<span class="ml-2 font-medium menu-text text-sm">FAQ</span>
 </a>
 <a href="#" class="menu-item flex items-center px-2 py-2 mb-2 rounded-xl text-cyan-200" data-page="settings">
 <i data-lucide="settings" class="w-4 h-4"></i>
@@ -366,7 +746,9 @@ body { background: #000814; color: #ffffff; overflow-x: hidden; }
 </header>
 <main class="flex-1 overflow-auto">
 <div id="content" class="content-container space-y-4">
-<div id="dashboard-page" class="page-content active">
+
+<!-- DASHBOARD PAGE -->
+<div id="dashboard-page" class="page-content">
 <div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-3 overflow-hidden" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="relative">
 <div id="running-text" class="whitespace-nowrap text-cyan-400 font-medium text-sm">
@@ -392,7 +774,6 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </p>
 </div>
 </div>
-
 <div class="stat-card hover-scale validation-card">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -419,7 +800,6 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 </div>
-
 <div class="stat-card hover-scale" style="display: flex; flex-direction: column; justify-content: space-between;">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -437,7 +817,6 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </button>
 </div>
 </div>
-
 <div class="stat-card hover-scale">
 <div class="corner-dot top-left"></div><div class="corner-dot top-right"></div><div class="corner-dot bottom-right"></div><div class="corner-dot bottom-left"></div>
 <div class="border-line border-top"></div><div class="border-line border-right"></div><div class="border-line border-bottom"></div><div class="border-line border-left"></div>
@@ -477,7 +856,6 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 </div>
-
 <div id="log-engine" class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-4 mt-6 relative overflow-hidden log-engine" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
 <div class="flex justify-between items-center mb-3">
@@ -486,7 +864,6 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 <div id="log-output" class="bg-[#000814] p-4 rounded-lg overflow-y-auto h-64 text-sm font-mono whitespace-pre-wrap space-y-1 border border-cyan-400/20"></div>
 </div>
-
 <div class="bg-[#001233] border-2 border-cyan-400/30 rounded-xl p-4 mt-6 relative overflow-hidden info-system" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
 <div class="border-line-gold border-top-gold"></div><div class="border-line-gold border-right-gold"></div><div class="border-line-gold border-bottom-gold"></div><div class="border-line-gold border-left-gold"></div>
 <div class="flex items-center mb-3">
@@ -510,7 +887,8 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
-<div id="private-key-page" class="page-content">
+<!-- PRIVATE KEY PAGE -->
+<div id="private-key-page" class="page-content active">
 <div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-cyan-300/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
 <div class="flex items-center justify-between">
 <div>
@@ -628,6 +1006,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
+<!-- DEPOSIT PAGE -->
 <div id="deposit-page" class="page-content">
 <div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-cyan-400/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
 <div class="flex items-center justify-between">
@@ -732,6 +1111,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
+<!-- WITHDRAWAL PAGE -->
 <div id="withdrawal-page" class="page-content">
 <div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-rose-500/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(255, 0, 110, 0.2);">
 <div class="flex items-center justify-between">
@@ -859,6 +1239,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
+<!-- P2P PAGE -->
 <div id="p2p-page" class="page-content exchange-bg">
 <div class="exchange-card p-6 mb-6">
 <h1 class="text-3xl font-bold text-cyan-400 mb-4 flex items-center frost-text">
@@ -912,10 +1293,91 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
-<div id="chat-room-page" class="page-content">
-<div id="chat-room-container" class="w-full h-full"></div>
+<!-- ============================================ -->
+<!-- SOCIALFI PAGE (MODUL BARU)                   -->
+<!-- ============================================ -->
+<div id="socialfi-page" class="page-content">
+<div class="bg-gradient-to-r from-[#001233] via-[#000814] to-[#001233] border-2 border-cyan-400/30 rounded-xl p-6 mb-6" style="box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
+<div class="flex items-center justify-between flex-wrap gap-4">
+<div>
+<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center frost-text">
+<i data-lucide="share-2" class="w-8 h-8 mr-2"></i>SocialFi
+</h1>
+<p class="text-cyan-200">Platform sosial eksklusif untuk holder BossX. Bagikan momen, ide, dan analisis Anda.</p>
+</div>
+<div class="crypto-icon-large" style="background: linear-gradient(145deg, rgba(0, 229, 255, 0.2), rgba(125, 249, 255, 0.1)); border-color: rgba(0, 229, 255, 0.5); box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);">
+<i data-lucide="share-2" class="text-cyan-300 w-8 h-8"></i>
+</div>
+</div>
 </div>
 
+<!-- Subscription Status Card -->
+<div id="sfi-subscription-card" class="sfi-subscribe-card mb-6">
+<div class="sfi-subscribe-icon">
+<i data-lucide="crown" class="w-10 h-10 text-[#000814]"></i>
+</div>
+<h2 class="text-2xl font-bold text-white mb-2 frost-text">BossX SocialFi Access</h2>
+<p class="text-cyan-200 mb-4">Nikmati akses penuh ke platform sosial eksklusif BossX</p>
+<div id="sfi-subscription-status" class="mb-4"></div>
+<div id="sfi-subscription-action"></div>
+</div>
+
+<!-- Main Content (hanya muncul jika subscribed) -->
+<div id="sfi-main-content" style="display: none;">
+<!-- Stats Grid -->
+<div class="sfi-stats-grid">
+<div class="sfi-stat-card">
+<div class="sfi-stat-value" id="sfi-stat-posts">0</div>
+<div class="sfi-stat-label">Total Postingan</div>
+</div>
+<div class="sfi-stat-card">
+<div class="sfi-stat-value" id="sfi-stat-likes">0</div>
+<div class="sfi-stat-label">Total Likes</div>
+</div>
+<div class="sfi-stat-card">
+<div class="sfi-stat-value" id="sfi-stat-comments">0</div>
+<div class="sfi-stat-label">Total Komentar</div>
+</div>
+<div class="sfi-stat-card">
+<div class="sfi-stat-value" id="sfi-stat-members">1,247</div>
+<div class="sfi-stat-label">Member Aktif</div>
+</div>
+</div>
+
+<!-- Compose Post -->
+<div class="sfi-compose-card">
+<div class="flex items-center gap-3 mb-3">
+<div class="sfi-post-avatar">FM</div>
+<div>
+<div class="sfi-post-author">Fery Muliawan</div>
+<div class="sfi-post-role">CEO • BossX</div>
+</div>
+</div>
+<textarea id="sfi-compose-text" class="sfi-compose-textarea" placeholder="Apa yang sedang Anda pikirkan, Bos? Bagikan dengan komunitas BossX..." maxlength="500"></textarea>
+<div class="sfi-media-toggle">
+<button class="sfi-media-btn" onclick="toggleSfiMedia('image')" id="sfi-btn-image">
+<i data-lucide="image" class="w-4 h-4"></i> Gambar
+</button>
+<button class="sfi-media-btn" onclick="toggleSfiMedia('video')" id="sfi-btn-video">
+<i data-lucide="video" class="w-4 h-4"></i> Video
+</button>
+</div>
+<input type="text" id="sfi-media-url" class="sfi-media-url-input" placeholder="Paste URL gambar/video di sini (contoh: https://...)" />
+<img id="sfi-media-preview" class="sfi-media-preview" alt="Preview" />
+<div class="flex justify-between items-center mt-3">
+<span class="text-xs text-cyan-300"><span id="sfi-char-count">0</span>/500</span>
+<button class="node-button" style="width: auto; padding: 0.5rem 1.5rem;" onclick="submitSfiPost()">
+<i data-lucide="send" class="w-4 h-4 inline mr-1"></i>Posting
+</button>
+</div>
+</div>
+
+<!-- Feed -->
+<div id="sfi-feed"></div>
+</div>
+</div>
+
+<!-- REFERRAL PAGE -->
 <div id="referral-page" class="page-content">
 <div class="p-6">
 <h1 class="text-2xl font-bold text-cyan-400 mb-4 frost-text">Referral</h1>
@@ -940,6 +1402,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
+<!-- TEAM DEVELOPER PAGE -->
 <div id="team-developer-page" class="page-content">
 <div class="p-6">
 <h1 class="text-3xl font-bold text-cyan-400 mb-6 frost-text">Team Developer</h1>
@@ -994,110 +1457,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
-<div id="faq-page" class="page-content">
-<div class="p-6 max-w-4xl mx-auto">
-<div class="text-center mb-10">
-<h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center justify-center gap-2 frost-text">
-<i data-lucide="help-circle" class="w-8 h-8"></i> FAQ (Pertanyaan Umum)
-</h1>
-<p class="text-cyan-200">Temukan jawaban untuk pertanyaan yang sering diajukan tentang BossX.</p>
-</div>
-<div class="space-y-8">
-<div>
-<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
-<i data-lucide="info" class="w-5 h-5 text-cyan-400"></i> Umum
-</h2>
-<div class="space-y-3">
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apa itu BossX?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">BossX adalah salah satu cryptocurrency yang berjalan pada jaringan blockchain TRC20</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Bagaimana cara mendaftar akun?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-</div>
-</div>
-<div>
-<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
-<i data-lucide="server" class="w-5 h-5 text-emerald-400"></i> Masternode & Validator
-</h2>
-<div class="space-y-3">
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apa itu Masternode Validator?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa minimal stake untuk menjalankan Masternode?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Mengapa validasi berhenti otomatis jam 06:00?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-</div>
-</div>
-<div>
-<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
-<i data-lucide="key-round" class="w-5 h-5 text-cyan-300"></i> Access Key
-</h2>
-<div class="space-y-3">
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apa fungsi Access Key?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Bagaimana cara mendapatkan Access Key?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Mengapa Access Key hanya bisa digunakan sekali?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-</div>
-</div>
-<div>
-<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
-<i data-lucide="gift" class="w-5 h-5 text-cyan-300"></i> Reward & Claim
-</h2>
-<div class="space-y-3">
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Kapan reward bisa di-claim?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Apakah ada minimal claim reward?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Bagaimana cara menjual BossX hasil reward?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-</div>
-</div>
-<div>
-<h2 class="text-xl font-bold text-white mb-4 border-b-2 border-cyan-400/30 pb-2 flex items-center gap-2">
-<i data-lucide="wallet" class="w-5 h-5 text-emerald-400"></i> Deposit & Withdrawal
-</h2>
-<div class="space-y-3">
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa minimal deposit USDT?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa lama proses deposit?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-<details class="bg-[#001233] border-2 border-cyan-400/20 rounded-lg p-4 group">
-<summary class="font-semibold text-cyan-400 cursor-pointer list-none flex justify-between items-center frost-text">Berapa fee withdrawal?<span class="transition-transform group-open:rotate-180">▼</span></summary>
-<p class="mt-3 text-cyan-100 pl-2 border-l-2 border-cyan-400/50">[Silakan tulis jawaban Anda di sini...]</p>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-
+<!-- SETTINGS PAGE -->
 <div id="settings-page" class="page-content">
 <div class="p-6">
 <h1 class="text-2xl font-bold text-cyan-400 mb-4 frost-text">Settings</h1>
@@ -1105,6 +1465,7 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 
+<!-- EXCHANGE PAGE -->
 <div id="exchange-page" class="page-content exchange-bg">
 <div class="exchange-card p-4 mb-4">
 <h1 class="text-3xl font-bold text-cyan-400 mb-2 flex items-center frost-text">
@@ -1202,10 +1563,66 @@ Beli Access Key di menu <span class="text-cyan-400 font-semibold cursor-pointer 
 </div>
 </div>
 </div>
+
 </main>
 </div>
 </div>
+
+<!-- ============================================ -->
+<!-- BOSSX AI AGENT - FLOATING CHATBOT HTML       -->
+<!-- ============================================ -->
+<div id="bossx-ai-fab" class="bossx-ai-fab" onclick="toggleBossxAI()" title="BossX AI AGENT">
+<span class="bossx-ai-fab-icon">🤖</span>
+<span id="bossx-ai-badge" class="bossx-ai-fab-badge" style="display: none;">1</span>
+</div>
+
+<div id="bossx-ai-window" class="bossx-ai-window">
+<div class="bossx-ai-header">
+<div class="bossx-ai-header-left">
+<div class="bossx-ai-avatar">
+<span class="bossx-ai-avatar-icon">🤖</span>
+<div class="bossx-ai-avatar-status"></div>
+</div>
+<div class="bossx-ai-header-info">
+<h3>BossX AI AGENT</h3>
+<p>Online • Siap membantu</p>
+</div>
+</div>
+<div class="bossx-ai-header-actions">
+<button class="bossx-ai-header-btn" onclick="minimizeBossxAI()" title="Minimize">
+<i data-lucide="minus" style="width:14px;height:14px;"></i>
+</button>
+<button class="bossx-ai-header-btn" onclick="closeBossxAI()" title="Tutup">
+<i data-lucide="x" style="width:14px;height:14px;"></i>
+</button>
+</div>
+</div>
+
+<div id="bossx-ai-body" class="bossx-ai-body"></div>
+
+<div id="bossx-ai-quick-replies" class="bossx-ai-quick-replies">
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Apa itu BossX?')">Apa itu BossX?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Cara deposit?')">Cara deposit?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Apa itu Access Key?')">Access Key?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Bagaimana reward bekerja?')">Reward?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Cara withdrawal?')">Withdrawal?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Siapa team developer?')">Team?</button>
+<button class="bossx-ai-quick-btn" onclick="sendQuickReply('Apa itu SocialFi?')">SocialFi?</button>
+</div>
+
+<div class="bossx-ai-footer">
+<button class="bossx-ai-clear-btn" onclick="clearBossxAIChat()" title="Hapus chat">
+<i data-lucide="trash-2" style="width:16px;height:16px;"></i>
+</button>
+<input id="bossx-ai-input" type="text" class="bossx-ai-input" placeholder="Tanyakan seputar BossX..." onkeypress="handleBossxAIKey(event)" />
+<button id="bossx-ai-send" class="bossx-ai-send-btn" onclick="sendBossxAIMessage()" title="Kirim">
+<i data-lucide="send" style="width:16px;height:16px;"></i>
+</button>
+</div>
+</div>
+
 <script>
+// ============ UTILITY FUNCTIONS ============
 function showSuccessMessage(message) {
 const existingMessage = document.querySelector('.success-message');
 if (existingMessage) existingMessage.remove();
@@ -1283,7 +1700,9 @@ function showRegisterInfo() {
 alert('Fitur registrasi akan segera hadir!\nSilakan hubungi admin untuk pendaftaran.');
 return false;
 }
-let currentPage = 'dashboard';
+
+// ============ STATE VARIABLES ============
+let currentPage = 'private-key';
 let activeTab = 'USDT';
 let activeWithdrawalTab = 'USDT';
 let isNodeActive = false;
@@ -1300,6 +1719,7 @@ let logInterval;
 let lastClaimTime = 0;
 let masaBerlaku = 40000000;
 let masaInterval;
+
 const walletAddresses = {
 USDT: { address: 'TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TQ3HBNdVFmTFvz9wz3AR2Siss7MRN1fuRM&color=00E5FF' },
 BOSSX: { address: 'TTfKjrU18mi223ukVmz6FMNgBkma13kVA3', qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TTfKjrU18mi223ukVmz6FMNgBkma13kVA3&color=00E5FF' }
@@ -1322,6 +1742,7 @@ BOSSX: [
 };
 const withdrawalHistory = { USDT: [], BOSSX: [] };
 const p2pHistory = [];
+
 function initializeMainApp() {
 try {
 updateClock();
@@ -1329,9 +1750,14 @@ updateBalanceDisplays();
 updateDepositContent();
 updateWithdrawalContent();
 updateP2PContent();
+updatePKStatistics();
+updatePrivateKeysList();
+updatePKSummary();
+initSocialFi();
 lucide.createIcons();
 startMasaCountdown();
 setupEventListeners();
+initBossxAI();
 setTimeout(() => showSuccessMessage('Selamat datang di BossX Crypto Exchange Platform!'), 500);
 } catch (err) {
 console.error('Error di initializeMainApp:', err);
@@ -1356,6 +1782,17 @@ return date.toLocaleString('id-ID', { year: 'numeric', month: 'short', day: 'num
 function formatAmount(amount) {
 return new Intl.NumberFormat('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 8 }).format(amount);
 }
+function formatTimeAgo(timestamp) {
+const diff = Date.now() - timestamp;
+const minutes = Math.floor(diff / 60000);
+const hours = Math.floor(diff / 3600000);
+const days = Math.floor(diff / 86400000);
+if (minutes < 1) return 'Baru saja';
+if (minutes < 60) return `${minutes} menit lalu`;
+if (hours < 24) return `${hours} jam lalu`;
+if (days < 7) return `${days} hari lalu`;
+return new Date(timestamp).toLocaleDateString('id-ID');
+}
 function showPage(pageId) {
 document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
 const targetPage = document.getElementById(pageId + '-page');
@@ -1374,7 +1811,7 @@ if (pageId === 'deposit') updateDepositContent();
 else if (pageId === 'withdrawal') updateWithdrawalContent();
 else if (pageId === 'p2p') updateP2PContent();
 else if (pageId === 'exchange') initExchangePage();
-else if (pageId === 'chat-room') setTimeout(() => initializeChatRoom(), 100);
+else if (pageId === 'socialfi') renderSocialFi();
 else if (pageId === 'private-key') {
 updatePKStatistics();
 updatePrivateKeysList();
@@ -1581,6 +2018,8 @@ if (now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0) {
 if (isValidationRunning) forceStopValidation('otomatis pada jam 06:00');
 }
 }
+
+// ============ PRIVATE KEY FUNCTIONS ============
 const PK_STORAGE_KEY = 'bossx_private_keys';
 const PK_FEE = 1;
 const PK_MIN_STAKE = 10;
@@ -1869,6 +2308,8 @@ const maxStake = Math.max(0, bossxBalance - PK_FEE);
 document.getElementById('pk-stake-amount').value = maxStake.toFixed(9);
 updatePKSummary();
 }
+
+// ============ DEPOSIT FUNCTIONS ============
 function updateDepositContent() {
 const wallet = walletAddresses[activeTab];
 document.getElementById('qr-currency').textContent = activeTab;
@@ -1940,6 +2381,8 @@ case 'failed': return 'Gagal';
 default: return 'Pending';
 }
 }
+
+// ============ WITHDRAWAL FUNCTIONS ============
 function updateWithdrawalContent() {
 const balance = activeWithdrawalTab === 'USDT' ? usdtBalance : bossxBalance;
 document.getElementById('withdrawal-balance').textContent = `${formatAmount(balance)} ${activeWithdrawalTab}`;
@@ -2083,6 +2526,8 @@ case 'failed': return 'Gagal';
 default: return 'Diproses';
 }
 }
+
+// ============ P2P FUNCTIONS ============
 function updateP2PContent() {
 updateBalanceDisplays();
 updateP2PStatistics();
@@ -2128,6 +2573,8 @@ const totalReceived = p2pHistory.filter(t => t.type === 'in').reduce((sum, t) =>
 document.getElementById('p2p-total-sent').textContent = formatAmount(totalSent) + ' BossX';
 document.getElementById('p2p-total-received').textContent = formatAmount(totalReceived) + ' BossX';
 }
+
+// ============ REFERRAL FUNCTIONS ============
 function generateReferralCode() {
 const code = 'REF-' + Math.random().toString(36).substring(2, 8).toUpperCase();
 document.getElementById('referral-code').value = code;
@@ -2162,6 +2609,8 @@ link.href = walletAddresses[activeTab].qrCode;
 link.click();
 showSuccessMessage(`QR Code ${activeTab} berhasil didownload!`);
 }
+
+// ============ EXCHANGE FUNCTIONS ============
 let currentSymbol = 'BTCUSDT';
 let wsDepth = null;
 let wsTrades = null;
@@ -2361,6 +2810,8 @@ function updateAvbl() {
 document.getElementById('buy-avbl').textContent = usdtBalance.toFixed(2) + ' USDT';
 document.getElementById('sell-avbl').textContent = bossxBalance.toFixed(9) + ' BossX';
 }
+
+// ============ EVENT LISTENERS ============
 function setupEventListeners() {
 const toggleBtn = document.getElementById('toggle-sidebar');
 if (toggleBtn) {
@@ -2425,6 +2876,20 @@ if (e.target.id === 'p2p-max') setMaxP2P();
 document.addEventListener('input', function(e) {
 if (!e.target) return;
 if (e.target.id === 'withdrawal-amount') updateWithdrawalSummary();
+if (e.target.id === 'sfi-compose-text') {
+const count = e.target.value.length;
+const counter = document.getElementById('sfi-char-count');
+if (counter) counter.textContent = count;
+}
+if (e.target.id === 'sfi-media-url') {
+const preview = document.getElementById('sfi-media-preview');
+if (preview && e.target.value) {
+preview.src = e.target.value;
+preview.classList.add('show');
+} else if (preview) {
+preview.classList.remove('show');
+}
+}
 });
 document.addEventListener('change', function(e) {
 if (e.target.id === 'buy-order-type') {
@@ -2437,90 +2902,833 @@ if (priceInput) priceInput.style.display = e.target.value === 'market' ? 'none' 
 }
 });
 }
+
 setInterval(updateClock, 1000);
 setInterval(checkSixAMStop, 1000);
-function initializeChatRoom() {
-const { useState, useEffect, useRef, createElement: h } = React;
-const MessageCircleIcon = ({ size = 24, className = "" }) => h('svg', { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", className }, h('path', { d: "m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" }));
-const UsersIcon = ({ size = 24, className = "" }) => h('svg', { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", className }, h('path', { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" }), h('circle', { cx: "9", cy: "7", r: "4" }), h('path', { d: "m22 21-3.4-3.4M17 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" }));
-const SendIcon = ({ size = 24, className = "" }) => h('svg', { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", className }, h('path', { d: "m22 2-7 20-4-9-9-4Z" }), h('path', { d: "M22 2 11 13" }));
-const ClockIcon = ({ size = 24, className = "" }) => h('svg', { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", className }, h('circle', { cx: "12", cy: "12", r: "10" }), h('polyline', { points: "12,6 12,12 16,14" }));
-const mockRooms = [
-{ id: '#validator', description: 'Diskusi Validator & Masternode' },
-{ id: '#trading', description: 'Tips & Strategi Trading' },
-{ id: '#support', description: 'Bantuan & Dukungan Teknis' },
-{ id: '#founder', description: 'Diskusi dengan Founder' }
-];
-const mockMessages = [
-{ id: 1, sender: 'BossX Bot', content: ' Selamat datang di Chat Room BossX!', timestamp: '10:00', room: '#validator', isUser: false },
-{ id: 2, sender: 'Admin', content: 'Halo semua! Ada yang punya pertanyaan?', timestamp: '10:05', room: '#validator', isUser: false },
-{ id: 3, sender: 'Trader Pro', content: 'Market sedang bullish hari ini.', timestamp: '09:30', room: '#trading', isUser: false },
-{ id: 4, sender: 'User123', content: 'Bagaimana cara withdraw?', timestamp: '11:00', room: '#support', isUser: false },
-{ id: 5, sender: 'Founder', content: 'Selamat datang di ruang diskusi.', timestamp: '14:00', room: '#founder', isUser: false }
-];
-const ChatRoom = ({ onNavigate }) => {
-const [messages, setMessages] = useState(mockMessages);
-const [currentRoom, setCurrentRoom] = useState('#validator');
-const [messageInput, setMessageInput] = useState('');
-const messagesEndRef = useRef(null);
-useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
-const handleSendMessage = () => {
-if (!messageInput.trim()) return;
-const newMessage = { id: Date.now(), sender: 'User', content: messageInput.trim(), timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }), room: currentRoom, isUser: true };
-setMessages(prev => [...prev, newMessage]);
-setMessageInput('');
+
+// ============================================
+// SOCIALFI MODULE (Modul Terpisah - Prefix sfi)
+// ============================================
+const SFI_STORAGE_KEY = 'bossx_socialfi_posts';
+const SFI_SUB_KEY = 'bossx_socialfi_subscription';
+const SFI_COST = 1;
+const SFI_DURATION_DAYS = 30;
+
+// Team developer data untuk dummy posts
+const SFI_TEAM = {
+'Fery Muliawan': { role: 'CEO • BossX', avatar: 'FM', image: 'https://i.ibb.co.com/N2RF70Vs/IMG-1097-removebg-preview.png' },
+'Mr.Ramadhan': { role: 'CFO • BossX', avatar: 'MR', image: 'https://i.ibb.co.com/xKDSrKYw/Picsart-25-10-03-12-44-06-927.png' },
+'Lee': { role: 'CTO • BossX', avatar: 'LE', image: 'https://i.ibb.co/gbVsGLy0/FB-IMG-1617237754232.jpg' },
+'Michael Johnson': { role: 'Manager', avatar: 'MJ', image: null },
+'Emily Brown': { role: 'Secretary', avatar: 'EB', image: null }
 };
-const handleKeyPress = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } };
-const currentRoomMessages = messages.filter(msg => msg.room === currentRoom);
-return h('div', { className: "min-h-screen text-white p-4", style: { background: '#000814' } },
-h('button', { onClick: () => onNavigate('dashboard'), className: "mb-4 text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-lg font-medium frost-text" }, "← Kembali ke Dashboard"),
-h('div', { className: "relative border-2 border-cyan-400/50 backdrop-blur-sm h-[calc(100vh-100px)] overflow-hidden rounded-3xl glowing-border", style: { background: 'rgba(0, 18, 51, 0.9)' } },
-h('div', { className: "relative rounded-3xl h-full", style: { background: 'linear-gradient(145deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95))' } },
-h('div', { className: "border-b-2 border-cyan-400/30 p-6", style: { background: 'rgba(0, 8, 20, 0.5)' } },
-h('div', { className: "flex justify-between items-center" },
-h('div', { className: "flex items-center gap-4" }, h(MessageCircleIcon, { size: 32, className: "text-cyan-400" }), h('h1', { className: "text-2xl font-bold text-cyan-400 frost-text" }, "Chat Room BossX")),
-h('div', { className: "bg-emerald-400/10 border-2 border-emerald-400/30 text-emerald-400 px-4 py-2 text-lg font-bold rounded-full flex items-center gap-2", style: { boxShadow: '0 0 20px rgba(0, 255, 200, 0.3)' } }, h(UsersIcon, { size: 16 }), "15 Online")
-)
-),
-h('div', { className: "flex h-[calc(100%-85px)]" },
-h('div', { className: "w-80 border-r-2 border-cyan-400/30 p-6", style: { background: 'rgba(0, 8, 20, 0.8)' } },
-h('h3', { className: "text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2 frost-text" }, h(MessageCircleIcon, { size: 20 }), "Chat Rooms"),
-h('div', { className: "space-y-4" }, mockRooms.map(room => h('div', { key: room.id, onClick: () => setCurrentRoom(room.id), className: `p-5 rounded-2xl cursor-pointer transition-all duration-300 border-2 ${currentRoom === room.id ? 'active' : ''}`, style: { backgroundColor: currentRoom === room.id ? 'rgba(0, 229, 255, 0.15)' : 'rgba(255,255,255,0.03)', borderColor: currentRoom === room.id ? '#00E5FF' : 'rgba(0, 229, 255, 0.2)', boxShadow: currentRoom === room.id ? '0 0 20px rgba(0, 229, 255, 0.4)' : 'none' } }, h('div', { className: "font-bold text-lg text-cyan-400 frost-text" }, room.id), h('div', { className: "text-sm text-cyan-200 mt-1" }, room.description))))
-),
-h('div', { className: "flex-1 flex flex-col", style: { background: 'rgba(0, 8, 20, 0.5)' } },
-h('div', { className: "flex justify-between items-center p-6 border-b-2 border-cyan-400/30" },
-h('div', { className: "flex items-center gap-4" }, h('span', { className: "text-2xl font-bold text-cyan-400 frost-text" }, currentRoom)),
-h('div', { className: "flex items-center gap-2 text-emerald-400 font-bold" }, h('div', { className: "w-3 h-3 bg-emerald-400 rounded-full live-indicator" }), "Live")
-),
-h('div', { className: "flex-1 p-6 overflow-y-auto custom-scroll" },
-h('div', { className: "space-y-4" },
-currentRoomMessages.length > 0 ? currentRoomMessages.map(msg => h('div', { key: msg.id, className: "flex gap-4 message-animate" },
-h('div', { className: "flex flex-col items-center gap-1" },
-h('div', { className: `w-10 h-10 rounded-full flex items-center justify-center font-bold text-white`, style: { background: msg.isUser ? 'linear-gradient(135deg, #00E5FF, #00B8D4)' : 'linear-gradient(135deg, #7DF9FF, #00E5FF)', boxShadow: '0 0 15px rgba(0, 229, 255, 0.5)' } }, msg.sender.charAt(0).toUpperCase()),
-h('span', { className: "text-xs text-cyan-200 max-w-[60px] truncate" }, msg.sender)
-),
-h('div', { className: "flex-1" },
-h('div', { className: "flex justify-between items-center mb-2" }, h('span', { className: "font-bold text-cyan-400 frost-text" }, msg.sender), h('span', { className: "text-xs text-cyan-300 flex items-center gap-1" }, h(ClockIcon, { size: 12 }), msg.timestamp)),
-h('div', { className: "rounded-2xl rounded-tl-sm p-4 max-w-[85%] border-2 border-cyan-400/30", style: { background: 'rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(10px)', boxShadow: '0 0 15px rgba(0, 229, 255, 0.2)' } }, h('p', { className: "text-white leading-relaxed whitespace-pre-wrap" }, msg.content))
-)
-)) : h('div', { className: "text-center text-cyan-300 py-8" }, h('p', null, "Belum ada pesan di room ini.")),
-h('div', { ref: messagesEndRef })
-)
-),
-h('div', { className: "p-6 border-t-2 border-cyan-400/30", style: { background: 'rgba(0, 8, 20, 0.5)' } },
-h('div', { className: "flex gap-4" },
-h('textarea', { value: messageInput, onChange: (e) => setMessageInput(e.target.value), onKeyPress: handleKeyPress, placeholder: "Tulis pesan...", maxLength: 500, className: "flex-1 text-white rounded-2xl resize-none min-h-[60px] p-4 focus:outline-none", style: { background: 'rgba(0, 24, 69, 0.8)', border: '2px solid rgba(0, 229, 255, 0.3)', boxShadow: 'inset 0 0 10px rgba(0, 229, 255, 0.05)' } }),
-h('button', { onClick: handleSendMessage, className: "text-[#000814] font-bold px-8 py-4 rounded-2xl min-w-[140px] transition-all duration-300 flex items-center gap-2", style: { background: 'linear-gradient(145deg, #00E5FF, #00B8D4)', boxShadow: '0 0 25px rgba(0, 229, 255, 0.6)' } }, h(SendIcon, { size: 20 }), "Kirim")
-)
-)
-)
-)
-)
-)
-);
-};
-ReactDOM.render(h(ChatRoom, { onNavigate: (page) => showPage(page) }), document.getElementById('chat-room-container'));
+
+let sfiCurrentMedia = { type: null, url: '' };
+
+function initSocialFi() {
+// Load subscription
+let sub = null;
+try {
+const saved = localStorage.getItem(SFI_SUB_KEY);
+if (saved) sub = JSON.parse(saved);
+} catch (e) {}
+
+// Jika belum ada subscription, buat dummy posts pertama kali
+if (!localStorage.getItem(SFI_STORAGE_KEY)) {
+seedDummyPosts();
 }
+}
+
+function seedDummyPosts() {
+const now = Date.now();
+const dummyPosts = [
+{
+id: 'dummy-1',
+author: 'Fery Muliawan',
+role: 'CEO • BossX',
+avatar: 'FM',
+avatarImage: SFI_TEAM['Fery Muliawan'].image,
+content: '🧊 Selamat datang di BossX SocialFi! Platform sosial eksklusif untuk komunitas BossX. Di sini kita bisa berbagi analisis, strategi trading, dan momen-momen berharga bersama. Mari bangun ekosistem crypto yang solid dan saling mendukung. Let\'s grow together! 🚀',
+media: null,
+mediaType: null,
+timestamp: now - 2 * 3600000,
+likes: ['Admin', 'Lee', 'Mr.Ramadhan', 'Michael Johnson', 'Emily Brown', 'TraderPro', 'CryptoKing'],
+comments: [
+{ id: 'c1', author: 'Lee', avatar: 'LE', text: 'Excited to be part of this journey, Bos! 🚀', timestamp: now - 1.5 * 3600000, replies: [] },
+{ id: 'c2', author: 'Mr.Ramadhan', avatar: 'MR', text: 'Platform yang sangat inovatif! Salut dengan visi BossX.', timestamp: now - 1 * 3600000, replies: [
+{ id: 'r1', author: 'Fery Muliawan', avatar: 'FM', text: 'Terima kasih! Ini baru permulaan, kita masih punya banyak rencana besar.', timestamp: now - 0.5 * 3600000 }
+]}
+]
+},
+{
+id: 'dummy-2',
+author: 'Lee',
+role: 'CTO • BossX',
+avatar: 'LE',
+avatarImage: SFI_TEAM['Lee'].image,
+content: '💻 Update teknis: Sistem masternode validator BossX sudah berjalan stabil. Tim engineering sedang mengerjakan peningkatan performa untuk auto-claim yang lebih cepat. Stay tuned untuk update berikutnya!',
+media: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+mediaType: 'image',
+timestamp: now - 5 * 3600000,
+likes: ['Fery Muliawan', 'Admin', 'TraderPro', 'CryptoKing'],
+comments: [
+{ id: 'c3', author: 'Fery Muliawan', avatar: 'FM', text: 'Great work, Lee! Keep it up 🔥', timestamp: now - 4 * 3600000, replies: [] }
+]
+},
+{
+id: 'dummy-3',
+author: 'Mr.Ramadhan',
+role: 'CFO • BossX',
+avatar: 'MR',
+avatarImage: SFI_TEAM['Mr.Ramadhan'].image,
+content: '📊 Financial Update: Volume transaksi BossX meningkat 45% minggu ini! Terima kasih kepada seluruh komunitas yang telah mendukung. Mari kita pertahankan momentum ini dan capai target Q4. Numbers don\'t lie! 💪',
+media: null,
+mediaType: null,
+timestamp: now - 10 * 3600000,
+likes: ['Fery Muliawan', 'Lee', 'Admin', 'CryptoKing'],
+comments: [
+{ id: 'c4', author: 'Michael Johnson', avatar: 'MJ', text: 'Angka yang luar biasa! Tim marketing sudah siap untuk campaign berikutnya.', timestamp: now - 9 * 3600000, replies: [] }
+]
+},
+{
+id: 'dummy-4',
+author: 'Emily Brown',
+role: 'Secretary',
+avatar: 'EB',
+avatarImage: null,
+content: '📢 Pengumuman: Community meetup BossX akan diadakan bulan depan! Detail akan diumumkan segera. Siapkan pertanyaan terbaik Anda untuk tim developer. Jangan sampai terlewat! ✨',
+media: null,
+mediaType: null,
+timestamp: now - 24 * 3600000,
+likes: ['Fery Muliawan', 'Lee', 'Mr.Ramadhan', 'Michael Johnson'],
+comments: []
+},
+{
+id: 'dummy-5',
+author: 'Michael Johnson',
+role: 'Manager',
+avatar: 'MJ',
+avatarImage: null,
+content: '🎯 Tips untuk validator baru: Pastikan Access Key Anda sudah di-redeem sebelum memulai validasi. Jangan lupa aktifkan power button dan pantau log engine secara berkala. Sukses untuk semua validator BossX! 💎',
+media: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800',
+mediaType: 'image',
+timestamp: now - 30 * 3600000,
+likes: ['Fery Muliawan', 'Lee', 'Admin'],
+comments: [
+{ id: 'c5', author: 'TraderPro', avatar: 'TP', text: 'Mantap tipsnya, sangat membantu untuk pemula!', timestamp: now - 28 * 3600000, replies: [] }
+]
+}
+];
+try {
+localStorage.setItem(SFI_STORAGE_KEY, JSON.stringify(dummyPosts));
+} catch (e) {
+console.error('Error seeding dummy posts:', e);
+}
+}
+
+function loadSfiPosts() {
+try {
+const data = localStorage.getItem(SFI_STORAGE_KEY);
+return data ? JSON.parse(data) : [];
+} catch (e) {
+return [];
+}
+}
+
+function saveSfiPosts(posts) {
+try {
+localStorage.setItem(SFI_STORAGE_KEY, JSON.stringify(posts));
+} catch (e) {
+showErrorMessage('Gagal menyimpan postingan!');
+}
+}
+
+function getSfiSubscription() {
+try {
+const data = localStorage.getItem(SFI_SUB_KEY);
+if (!data) return null;
+const sub = JSON.parse(data);
+// Cek expired
+if (sub.expiresAt < Date.now()) {
+localStorage.removeItem(SFI_SUB_KEY);
+return null;
+}
+return sub;
+} catch (e) {
+return null;
+}
+}
+
+function renderSocialFi() {
+const sub = getSfiSubscription();
+const statusEl = document.getElementById('sfi-subscription-status');
+const actionEl = document.getElementById('sfi-subscription-action');
+const mainContent = document.getElementById('sfi-main-content');
+
+if (sub) {
+// Aktif
+const daysLeft = Math.ceil((sub.expiresAt - Date.now()) / 86400000);
+statusEl.innerHTML = `<div class="sfi-status-badge active"><i data-lucide="check-circle" class="w-3 h-3"></i>AKTIF • ${daysLeft} hari tersisa</div>`;
+actionEl.innerHTML = `<p class="text-cyan-200 text-sm mt-2">Berlangganan hingga: ${new Date(sub.expiresAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>`;
+mainContent.style.display = 'block';
+renderSfiFeed();
+updateSfiStats();
+} else {
+// Tidak aktif
+statusEl.innerHTML = `<div class="sfi-status-badge inactive"><i data-lucide="x-circle" class="w-3 h-3"></i>TIDAK AKTIF</div>`;
+actionEl.innerHTML = `
+<p class="text-cyan-200 text-sm mb-4">Aktifkan akses SocialFi dengan biaya <strong class="text-cyan-300">1 BossX / 30 hari</strong></p>
+<button class="node-button" style="max-width: 300px; margin: 0 auto;" onclick="subscribeSfi()">
+<i data-lucide="crown" class="w-4 h-4 inline mr-1"></i>Aktifkan Akses (1 BossX)
+</button>
+<p class="text-xs text-cyan-300 mt-3">Saldo Anda: <strong class="text-emerald-400">${bossxBalance.toFixed(9)} BossX</strong></p>
+`;
+mainContent.style.display = 'none';
+}
+lucide.createIcons();
+}
+
+function subscribeSfi() {
+if (bossxBalance < SFI_COST) {
+showErrorMessage(`Saldo tidak mencukupi! Dibutuhkan ${SFI_COST} BossX.`);
+return;
+}
+if (!confirm(`Aktifkan akses SocialFi selama ${SFI_DURATION_DAYS} hari dengan biaya ${SFI_COST} BossX?`)) return;
+
+bossxBalance -= SFI_COST;
+const sub = {
+active: true,
+purchasedAt: Date.now(),
+expiresAt: Date.now() + (SFI_DURATION_DAYS * 86400000)
+};
+try {
+localStorage.setItem(SFI_SUB_KEY, JSON.stringify(sub));
+} catch (e) {}
+
+updateBalanceDisplays();
+showSuccessMessage(`SocialFi berhasil diaktifkan selama ${SFI_DURATION_DAYS} hari!`);
+renderSocialFi();
+}
+
+function renderSfiFeed() {
+const feed = document.getElementById('sfi-feed');
+const posts = loadSfiPosts().sort((a, b) => b.timestamp - a.timestamp);
+
+if (posts.length === 0) {
+feed.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 bg-[#001845] rounded-full flex items-center justify-center mx-auto mb-4" style="box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);"><i data-lucide="message-circle" class="text-cyan-300 w-6 h-6"></i></div><h4 class="text-cyan-200 text-lg font-semibold mb-2">Belum ada postingan</h4><p class="text-cyan-300">Jadilah yang pertama membagikan sesuatu!</p></div>`;
+return;
+}
+
+feed.innerHTML = posts.map(post => renderSfiPost(post)).join('');
+lucide.createIcons();
+}
+
+function renderSfiPost(post) {
+const isLiked = post.likes.includes('Fery Muliawan');
+const likeClass = isLiked ? 'liked' : '';
+const likeIcon = isLiked ? 'heart' : 'heart';
+const likeText = post.likes.length;
+
+let mediaHtml = '';
+if (post.media) {
+if (post.mediaType === 'video') {
+mediaHtml = `<video class="sfi-post-media-video" controls src="${escapeHtml(post.media)}"></video>`;
+} else {
+mediaHtml = `<img class="sfi-post-media" src="${escapeHtml(post.media)}" alt="Media" onerror="this.style.display='none'" />`;
+}
+}
+
+const avatarHtml = post.avatarImage
+? `<div class="sfi-post-avatar"><img src="${post.avatarImage}" alt="${post.author}" onerror="this.style.display='none'; this.parentNode.textContent='${post.avatar}'"></div>`
+: `<div class="sfi-post-avatar">${post.avatar}</div>`;
+
+const commentsHtml = renderSfiComments(post);
+
+return `
+<div class="sfi-post-card" data-post-id="${post.id}">
+<div class="sfi-post-header">
+${avatarHtml}
+<div class="sfi-post-meta">
+<div class="sfi-post-author">${escapeHtml(post.author)}</div>
+<div class="sfi-post-role">${escapeHtml(post.role)}</div>
+</div>
+<div class="sfi-post-time">${formatTimeAgo(post.timestamp)}</div>
+</div>
+<div class="sfi-post-content">${escapeHtml(post.content)}</div>
+${mediaHtml}
+<div class="sfi-post-actions">
+<button class="sfi-action-btn ${likeClass}" onclick="toggleSfiLike('${post.id}')">
+<i data-lucide="${likeIcon}" class="w-4 h-4"></i>
+<span>${likeText}</span>
+</button>
+<button class="sfi-action-btn" onclick="toggleSfiComments('${post.id}')">
+<i data-lucide="message-circle" class="w-4 h-4"></i>
+<span>${post.comments.length}</span>
+</button>
+<button class="sfi-action-btn" onclick="shareSfiPost('${post.id}')">
+<i data-lucide="share-2" class="w-4 h-4"></i>
+<span>Share</span>
+</button>
+</div>
+<div class="sfi-comments-section" id="sfi-comments-${post.id}" style="display: none;">
+${commentsHtml}
+<div class="sfi-comment-input-wrap">
+<input type="text" class="sfi-comment-input" id="sfi-comment-input-${post.id}" placeholder="Tulis komentar..." maxlength="300" onkeypress="if(event.key==='Enter')submitSfiComment('${post.id}')" />
+<button class="sfi-comment-send" onclick="submitSfiComment('${post.id}')">
+<i data-lucide="send" class="w-4 h-4"></i>
+</button>
+</div>
+</div>
+</div>
+`;
+}
+
+function renderSfiComments(post) {
+if (post.comments.length === 0) {
+return '<p class="text-cyan-300 text-xs text-center py-2">Belum ada komentar. Jadilah yang pertama!</p>';
+}
+return post.comments.map(c => {
+const avatarHtml = c.avatarImage
+? `<div class="sfi-comment-avatar"><img src="${c.avatarImage}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none'; this.parentNode.textContent='${c.avatar}'"></div>`
+: `<div class="sfi-comment-avatar">${c.avatar}</div>`;
+
+const repliesHtml = (c.replies || []).map(r => `
+<div class="sfi-comment sfi-reply">
+<div class="sfi-comment-avatar">${r.avatar}</div>
+<div class="sfi-comment-body">
+<div class="sfi-comment-author">${escapeHtml(r.author)}</div>
+<div class="sfi-comment-text">${escapeHtml(r.text)}</div>
+<div class="sfi-comment-time">${formatTimeAgo(r.timestamp)}</div>
+</div>
+</div>
+`).join('');
+
+return `
+<div class="sfi-comment">
+${avatarHtml}
+<div class="sfi-comment-body">
+<div class="sfi-comment-author">${escapeHtml(c.author)}</div>
+<div class="sfi-comment-text">${escapeHtml(c.text)}</div>
+<div class="sfi-comment-time">
+${formatTimeAgo(c.timestamp)}
+<button class="sfi-reply-btn" onclick="showSfiReplyInput('${post.id}', '${c.id}')">Balas</button>
+</div>
+<div id="sfi-reply-input-${post.id}-${c.id}" style="display:none;" class="sfi-comment-input-wrap" style="margin-top:8px;">
+<input type="text" class="sfi-comment-input" placeholder="Balas komentar..." maxlength="300" onkeypress="if(event.key==='Enter')submitSfiReply('${post.id}','${c.id}')" />
+<button class="sfi-comment-send" onclick="submitSfiReply('${post.id}','${c.id}')">
+<i data-lucide="send" class="w-3 h-3"></i>
+</button>
+</div>
+</div>
+</div>
+${repliesHtml}
+`;
+}).join('');
+}
+
+function toggleSfiLike(postId) {
+const posts = loadSfiPosts();
+const post = posts.find(p => p.id === postId);
+if (!post) return;
+
+const user = 'Fery Muliawan';
+const idx = post.likes.indexOf(user);
+if (idx > -1) {
+post.likes.splice(idx, 1);
+} else {
+post.likes.push(user);
+}
+saveSfiPosts(posts);
+renderSfiFeed();
+updateSfiStats();
+}
+
+function toggleSfiComments(postId) {
+const section = document.getElementById(`sfi-comments-${postId}`);
+if (section) {
+section.style.display = section.style.display === 'none' ? 'block' : 'none';
+}
+}
+
+function submitSfiComment(postId) {
+const input = document.getElementById(`sfi-comment-input-${postId}`);
+const text = input.value.trim();
+if (!text) return;
+
+const posts = loadSfiPosts();
+const post = posts.find(p => p.id === postId);
+if (!post) return;
+
+post.comments.push({
+id: 'c' + Date.now(),
+author: 'Fery Muliawan',
+avatar: 'FM',
+avatarImage: SFI_TEAM['Fery Muliawan'].image,
+text: text,
+timestamp: Date.now(),
+replies: []
+});
+
+saveSfiPosts(posts);
+input.value = '';
+renderSfiFeed();
+updateSfiStats();
+// Re-open comments section
+setTimeout(() => {
+const section = document.getElementById(`sfi-comments-${postId}`);
+if (section) section.style.display = 'block';
+}, 50);
+showSuccessMessage('Komentar berhasil ditambahkan!');
+}
+
+function showSfiReplyInput(postId, commentId) {
+const el = document.getElementById(`sfi-reply-input-${postId}-${commentId}`);
+if (el) {
+el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+}
+}
+
+function submitSfiReply(postId, commentId) {
+const wrap = document.getElementById(`sfi-reply-input-${postId}-${commentId}`);
+const input = wrap.querySelector('input');
+const text = input.value.trim();
+if (!text) return;
+
+const posts = loadSfiPosts();
+const post = posts.find(p => p.id === postId);
+if (!post) return;
+const comment = post.comments.find(c => c.id === commentId);
+if (!comment) return;
+
+if (!comment.replies) comment.replies = [];
+comment.replies.push({
+id: 'r' + Date.now(),
+author: 'Fery Muliawan',
+avatar: 'FM',
+text: text,
+timestamp: Date.now()
+});
+
+saveSfiPosts(posts);
+renderSfiFeed();
+updateSfiStats();
+setTimeout(() => {
+const section = document.getElementById(`sfi-comments-${postId}`);
+if (section) section.style.display = 'block';
+}, 50);
+showSuccessMessage('Balasan berhasil ditambahkan!');
+}
+
+function shareSfiPost(postId) {
+showSuccessMessage('Link postingan disalin ke clipboard!');
+}
+
+function toggleSfiMedia(type) {
+const btnImage = document.getElementById('sfi-btn-image');
+const btnVideo = document.getElementById('sfi-btn-video');
+const urlInput = document.getElementById('sfi-media-url');
+const preview = document.getElementById('sfi-media-preview');
+
+if (sfiCurrentMedia.type === type) {
+// Toggle off
+sfiCurrentMedia = { type: null, url: '' };
+btnImage.classList.remove('active');
+btnVideo.classList.remove('active');
+urlInput.classList.remove('show');
+urlInput.value = '';
+preview.classList.remove('show');
+return;
+}
+
+sfiCurrentMedia.type = type;
+sfiCurrentMedia.url = '';
+btnImage.classList.toggle('active', type === 'image');
+btnVideo.classList.toggle('active', type === 'video');
+urlInput.classList.add('show');
+urlInput.placeholder = type === 'image'
+? 'Paste URL gambar (contoh: https://images.unsplash.com/...)'
+: 'Paste URL video (contoh: https://...mp4)';
+preview.classList.remove('show');
+urlInput.focus();
+}
+
+function submitSfiPost() {
+const textarea = document.getElementById('sfi-compose-text');
+const content = textarea.value.trim();
+const mediaUrl = document.getElementById('sfi-media-url').value.trim();
+
+if (!content && !mediaUrl) {
+showErrorMessage('Tulis sesuatu atau tambahkan media!');
+return;
+}
+
+if (content.length > 500) {
+showErrorMessage('Postingan maksimal 500 karakter!');
+return;
+}
+
+// Validasi URL media
+if (mediaUrl && sfiCurrentMedia.type) {
+try {
+new URL(mediaUrl);
+} catch (e) {
+showErrorMessage('URL media tidak valid!');
+return;
+}
+}
+
+const posts = loadSfiPosts();
+const newPost = {
+id: 'post-' + Date.now(),
+author: 'Fery Muliawan',
+role: 'CEO • BossX',
+avatar: 'FM',
+avatarImage: SFI_TEAM['Fery Muliawan'].image,
+content: content,
+media: mediaUrl || null,
+mediaType: sfiCurrentMedia.type,
+timestamp: Date.now(),
+likes: [],
+comments: []
+};
+
+posts.unshift(newPost);
+saveSfiPosts(posts);
+
+// Reset form
+textarea.value = '';
+document.getElementById('sfi-char-count').textContent = '0';
+document.getElementById('sfi-media-url').value = '';
+document.getElementById('sfi-media-url').classList.remove('show');
+document.getElementById('sfi-media-preview').classList.remove('show');
+document.getElementById('sfi-btn-image').classList.remove('active');
+document.getElementById('sfi-btn-video').classList.remove('active');
+sfiCurrentMedia = { type: null, url: '' };
+
+renderSfiFeed();
+updateSfiStats();
+showSuccessMessage('Postingan berhasil dipublikasikan!');
+}
+
+function updateSfiStats() {
+const posts = loadSfiPosts();
+const totalPosts = posts.length;
+const totalLikes = posts.reduce((sum, p) => sum + p.likes.length, 0);
+const totalComments = posts.reduce((sum, p) => {
+const c = p.comments.length;
+const r = p.comments.reduce((s, cm) => s + (cm.replies ? cm.replies.length : 0), 0);
+return sum + c + r;
+}, 0);
+
+const el1 = document.getElementById('sfi-stat-posts');
+const el2 = document.getElementById('sfi-stat-likes');
+const el3 = document.getElementById('sfi-stat-comments');
+if (el1) el1.textContent = totalPosts;
+if (el2) el2.textContent = totalLikes;
+if (el3) el3.textContent = totalComments;
+}
+
+function escapeHtml(text) {
+if (!text) return '';
+const div = document.createElement('div');
+div.textContent = text;
+return div.innerHTML;
+}
+
+// ============================================
+// BOSSX AI AGENT - KNOWLEDGE BASE & LOGIC
+// ============================================
+const BOSSX_AI_KB = [
+{
+keywords: ['apa itu bossx', 'bossx itu apa', 'tentang bossx', 'pengertian bossx', 'bossx cryptocurrency'],
+question: 'Apa itu BossX?',
+answer: '<strong>BossX</strong> adalah salah satu cryptocurrency yang berjalan pada jaringan blockchain <strong>TRC20</strong> (TRON). BossX merupakan token internal platform BossX Masternode yang dirancang untuk sistem validator masternode dengan reward mechanism yang unik. Platform ini mengusung tema <strong>"Glacier/Ice"</strong> dengan warna khas cyan yang merepresentasikan kekuatan, kecepatan, dan transparansi.'
+},
+{
+keywords: ['cara deposit', 'deposit bagaimana', 'deposit usdt', 'deposit bossx', 'cara top up'],
+question: 'Bagaimana cara deposit?',
+answer: 'Untuk melakukan deposit ke akun BossX Anda:<br><br><strong>1.</strong> Buka menu <strong>"Deposit"</strong> di sidebar<br><strong>2.</strong> Pilih currency: <strong>USDT</strong> atau <strong>BOSSX</strong><br><strong>3.</strong> Copy alamat wallet yang ditampilkan<br><strong>4.</strong> Kirim crypto dari wallet eksternal Anda<br><br><strong>⚠️ Penting:</strong><br>• USDT: Network <strong>TRC20</strong> (TRON), minimal deposit <strong>10 USDT</strong><br>• BOSSX: Network internal, minimal deposit <strong>1 BOSSX</strong><br>• Deposit dikonfirmasi setelah 1 konfirmasi network'
+},
+{
+keywords: ['access key', 'apa itu access key', 'fungsi access key', 'private key'],
+question: 'Apa itu Access Key?',
+answer: '<strong>Access Key</strong> adalah kode unik sepanjang <strong>25 karakter</strong> (kombinasi huruf A-Z dan angka 0-9) yang digunakan untuk mengaktivasi node validator BossX.<br><br><strong>Spesifikasi:</strong><br>• Format: 25 karakter (A-Z, 0-9)<br>• Minimal stake: <strong>10 BossX</strong><br>• Fee generate: <strong>1 BossX</strong> (dipotong otomatis)<br>• Status: <strong>One-time use</strong> (hangus setelah redeem)<br><br><strong>Cara pakai:</strong> Generate di menu "Access Key" → Copy kode → Paste di Dashboard → Klik "Redeem Now"'
+},
+{
+keywords: ['reward', 'bagaimana reward', 'cara dapat reward', 'reward validasi', 'auto claim'],
+question: 'Bagaimana reward bekerja?',
+answer: 'Sistem reward BossX bekerja dengan mekanisme <strong>Masternode Validator</strong>:<br><br><strong>📊 Rate Reward:</strong><br>• <code>0.000000038580246913580247 BossX/detik</code> per 1 BossX stake<br>• Auto claim setiap <strong>60 detik</strong> (masuk ke Pending Reward)<br><br><strong>⏰ Sistem:</strong><br>• Auto claim berjalan otomatis saat validasi aktif<br>• Manual claim: Kapan saja tanpa minimal ke wallet<br>• Auto stop: Setiap hari jam <strong>06:00</strong><br>• Masa berlaku: <strong>40.000.000 detik</strong><br><br><strong>💡 Tips:</strong> Semakin besar stake, semakin besar reward per detik!'
+},
+{
+keywords: ['cara withdrawal', 'withdrawal bagaimana', 'tarik dana', 'withdraw usdt', 'withdraw bossx'],
+question: 'Bagaimana cara withdrawal?',
+answer: 'Untuk menarik dana dari akun BossX:<br><br><strong>1.</strong> Buka menu <strong>"Withdrawal"</strong><br><strong>2.</strong> Pilih currency (USDT/BOSSX)<br><strong>3.</strong> Pilih network:<br>  • USDT: <strong>TRC20</strong> atau <strong>BEP20</strong><br>  • BOSSX: <strong>TRC20</strong><br><strong>4.</strong> Masukkan alamat wallet tujuan<br><strong>5.</strong> Masukkan jumlah withdrawal<br><strong>6.</strong> Klik "Submit Withdrawal"<br><br><strong>💰 Fee & Minimal:</strong><br>• USDT: Fee <strong>1 USDT</strong>, minimal <strong>10 USDT</strong><br>• BOSSX: Fee <strong>0.1 BOSSX</strong>, minimal <strong>1 BOSSX</strong><br><br><strong>⏱️ Proses:</strong> 1-24 jam setelah submit'
+},
+{
+keywords: ['team developer', 'siapa team', 'tim developer', 'founder', 'ceo bossx'],
+question: 'Siapa team developer BossX?',
+answer: 'Tim di balik BossX Crypto Exchange Platform:<br><br><strong>👑 Fery Muliawan</strong> — CEO (Chief Executive Officer)<br>Pendiri dan visioner BossX<br><br><strong>💰 Mr.Ramadhan</strong> — CFO (Chief Financial Officer)<br>Mengawasi operasi harian<br><br><strong>📊 Michael Johnson</strong> — Manager<br>Mengatur tim operasional<br><br><strong>💻 Lee</strong> — CTO (Chief Technology Officer)<br>Infrastruktur teknis & keamanan<br><br><strong>📝 Emily Brown</strong> — Secretary<br>Administrasi & komunikasi'
+},
+{
+keywords: ['masternode', 'validator', 'apa itu masternode', 'cara kerja masternode'],
+question: 'Apa itu Masternode Validator?',
+answer: '<strong>Masternode Validator</strong> adalah node khusus di jaringan BossX yang bertugas memvalidasi transaksi dan menjaga keamanan blockchain. Sebagai imbalannya, validator mendapatkan reward BossX.<br><br><strong>🔧 Cara Kerja:</strong><br>1. Generate Access Key (minimal stake 10 BossX)<br>2. Redeem Access Key di Dashboard<br>3. Aktifkan Power Button (ON)<br>4. Reward mengalir otomatis setiap detik<br><br><strong>⚙️ Fitur:</strong><br>• Auto claim setiap 60 detik<br>• Auto stop jam 06:00 setiap hari<br>• Masa berlaku 40.000.000 detik<br>• Log engine real-time'
+},
+{
+keywords: ['login', 'cara login', 'masuk akun', 'akun demo'],
+question: 'Bagaimana cara login?',
+answer: 'Untuk login ke BossX Masternode:<br><br><strong>🔐 Demo Credentials:</strong><br>• Username: <code>admin</code><br>• Password: <code>admin123</code><br><br><strong>📝 Langkah:</strong><br>1. Buka halaman login BossX<br>2. Masukkan username & password<br>3. Klik "Masuk"<br>4. Anda akan diarahkan ke Dashboard<br><br><strong>💾 Session:</strong> Login tersimpan di browser (localStorage), jadi Anda tidak perlu login ulang setiap kali membuka website.'
+},
+{
+keywords: ['p2p', 'peer to peer', 'transfer bossx', 'kirim bossx'],
+question: 'Bagaimana cara transfer P2P?',
+answer: 'Fitur <strong>Peer to Peer (P2P)</strong> memungkinkan Anda transfer BossX ke sesama pengguna BossX:<br><br><strong>📤 Cara Transfer:</strong><br>1. Buka menu <strong>"Peer to Peer"</strong><br>2. Masukkan username penerima (format: <code>@username</code>)<br>3. Masukkan jumlah BossX (minimal 1 BossX)<br>4. Klik "Kirim BossX"<br><br><strong>✅ Fitur:</strong><br>• Transfer instan antar user BossX<br>• Tanpa fee<br>• History transfer tercatat lengkap<br>• Statistik total dikirim & diterima'
+},
+{
+keywords: ['referral', 'kode referral', 'ajak teman', 'komisi referral'],
+question: 'Bagaimana sistem referral?',
+answer: 'Sistem <strong>Referral BossX</strong> memungkinkan Anda mendapatkan reward dengan mengajak teman bergabung:<br><br><strong>🎯 Cara Kerja:</strong><br>1. Dapatkan kode referral unik Anda<br>2. Bagikan kode ke teman/komunitas<br>3. Setiap orang yang daftar pakai kode Anda = referral aktif<br>4. Dapatkan reward BossX dari setiap referral<br><br><strong>💡 Tips:</strong><br>• Klik "Generate Kode Baru" untuk refresh kode<br>• Bagikan via sosial media, grup chat, dll<br>• Statistik referral tersedia di menu Referral'
+},
+{
+keywords: ['socialfi', 'sosial', 'media sosial', 'fitur sosial', 'bossx social'],
+question: 'Apa itu SocialFi BossX?',
+answer: '<strong>SocialFi BossX</strong> adalah platform sosial eksklusif untuk holder token BossX. Mirip dengan Binance Square, tetapi khusus untuk komunitas BossX.<br><br><strong>✨ Fitur:</strong><br>• Posting teks, gambar, dan video<br>• Like & komentar pada postingan<br>• Balas komentar user lain<br>• Feed komunitas yang aktif<br><br><strong>💎 Akses:</strong><br>• Biaya: <strong>1 BossX / 30 hari</strong><br>• User aktif bisa menikmati semua fitur<br>• Utilitas token BossX yang nyata<br><br><strong>📍 Lokasi:</strong> Menu "SocialFi" di sidebar'
+}
+];
+
+const BOSSX_AI_FALLBACK = 'Maaf, informasi yang Anda tanyakan <strong>tidak tersedia di whitepaper BossX</strong>. Saya hanya dapat menjawab pertanyaan seputar:<br><br>• Tentang BossX & Masternode<br>• Access Key & Validasi<br>• Deposit & Withdrawal<br>• Reward & Claim<br>• P2P & Referral<br>• SocialFi<br>• Team Developer<br><br>Silakan coba pertanyaan lain atau hubungi tim support untuk bantuan lebih lanjut.';
+
+const BOSSX_AI_WELCOME = '🧊 Halo! Saya <strong>BossX AI AGENT</strong>, asisten virtual platform BossX. Saya siap menjawab pertanyaan seputar whitepaper BossX.<br><br>Silakan ketik pertanyaan Anda atau pilih <strong>quick reply</strong> di bawah untuk memulai!';
+
+let bossxAIHistory = [];
+let bossxAIIsOpen = false;
+let bossxAIIsMinimized = false;
+let bossxAIIsInitialized = false;
+let bossxAIWelcomeShown = false;
+
+function initBossxAI() {
+if (bossxAIIsInitialized) return;
+bossxAIIsInitialized = true;
+loadBossxAIHistory();
+lucide.createIcons();
+setTimeout(() => {
+const fab = document.getElementById('bossx-ai-fab');
+if (fab && !bossxAIWelcomeShown) {
+document.getElementById('bossx-ai-badge').style.display = 'block';
+}
+}, 2000);
+}
+function loadBossxAIHistory() {
+try {
+const saved = localStorage.getItem('bossx_ai_chat_history');
+if (saved) {
+bossxAIHistory = JSON.parse(saved);
+}
+} catch (e) {
+bossxAIHistory = [];
+}
+}
+function saveBossxAIHistory() {
+try {
+localStorage.setItem('bossx_ai_chat_history', JSON.stringify(bossxAIHistory.slice(-50)));
+} catch (e) {
+console.error('Error saving AI chat history:', e);
+}
+}
+function toggleBossxAI() {
+if (bossxAIIsMinimized) {
+bossxAIIsMinimized = false;
+document.getElementById('bossx-ai-window').classList.remove('minimized');
+document.getElementById('bossx-ai-fab').classList.remove('minimized');
+document.getElementById('bossx-ai-badge').style.display = 'none';
+return;
+}
+if (bossxAIIsOpen) {
+closeBossxAI();
+} else {
+openBossxAI();
+}
+}
+function openBossxAI() {
+bossxAIIsOpen = true;
+bossxAIIsMinimized = false;
+const win = document.getElementById('bossx-ai-window');
+win.classList.add('active');
+win.classList.remove('minimized');
+document.getElementById('bossx-ai-badge').style.display = 'none';
+lucide.createIcons();
+if (!bossxAIWelcomeShown || bossxAIHistory.length === 0) {
+renderBossxAIWelcome();
+} else {
+renderBossxAIHistory();
+}
+document.getElementById('bossx-ai-input').focus();
+}
+function closeBossxAI() {
+bossxAIIsOpen = false;
+document.getElementById('bossx-ai-window').classList.remove('active');
+}
+function minimizeBossxAI() {
+bossxAIIsMinimized = true;
+document.getElementById('bossx-ai-window').classList.add('minimized');
+document.getElementById('bossx-ai-fab').classList.add('minimized');
+}
+function clearBossxAIChat() {
+if (bossxAIHistory.length === 0) {
+showSuccessMessage('Chat sudah kosong!');
+return;
+}
+if (confirm('Hapus semua riwayat chat?')) {
+bossxAIHistory = [];
+saveBossxAIHistory();
+renderBossxAIWelcome();
+showSuccessMessage('Riwayat chat berhasil dihapus!');
+}
+}
+function renderBossxAIWelcome() {
+const body = document.getElementById('bossx-ai-body');
+body.innerHTML = '';
+addBossxAIMessage('bot', BOSSX_AI_WELCOME, false);
+bossxAIWelcomeShown = true;
+}
+function renderBossxAIHistory() {
+const body = document.getElementById('bossx-ai-body');
+body.innerHTML = '';
+bossxAIHistory.forEach(msg => {
+addBossxAIMessage(msg.role, msg.content, false);
+});
+scrollBossxAIToBottom();
+}
+function addBossxAIMessage(role, content, animate = true) {
+const body = document.getElementById('bossx-ai-body');
+const msgDiv = document.createElement('div');
+msgDiv.className = `bossx-ai-msg ${role}`;
+if (animate) msgDiv.style.opacity = '0';
+const avatar = role === 'bot' ? '🤖' : 'U';
+msgDiv.innerHTML = `
+<div class="bossx-ai-msg-avatar">${avatar}</div>
+<div class="bossx-ai-msg-content">${content}</div>
+`;
+body.appendChild(msgDiv);
+if (animate) {
+requestAnimationFrame(() => {
+msgDiv.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+msgDiv.style.opacity = '1';
+});
+}
+scrollBossxAIToBottom();
+}
+function scrollBossxAIToBottom() {
+const body = document.getElementById('bossx-ai-body');
+setTimeout(() => {
+body.scrollTop = body.scrollHeight;
+}, 50);
+}
+function showBossxAITyping() {
+const body = document.getElementById('bossx-ai-body');
+const typingDiv = document.createElement('div');
+typingDiv.className = 'bossx-ai-msg bot';
+typingDiv.id = 'bossx-ai-typing-indicator';
+typingDiv.innerHTML = `
+<div class="bossx-ai-msg-avatar">🤖</div>
+<div class="bossx-ai-msg-content" style="padding: 12px 14px;">
+<div class="bossx-ai-typing">
+<div class="bossx-ai-typing-dot"></div>
+<div class="bossx-ai-typing-dot"></div>
+<div class="bossx-ai-typing-dot"></div>
+</div>
+</div>
+`;
+body.appendChild(typingDiv);
+scrollBossxAIToBottom();
+}
+function hideBossxAITyping() {
+const typing = document.getElementById('bossx-ai-typing-indicator');
+if (typing) typing.remove();
+}
+function playBossxAISound() {
+try {
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+if (!AudioContext) return;
+const ctx = new AudioContext();
+const osc = ctx.createOscillator();
+const gain = ctx.createGain();
+osc.connect(gain);
+gain.connect(ctx.destination);
+osc.type = 'sine';
+osc.frequency.setValueAtTime(880, ctx.currentTime);
+osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.08);
+gain.gain.setValueAtTime(0.15, ctx.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+osc.start(ctx.currentTime);
+osc.stop(ctx.currentTime + 0.2);
+} catch (e) {
+console.error('Audio error:', e);
+}
+}
+function findBossxAIAnswer(userInput) {
+const input = userInput.toLowerCase().trim();
+if (!input) return null;
+let bestMatch = null;
+let bestScore = 0;
+BOSSX_AI_KB.forEach(entry => {
+let score = 0;
+entry.keywords.forEach(keyword => {
+if (input.includes(keyword)) {
+score += keyword.length;
+if (input === keyword) score += 10;
+}
+});
+const inputWords = input.split(/\s+/);
+entry.keywords.forEach(keyword => {
+const kwWords = keyword.split(/\s+/);
+kwWords.forEach(kw => {
+if (inputWords.includes(kw)) score += 2;
+});
+});
+if (score > bestScore) {
+bestScore = score;
+bestMatch = entry;
+}
+});
+return bestScore > 0 ? bestMatch : null;
+}
+function sendBossxAIMessage() {
+const input = document.getElementById('bossx-ai-input');
+const text = input.value.trim();
+if (!text) return;
+input.value = '';
+addBossxAIMessage('user', escapeHtml(text));
+bossxAIHistory.push({ role: 'user', content: escapeHtml(text) });
+saveBossxAIHistory();
+showBossxAITyping();
+const delay = 800 + Math.random() * 800;
+setTimeout(() => {
+hideBossxAITyping();
+const match = findBossxAIAnswer(text);
+let answer;
+if (match) {
+answer = match.answer;
+} else {
+answer = BOSSX_AI_FALLBACK;
+}
+addBossxAIMessage('bot', answer);
+bossxAIHistory.push({ role: 'bot', content: answer });
+saveBossxAIHistory();
+playBossxAISound();
+}, delay);
+}
+function sendQuickReply(text) {
+document.getElementById('bossx-ai-input').value = text;
+sendBossxAIMessage();
+}
+function handleBossxAIKey(event) {
+if (event.key === 'Enter') {
+event.preventDefault();
+sendBossxAIMessage();
+}
+}
+
 console.log('🚀 Script dimulai');
 checkAuth();
 lucide.createIcons();
